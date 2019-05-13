@@ -93,20 +93,22 @@ class Login extends Component {
     const { login } = this.props;
     const { btt, viewModal, messageRequest, call } = this.state;
     return (
-      <ImageBackground source={require('../../assents/imgs/local_crime.jpg')} style={styles.backgroundImage} >
+      <View style={styles.container}>
+
+        <Image 
+          source={require('../../assents/imgs/local_crime.jpg')} 
+          style={styles.image} 
+        />
+        
         <KeyboardAwareScrollView
-          contentContainerStyle={styles.container}
-          scrollEnabled={true}
+            contentContainerStyle={styles.viewInputs}
+            scrollEnabled={true}
         >
-          <StatusBar backgroundColor="rgba(45, 45, 45, 0.8)" />
-          <Text style={styles.title}>Bem-Vindo</Text>
-          <Text style={styles.descript}>Por favor, digite suas credenciais</Text>
-          <View style={styles.forms}>
             <TextInput
               style={styles.input}
               autoCapitalize="none"
               autoCorrect={true}
-              placeholder="ID"
+              placeholder="Matrícula"
               underlineColorAndroid="rgba(0,0,0,0)"
               onChangeText={inputSave => this.setState({ inputSave })}
               value={this.state.inputSave}
@@ -116,32 +118,24 @@ class Login extends Component {
               style={styles.input}
               autoCapitalize="none"
               autoCorrect={true}
-              placeholder="Senha"
+              placeholder="Turma"
               underlineColorAndroid="rgba(0,0,0,0)"
               secureTextEntry={true}
               onChangeText={password => this.setState({ password })}
               value={this.state.password}
             />
-            <TouchableOpacity style={styles.testebutton} onPress={() => this.confereCadastro()}>
+            <TouchableOpacity style={styles.entrarButton} onPress={() => this.confereCadastro()}>
               <Text style={styles.buttonText}>
-                Entrar
+                ENTRAR
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cadastrobutton} onPress={() => this.navigateToSignUp()}>
+            <TouchableOpacity style={styles.cadastrarButton} onPress={() => this.navigateToSignUp()}>
               <Text style={styles.buttonText}>
-                Cadastrar
+                CADASTRAR
               </Text>
-            </TouchableOpacity>
-            
-          </View>
-          </KeyboardAwareScrollView>
-          <HideWithKeyboard>
-            <TouchableOpacity style={styles.serverbutton} onPress={() => { this.navigateToChangeService(); }}>
-            <Icon name='server' size={20} color="rgb(225, 200, 133)" style={styles.icon} />
-            </TouchableOpacity>
-          </HideWithKeyboard>
-      </ImageBackground>
-     
+            </TouchableOpacity>         
+        </KeyboardAwareScrollView>
+      </View>
     );
   }
 }

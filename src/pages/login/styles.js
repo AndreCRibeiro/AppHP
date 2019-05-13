@@ -3,111 +3,62 @@ import { colors, metrics, responsividade } from '../../styles';
 
 const styles = StyleSheet.create({
 
-  backgroundImage: {
-    flex: 1,
-    //alignItems: 'center',
-  },
-
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: metrics.basePadding * 2,
-    // backgroundColor: colors.lighter,
-    backgroundColor: 'rgba(45, 45, 45, 0.8)',
   },
 
   image: {
-    marginBottom: metrics.baseMargin * 6,
-    alignSelf: 'center',
-    height: 210,
-    width: 170,
-    padding: metrics.basePadding,
+    width: responsividade.largura_tela,
+    height: responsividade.altura_tela * 0.5,
+    opacity: 0.5
   },
 
-  title: {
-    fontSize: responsividade.largura_tela < 430 ? 34 : 45,
-    fontWeight: 'bold',
-    color: colors.white,
+  viewInputs: {
+    backgroundColor: colors.white,
+    width: responsividade.largura_tela,
+    height: responsividade.altura_tela * 0.5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
-  descript: {
-    fontSize: responsividade.largura_tela < 430 ? 15 : 20,
-    color: colors.lighter,
-    marginBottom: metrics.baseMargin,
-    marginTop: metrics.baseMargin / 2,
+  entrarButton: {
+    borderWidth: 3,
+    borderColor: colors.primary,
+    borderRadius: 40,
+    height: responsividade.largura_tela < 430 ? 45 : 60,
+    width: responsividade.largura_tela < 430 ? responsividade.largura_tela * 0.7 : responsividade.largura_tela * 0.55,
+    marginTop: metrics.baseMargin * 2,
+    paddingHorizontal: metrics.basePadding,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  cadastrarButton: {
+    height: 50,
+    marginTop: metrics.baseMargin,
+    paddingHorizontal: metrics.basePadding,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   input: {
      backgroundColor: 'rgba(255, 255, 255, 0.6)',
-     borderRadius: 40,
+     borderRadius: 5,
+     borderColor: colors.regular,
+     borderWidth: 1,     
      marginTop: metrics.baseMargin * 2,
-     height: responsividade.largura_tela < 430 ? 50 : 60,
-     width: responsividade.largura_tela < 430 ? responsividade.largura_tela * 0.7 : responsividade.largura_tela * 0.55,
+     height: responsividade.largura_tela < 430 ? 40 : 60,
+     width: responsividade.largura_tela < 430 ? responsividade.largura_tela * 0.75 : responsividade.largura_tela * 0.80,
      paddingHorizontal: metrics.basePadding,
-
-   },
-
-   testebutton: {
-     backgroundColor: 'rgba(41, 42, 41, 0.65)',
-     borderWidth: 2,
-     borderColor: 'rgb(225, 200, 133)',
-     borderRadius: 40,
-     height: responsividade.largura_tela < 430 ? 50 : 60,
-     width: responsividade.largura_tela < 430 ? responsividade.largura_tela * 0.7 : responsividade.largura_tela * 0.55,
-     marginTop: metrics.baseMargin,
-     paddingHorizontal: metrics.basePadding,
-     justifyContent: 'center',
      alignItems: 'center',
-
-   },
-
-   cadastrobutton: {
-     height: 50,
-     marginTop: metrics.baseMargin,
-     paddingHorizontal: metrics.basePadding,
      justifyContent: 'center',
-     alignItems: 'center',
-
+     textAlign: 'center',
    },
 
    buttonText: {
-     color: 'rgb(225, 200, 133)',
+     color: colors.primary,
      fontWeight: 'bold',
-     fontSize: responsividade.largura_tela < 430 ? 16 : 20,
-   },
-
-   estiloPicker: {
-     //height: 50,
-     //paddingHorizontal: metric.basePadding,
-     flex: 7,
-     },
-
-   forms2: {
-     height: 50,
-     justifyContent: 'center',
-     alignItems: 'center',
-     alignSelf: 'center',
-     flexDirection: 'row',
-     padding: metrics.basePadding,
-     borderRadius: metrics.baseRadius,
-     marginTop: metrics.baseMargin / 3,
-     backgroundColor: colors.whiteTransparent
-   },
-
-   serverbutton: {
-    borderRadius: 100,
-    //backgroundColor: 'rgb(225, 200, 133)',
-    borderWidth: 1.5,
-    borderColor: 'rgb(225, 200, 133)',
-    position: 'absolute',
-    width: 60,
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-    right: 20,
-    bottom: 30,
-
+     fontSize: responsividade.largura_tela < 430 ? 14 : 20,
    },
 });
 
