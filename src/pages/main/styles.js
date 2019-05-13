@@ -4,120 +4,71 @@ import { colors, metrics, responsividade } from '../../styles';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#344955',
-    //alignItems: 'center',
-    //paddingTop: Platform.OS === 'ios' ? 30 : 0,
+    backgroundColor: colors.white,
   },
+
   bodyS: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: "#344955",
+    backgroundColor: colors.white,
   },
-  halfBody: {
-    height: responsividade.largura_tela < 430 ? 170 : 200,
-    //justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: "#344955"
-  },
-  tokenView: {
-    marginTop: 25,
-    width: responsividade.largura_tela < 430 ? responsividade.largura_tela * 0.7 : responsividade.largura_tela * 0.55,
-    height: responsividade.largura_tela < 430 ? 55 : 70,
-    borderRadius: 50,
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  token: {
-    fontSize: 16,
-    fontWeight: "bold",
-    fontStyle: "normal",
-    letterSpacing: 0,
-    color: "#ffffff"
-  },
-  tokenD: {
-    fontSize: 16,
-    fontWeight: "bold",
-    fontStyle: "normal",
-    letterSpacing: 0,
-    color: "#2afe3f",
+
+  card: {
+    flex: 1,
+    marginTop: 80,
+    marginLeft: 35,
+    marginRight: 35,
+    marginBottom: 65,
+    backgroundColor: colors.white,
+    zIndex: 2
   },
 
   info: {
-    alignSelf: 'center',
-    justifyContent: 'center',
+    marginTop: 65,
+    marginLeft: 25,
   },
 
-  profile: {
-    alignSelf: 'center',
-    margin: metrics.baseMargin,
-    elevation: 1,
-    width: responsividade.largura_tela < 430 ? 150 : 300,
-    height: responsividade.largura_tela < 430 ? 150 : 300,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  ImageStyle: {
-    width: responsividade.largura_tela < 430 ? 150 : 250,
-    height: responsividade.largura_tela < 430 ? 150 : 250,
-    borderColor: 'white',
-    borderWidth: 3,
-    borderRadius: Platform.OS === 'ios' ? responsividade.largura_tela < 430 ? 75 : 300 : responsividade.largura_tela < 430 ? 100 : 300,
-  },
-
-  name_view:{
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 15,
-  },
   name: {
-    fontSize: 24,
+    fontSize: 36,
     fontWeight: "bold",
     fontStyle: "normal",
-    letterSpacing: 0,
-    color: "white",
   },
 
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: metrics.baseMargin,
-    width: responsividade.largura_tela < 430 ? responsividade.LARGURABUTTON  :  responsividade.LARGURABUTTON * 0.55,
-    height: responsividade.largura_tela < 430 ? responsividade.ALTURABUTTON : responsividade.largura_tela * 0.11,
-    borderRadius: 200,
-    backgroundColor: "#F9AA33",
-    // marginHorizontal: responsividade.largura_tela < 430 ? 10 : 30,
-  },
-
-  button2: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: metrics.baseMargin,
-    width: responsividade.largura_tela < 430 ? responsividade.LARGURABUTTON :  responsividade.LARGURABUTTON ,
-    height: responsividade.largura_tela < 430 ? responsividade.ALTURABUTTON : responsividade.largura_tela * 0.11,
-    borderRadius: 200,
-    backgroundColor: "red",
-  },
-
-  button3: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: metrics.baseMargin,
-    width: responsividade.largura_tela < 430 ? responsividade.LARGURABUTTON :  responsividade.LARGURABUTTON * 0.55,
-    height: responsividade.largura_tela < 430 ? responsividade.ALTURABUTTON : responsividade.largura_tela * 0.11,
-    borderRadius: 200,
-    backgroundColor: "#F9AA33",
-  },
-
-  button_text2: {
+  turma: {
     fontSize: 18,
     fontWeight: "bold",
     fontStyle: "normal",
-    letterSpacing: 0,
-    color: "#F9AA33",
+    marginTop: 10,
+  },
+
+  blueLine: {
+    backgroundColor: colors.primary,
+    marginTop: 12,
+    marginLeft: 1,
+    height: 6,
+    width: 55
+  },
+
+  novoTesteButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 340,
+    width: responsividade.largura_tela < 430 ? responsividade.LARGURABUTTON * 0.72 :  responsividade.LARGURABUTTON * 0.55,
+    height: responsividade.largura_tela < 430 ? responsividade.ALTURABUTTON * 0.72 : responsividade.largura_tela * 0.11,
+    borderRadius: 200,
+    backgroundColor: colors.primary,
+  },
+
+  meusTestesButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: metrics.baseMargin,
+    width: responsividade.largura_tela < 430 ? responsividade.LARGURABUTTON * 0.72 :  responsividade.LARGURABUTTON * 0.55,
+    height: responsividade.largura_tela < 430 ? responsividade.ALTURABUTTON * 0.72 : responsividade.largura_tela * 0.11,
+    borderRadius: 200,
+    borderWidth: 3,
+    borderColor: colors.primary,
   },
 
   button_text: {
@@ -125,7 +76,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontStyle: "normal",
     letterSpacing: 0,
-    color: "#344955",
+    color: colors.white,
+  },
+
+  button_text2: {
+    fontSize: responsividade.fonts.button,
+    fontWeight: "bold",
+    fontStyle: "normal",
+    letterSpacing: 0,
+    color: colors.primary,
   },
 
   icon:{

@@ -17,7 +17,7 @@ export default {
   primary: '#4CC6D3',
   tercery: '#232f34',
   primaryTransparent: 'rgba(6, 96, 140, 0.83)',
-  secundary: '#f9aa33',
+  secundary: '#4173CE',
   secundaryTranparent: 'rgba(145, 145, 145, 0.65)',
   success: '#9DCA83',
   danger: '#E8452C',

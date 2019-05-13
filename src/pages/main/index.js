@@ -31,7 +31,7 @@ class Main extends Component {
     drawerStatus: null,
   }
   
-  componentWillMount() {
+  /*componentWillMount() {
     const { login } = this.props;
 
     let days;
@@ -71,7 +71,7 @@ class Main extends Component {
     console.log( formatedMysqlString );
 
     return formatedMysqlString;
-  }
+  }*/
 
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.navigateToLogin);
@@ -108,39 +108,28 @@ class Main extends Component {
     console.tron.log(day);
     return (
       <View style={styles.container}>
-        <Header
-          showMenu
-          showExit
-          openMenu={navigation.toggleDrawer}
-          title='Inicial'
-        />
+        
+        <Header />
 
         <View style={styles.bodyS}>
-          <View style={styles.tokenView}>
-            <Text style={styles.token}>Token válido por </Text>
-            <Text style={styles.tokenD}>{day}</Text>
-            <Text style={styles.token}> dias</Text>
-          </View>
-
-          <View style={styles.info}>
-            <View style={styles.profile}>
-              <Image source={require('../../assents/imgs/avatar.png')} style={styles.ImageStyle} />
+          <View style={styles.card}>
+            <View style={styles.info}>
+                <Text style={styles.name}>Helvio Peixoto</Text>
+                <Text style={styles.turma}>Turma B</Text>
+                <View style={styles.blueLine} />
             </View>
-            <View style={styles.name_view}>
-              <Text style={styles.name}>{login.userName}</Text>
+            <View style={styles.buttons_view}>
+              <TouchableOpacity onPress={this.navigateToScreen('NewMenu')}>
+                <View style={styles.novoTesteButton}>
+                  <Text style={styles.button_text}>NOVO TESTE</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={this.navigateToScreen('Hist')}>
+                <View style={styles.meusTestesButton}>
+                  <Text style={styles.button_text2}>MEUS TESTES</Text>
+                </View>
+              </TouchableOpacity>
             </View>
-          </View>
-          <View style={styles.buttons_view}>
-            <TouchableOpacity onPress={this.navigateToScreen('NewMenu')}>
-              <View style={styles.button}>
-                <Text style={styles.button_text}>NOVA PERÍCIA</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.navigateToScreen('Hist')}>
-              <View style={styles.button}>
-                <Text style={styles.button_text}>MINHAS PERÍCIAS</Text>
-              </View>
-            </TouchableOpacity>
           </View>
         </View>
       </View>
