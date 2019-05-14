@@ -120,10 +120,10 @@ class InputText extends Component {
       this.saveGroupInput({ data_name, default_value })
     }
     return (
-      <View style={{ ...styles.container, backgroundColor: (groupFlag === true ? 'white' : null) }}>
+      <View style={styles.container}>
         <Text style={styles.hint}>{hint}</Text>
         <TextInput
-          style={{ ...styles.input, backgroundColor: (groupFlag === true ? colors.light : 'white') }}
+          style={styles.input}
           autoCapitalize="sentences"
           autoCorrect={true}
           placeholder={"Digite aqui..."}
