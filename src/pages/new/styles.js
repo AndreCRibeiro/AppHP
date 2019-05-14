@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform} from 'react-native';
 import { colors, metrics, responsividade } from '../../styles';
 
 const styles = StyleSheet.create({
@@ -9,13 +9,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     //backgroundColor: '#784657',
   },
-  icon: {
-    color: colors.white,
+  iconMenu: {
+    color: colors.secundary,
     alignSelf: 'flex-start',
   },
 
   viewIcon: {
     marginLeft: 4,
+  },
+
+  blueLine: {
+    backgroundColor: colors.primary,
+    marginTop: 12,
+    marginLeft: 1,
+    height: 6,
+    width: 55
   },
 
   viewTitle: {
@@ -94,23 +102,21 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: colors.secundary,
-    height: responsividade.ALTURA_BUTTON,
-    width: responsividade.LARGURA_BUTTON,
-    marginTop: responsividade.margin.secondMargin,
-    marginBottom: responsividade.margin.secondMargin,
-    //marginHorizontal: metrics.baseMargin * 2,
-    paddingHorizontal: metrics.basePadding,
-    justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: responsividade.BORDER_RADIUS_BUTTON,
-    elevation: 1,
+    justifyContent: 'center',
+    marginTop: 340,
+    width: responsividade.largura_tela < 430 ? responsividade.LARGURABUTTON * 0.72 :  responsividade.LARGURABUTTON * 0.55,
+    height: responsividade.largura_tela < 430 ? responsividade.ALTURABUTTON * 0.72 : responsividade.largura_tela * 0.11,
+    borderRadius: 200,
+    backgroundColor: colors.primary,
   },
 
   buttonText: {
-    color: 'black',
-    fontSize: responsividade.fonts.nameSize,
-    //fontWeight: 'bold',
+    fontSize: responsividade.fonts.button,
+    fontWeight: "bold",
+    fontStyle: "normal",
+    letterSpacing: 0,
+    color: colors.white,
   },
   input: {
     backgroundColor: colors.transparent,
@@ -125,6 +131,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: responsividade.largura_tela,
+   },
+
+   bar: {
+    margin: responsividade.padding.mainPadding,
+    
    }
 
 });

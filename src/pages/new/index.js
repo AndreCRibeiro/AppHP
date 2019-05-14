@@ -11,6 +11,7 @@ import {
   BackHandler
 } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Header, ModalCheck, PickerItem } from '../../globalComponents';
 import styles from './styles';
 
@@ -18,6 +19,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as NewActions } from '../../store/ducks/new';
 import { Creators as FormActios } from '../../store/ducks/form';
+import { responsividade } from '../../styles';
 
 const imageCheck = require('../../assents/lottie/warning.json');
 
@@ -140,14 +142,16 @@ class New extends Component {
       messageRequest,
       infopicker,
     } = this.state;
-    const { navigation, newState } = this.props;
+    const { navigation, newState, goBack } = this.props;
+    const {largura_tela} = responsividade;
     return (
       <View style={styles.container}>
-        <Header
-          title='Nova Perícia'
-          showMenu
-          openMenu={navigation.toggleDrawer}
-        />
+       <Header />
+       <View style = {styles.bar}> 
+    
+      </View>
+        
+        
         <ScrollView contentContainerStyle={styles.scrollview}>
           {
             viewError && (
@@ -156,13 +160,11 @@ class New extends Component {
               </View>
             )
           }
-          <View style={styles.forms1}>
+          <View style={styles.card}>
             <View style={styles.title}>
-              <View style={styles.ball}>
-                <Text style={styles.numberType}>1</Text>
-              </View>
-              <Text style={styles.textType}> Perícia: </Text>
+              <Text style={styles.textType}> Testes </Text>
             </View>
+            <View style={styles.blueLine} />
             <View style={styles.Picker}>
               <PickerItem
                 receiveProps={(params => this.receiveParams(params))}
@@ -171,27 +173,6 @@ class New extends Component {
             </View>
           </View>
 
-          {
-            showRef && (
-              <Animated.View
-                style={{ ...this.props.style, opacity: fadeAnim_ref }}>
-                {this.props.children}
-                <View style={styles.forms}>
-                  <View style={styles.title}>
-                    <View style={styles.ball}><Text style={styles.numberType}> 2 </Text></View>
-                    <Text style={styles.textType}> Referência: </Text>
-                  </View>
-                  <TextInput
-                    style={styles.input}
-                    autoCapitalize="words"
-                    maxLength={72}
-                    underlineColorAndroid="rgba(0,0,0,0)"
-                    onChangeText={inputSave => this.setState({ inputSave })}
-                  />
-                </View>
-              </Animated.View>
-            )
-          }
           {
             newState.showButton && (
               <TouchableOpacity style={styles.button} onPress={() => this.onPressButton()}>
