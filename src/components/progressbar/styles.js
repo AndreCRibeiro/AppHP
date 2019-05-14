@@ -4,7 +4,7 @@ import { colors, metrics, responsividade } from '../../styles';
 
 const styles = StyleSheet.create({
   container: {
-   
+
   },
 
   bar: {
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 
   progress: {
     height: 5,
-    backgroundColor: 'green',
+    backgroundColor: colors.primary,
   }
 
 

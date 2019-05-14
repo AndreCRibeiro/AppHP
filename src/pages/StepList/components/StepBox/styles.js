@@ -3,14 +3,15 @@ import { colors, metrics, responsividade } from '../../../../styles';
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',   
+    alignItems: 'center',
     justifyContent: 'space-between',
-    width: responsividade.LARGURACARD,
-    height: responsividade.ALTURACARD,
+    width: responsividade.LARGURACARD * 0.95,
+    height: responsividade.ALTURACARD * 0.85,
     backgroundColor: "white",
     borderRadius: 4,
-    marginTop: responsividade.margin.mainMargin / 2,
+    margin: responsividade.margin.mainMargin / 2,
     left: 40,
+    elevation: 2,
   },
   viewicon: {
     justifyContent: 'center',
@@ -24,6 +25,12 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     lineHeight: 21,
   },
+  blueline: {
+    width: 40,
+    height: 4,
+    backgroundColor: colors.primary,
+    margin: 5,
+  },
   descricao: {
     width: responsividade.WIDTH_MAIN * 0.7,
     color: '#000000',
@@ -35,19 +42,19 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
 
-  card_titulo:{
+  card_titulo: {
     marginTop: responsividade.margin.mainMargin,
     marginLeft: responsividade.margin.mainMargin * 0.3,
   },
 
-  card_descricao:{
+  card_descricao: {
     marginTop: responsividade.margin.mainMargin * 0.4,
     marginLeft: responsividade.margin.mainMargin * 0.3,
   },
 
   bar: {
-    
-    width: responsividade.LARGURACARD * 0.85,   
+
+    width: responsividade.LARGURACARD * 0.85,
     padding: 5,
     marginTop: responsividade.margin.mainMargin,
   },
@@ -58,12 +65,12 @@ const styles = StyleSheet.create({
 
   number_view: {
     //backgroundColor: 'pink',
-    top: responsividade.largura_tela*0.01,
+    top: responsividade.largura_tela * 0.01,
     justifyContent: 'center',
   },
 
   row: {
-    flexDirection: 'row',   
+    flexDirection: 'row',
   }
 
 });

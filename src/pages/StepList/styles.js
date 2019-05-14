@@ -5,7 +5,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#EDF0F2',
+    backgroundColor: 'white',
+    paddingBottom: 10,
   },
 
   message: {
@@ -45,11 +46,10 @@ const styles = StyleSheet.create({
     width: responsividade.LARGURA_BUTTON,
     height: responsividade.ALTURA_BUTTON,
     borderRadius: responsividade.BORDER_RADIUS_BUTTON,
-    //borderWidth: responsividade.largura_tela < 430 ? 1.5 : 3,
+    borderWidth: responsividade.largura_tela < 430 ? 2 : 3,
+    borderColor: colors.primary,
     fontWeight: 'bold',
-    backgroundColor: 'green',
     marginBottom: responsividade.margin.mainMargin,
-    elevation: 1,
   },
 
   enviarbutton: {
@@ -59,19 +59,17 @@ const styles = StyleSheet.create({
     width: responsividade.LARGURA_BUTTON,
     height: responsividade.ALTURA_BUTTON,
     borderRadius: responsividade.BORDER_RADIUS_BUTTON,
-    backgroundColor: '#F9AA33',
-    elevation: 1,
-
+    backgroundColor: colors.primary,
   },
   buttonText: {
-    color: 'black',
+    color: 'white',
     fontSize: responsividade.fonts.nameSize,
     fontWeight: '400',
     lineHeight: 28,
   },
 
   buttonTextsalvar: {
-    color: 'white',
+    color: colors.primary,
     fontSize: responsividade.fonts.nameSize,
     fontWeight: '400',
     lineHeight: 28,
