@@ -9,11 +9,13 @@ const styles = StyleSheet.create({
 
   bar: {
     height: 5,
+    borderRadius: 5,
     backgroundColor: '#EEE',
   },
 
   progress: {
     height: 5,
+    borderRadius: 5,
     backgroundColor: colors.primary,
   }
 

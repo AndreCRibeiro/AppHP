@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   descricao: {
-    width: responsividade.WIDTH_MAIN * 0.7,
+    //width: responsividade.WIDTH_MAIN * 0.7,
     color: '#000000',
     opacity: 0.7,
     fontSize: responsividade.fonts.descriptionSize,
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   card_descricao: {
     marginTop: responsividade.margin.mainMargin * 0.4,
     marginLeft: responsividade.margin.mainMargin * 0.3,
+    //backgroundColor: 'blue'
   },
 
   bar: {
