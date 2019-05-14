@@ -11,7 +11,6 @@ import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import fr.snapp.imagebase64.RNImgToBase64Package;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import org.reactnative.camera.RNCameraPackage;
-import com.spyworldxp.barcodescanner.BarcodeScannerPackage;
 import com.rnim.rn.audio.ReactNativeAudioPackage;
 import com.terrylinla.rnsketchcanvas.SketchCanvasPackage;
 import com.facebook.react.ReactNativeHost;
@@ -42,7 +41,6 @@ public class MainApplication extends Application implements ReactApplication {
             new RNImgToBase64Package(),
             new RNFetchBlobPackage(),
             new RNCameraPackage(),
-            new BarcodeScannerPackage(),
             new ReactNativeAudioPackage(),
             new SketchCanvasPackage()
       );
