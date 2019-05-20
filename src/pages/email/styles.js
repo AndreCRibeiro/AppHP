@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, metrics } from '../../styles';
+import { colors, metrics, responsividade } from '../../styles';
 
 const styles = StyleSheet.create({
 
@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
 
   first:{
     flex: 1,
-
   },
 
   step:{
@@ -19,12 +18,11 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    // backgroundColor: colors.lighter,
-    backgroundColor: 'rgba(45, 45, 45, 0.8)',
+    backgroundColor: colors.white,
   },
 
   indicadorContainer: {
-    backgroundColor: 'rgba(45, 45, 45, 0.8)',
+    backgroundColor: colors.white,
     paddingBottom: 40,
   },
 
@@ -32,7 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(45, 45, 45, 0.8)',
+    backgroundColor: colors.white,
   },
 
   image: {
@@ -50,38 +48,41 @@ const styles = StyleSheet.create({
   },
 
   descript: {
-    fontSize: 15,
-    color: colors.lighter,
+    fontSize: 16,
+    color: colors.primary,
     marginBottom: metrics.baseMargin,
     marginTop: metrics.baseMargin / 2,
   },
 
   input: {
-     backgroundColor: 'rgba(255, 255, 255, 0.6)',
-     borderRadius: 25,
-     marginTop: metrics.baseMargin * 2,
-     height: 50,
-     width: 270,
-     paddingHorizontal: metrics.basePadding,
-
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    borderRadius: 5,
+    borderColor: colors.regular,
+    borderWidth: 1,     
+    marginTop: metrics.baseMargin * 2,
+    height: responsividade.largura_tela < 430 ? 40 : 60,
+    width: responsividade.largura_tela < 430 ? responsividade.largura_tela * 0.75 : responsividade.largura_tela * 0.80,
+    paddingHorizontal: metrics.basePadding,
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
    },
 
   testebutton: {
-    backgroundColor: 'rgba(41, 42, 41, 0.65)',
-    borderWidth: 2,
-    borderColor: 'rgb(225, 200, 133)',
-    borderRadius: 25,
-    height: 50,
-    marginTop: metrics.baseMargin,
+    borderWidth: 3,
+    borderColor: colors.primary,
+    borderRadius: 40,
+    height: responsividade.largura_tela < 430 ? 45 : 60,
+    marginTop: metrics.baseMargin * 2,
     paddingHorizontal: metrics.basePadding,
     justifyContent: 'center',
     alignItems: 'center',
   },
 
   buttonText: {
-    color: 'rgb(225, 200, 133)',
+    color: colors.primary,
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: responsividade.largura_tela < 430 ? 16 : 20,
   },
 
   estiloPicker: {

@@ -7,11 +7,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: Platform.OS === 'ios' ? 58 : responsividade.ALTURA_HEADER,
+    height: Platform.OS === 'ios' ? 100 : responsividade.ALTURA_HEADER,
     //height: 80,
     //position: 'absolute',
     zIndex: 2,
-    paddingTop: Platform.OS === 'ios' ? 30 : 0,
+    paddingTop: Platform.OS === 'ios' ? 45 : 0,
     backgroundColor: colors.secundary,
   },
 

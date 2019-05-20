@@ -28,29 +28,29 @@ const imageCheck = require('../../assents/lottie/warning.json');
 
 import styles from './styles';
 
-const labels = ["ID", "PIN", "Senha"];
+const labels = ["Email", "PIN", "Senha"];
 const customStyles = {
   stepIndicatorSize: 45,
   currentStepIndicatorSize: 45,
   separatorStrokeWidth: 2,
   currentStepStrokeWidth: 3,
-  stepStrokeCurrentColor: 'rgb(225, 200, 133)',
+  stepStrokeCurrentColor: '#4CC6D3',
   stepStrokeWidth: 3,
-  stepStrokeFinishedColor: 'rgb(225, 200, 133)',
+  stepStrokeFinishedColor: '#4CC6D3',
   stepStrokeUnFinishedColor: '#aaaaaa',
-  separatorFinishedColor: 'rgb(225, 200, 133)',
+  separatorFinishedColor: '#4CC6D3',
   separatorUnFinishedColor: '#aaaaaa',
-  stepIndicatorFinishedColor: 'rgb(225, 200, 133)',
+  stepIndicatorFinishedColor: '#4CC6D3',
   stepIndicatorUnFinishedColor: '#ffffff',
   stepIndicatorCurrentColor: '#ffffff',
   stepIndicatorLabelFontSize: 13,
   currentStepIndicatorLabelFontSize: 13,
-  stepIndicatorLabelCurrentColor: 'rgb(225, 200, 133)',
+  stepIndicatorLabelCurrentColor: '#4CC6D3',
   stepIndicatorLabelFinishedColor: '#ffffff',
   stepIndicatorLabelUnFinishedColor: '#aaaaaa',
-  labelColor: '#999999',
+  labelColor: '#ffffff',
   labelSize: 13,
-  currentStepLabelColor: 'rgb(225, 200, 133)',
+  currentStepLabelColor: '#4CC6D3',
 }
 
 class Login extends Component {
@@ -124,7 +124,7 @@ class Login extends Component {
     return (
       <KeyboardAwareScrollView
        contentContainerStyle={styles.container}
-       scrollEnabled= {true}
+       scrollEnabled= {false}
       >
 
       <Header
@@ -135,10 +135,10 @@ class Login extends Component {
         <StatusBar backgroundColor="rgba(45, 45, 45, 0.8)" />
         <View style={styles.mainContainer}>
           <View style={styles.icon}>
-            <Icon name="fiber-pin" size={60} color="#fff" style={styles.icon} />
+            <Icon name="fiber-pin" size={70} color="#4CC6D3" style={styles.icon} />
           </View>
 
-          <Text style={styles.descript}>Verifique seu email!</Text>
+          <Text style={styles.descript}>Verifique seu email</Text>
           <View style={styles.forms}>
             <TextInput
               style={styles.input}
@@ -153,12 +153,11 @@ class Login extends Component {
 
             <TouchableOpacity style={styles.testebutton} onPress={() => { this.conferePIN(); }}>
               <Text style={styles.buttonText}>
-                Continuar
+                CONTINUAR
                </Text>
             </TouchableOpacity>
           </View>
         </View>
-        <HideWithKeyboard>
           <View style={styles.indicadorContainer}>
             <StepIndicator
               customStyles={customStyles}
@@ -167,10 +166,9 @@ class Login extends Component {
               stepCount={3}
             />
           </View>
-        </HideWithKeyboard>
         {
           viewModal && (
-            <SnackBar inside content = {this.state.messageRequest} color = "white"/>
+            <SnackBar register content={this.state.messageRequest} color="#4173CE" />
           )
         }
       </KeyboardAwareScrollView>
