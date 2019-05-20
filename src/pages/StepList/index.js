@@ -114,7 +114,7 @@ class StepList extends Component {
       contentGroup = true;
     }
 
-    console.tron.log('arrayRef\n', array);
+    //console.tron.log('arrayRef\n', array);
 
     array.map(item => {
       if (item === formulario.ref) {
@@ -123,7 +123,7 @@ class StepList extends Component {
       count += 1;
     });
 
-    console.tron.log('reset arrayRef\n', array);
+    //console.tron.log('reset arrayRef\n', array);
 
     await AsyncStorage.setItem('arrayRef', JSON.stringify(array));
 
@@ -181,9 +181,9 @@ class StepList extends Component {
       }
     })
       .then(response => {
-        console.tron.log('response', response);
+        //console.tron.log('response', response);
         if (response.status === 206) {
-          console.tron.log('teste', response.data, response.data.mensagem);
+          //console.tron.log('teste', response.data, response.data.mensagem);
           this.errorMessage(response.data.mensagem);
         } else {
           AsyncStorage.setItem('@IDlaudo', response.data.number);
@@ -202,7 +202,7 @@ class StepList extends Component {
         var mensage;
         if (error.response.status === 404) {
           mensage = `${error.response.status} - Não encontrado`;
-          console.tron.log('error 404', error, mensage); 
+          //console.tron.log('error 404', error, mensage); 
           // this.errorMessage(mensage);
         }
         else if(error.response.status === 403) {
@@ -214,7 +214,7 @@ class StepList extends Component {
         else if(error.response.status === 0) {
           mensage = `${error.response.status} - Formato incorreto`;
         }        
-        console.tron.log('error form', error, mensage); 
+        //console.tron.log('error form', error, mensage); 
         this.errorMessage(mensage);
       });
   }
@@ -291,7 +291,7 @@ class StepList extends Component {
     const { viewError, load, saved, mensageError } = this.state;
     let i = 0;
 
-    console.tron.log('msg error', mensageError)
+    //console.tron.log('msg error', mensageError)
     return (
       <View style={styles.container}>
         <Header

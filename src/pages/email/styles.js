@@ -12,28 +12,28 @@ const styles = StyleSheet.create({
 
   },
 
+  step:{
+    color: 'white',
+    fontSize : 58,
+  },
 
-    step:{
-      color: 'white',
-      fontSize : 58,
-    },
-    container: {
-      flex: 1,
-      // backgroundColor: colors.lighter,
-      backgroundColor: 'rgba(45, 45, 45, 0.8)',
-    },
+  container: {
+    flex: 1,
+    // backgroundColor: colors.lighter,
+    backgroundColor: 'rgba(45, 45, 45, 0.8)',
+  },
 
-    indicadorContainer: {
-      backgroundColor: 'rgba(45, 45, 45, 0.8)',
-      paddingBottom: 40,
-    },
+  indicadorContainer: {
+    backgroundColor: 'rgba(45, 45, 45, 0.8)',
+    paddingBottom: 40,
+  },
 
-    mainContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'rgba(45, 45, 45, 0.8)',
-    },
+  mainContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(45, 45, 45, 0.8)',
+  },
 
   image: {
     marginBottom: metrics.baseMargin * 6,
@@ -66,49 +66,48 @@ const styles = StyleSheet.create({
 
    },
 
-   testebutton: {
-     backgroundColor: 'rgba(41, 42, 41, 0.65)',
-     borderWidth: 2,
-     borderColor: 'rgb(225, 200, 133)',
-     borderRadius: 25,
-     height: 50,
-     marginTop: metrics.baseMargin,
-     paddingHorizontal: metrics.basePadding,
-     justifyContent: 'center',
-     alignItems: 'center',
+  testebutton: {
+    backgroundColor: 'rgba(41, 42, 41, 0.65)',
+    borderWidth: 2,
+    borderColor: 'rgb(225, 200, 133)',
+    borderRadius: 25,
+    height: 50,
+    marginTop: metrics.baseMargin,
+    paddingHorizontal: metrics.basePadding,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
-   },
+  buttonText: {
+    color: 'rgb(225, 200, 133)',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
 
-   buttonText: {
-     color: 'rgb(225, 200, 133)',
-     fontWeight: 'bold',
-     fontSize: 16,
-   },
+  estiloPicker: {
+    //height: 50,
+    //paddingHorizontal: metric.basePadding,
+    flex: 7,
+  },
 
-   estiloPicker: {
-     //height: 50,
-     //paddingHorizontal: metric.basePadding,
-     flex: 7,
-     },
+  forms2: {
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    flexDirection: 'row',
+    padding: metrics.basePadding,
+    borderRadius: metrics.baseRadius,
+    marginTop: metrics.baseMargin / 3,
+    backgroundColor: colors.whiteTransparent
+  },
 
-   forms2: {
-     height: 50,
-     justifyContent: 'center',
-     alignItems: 'center',
-     alignSelf: 'center',
-     flexDirection: 'row',
-     padding: metrics.basePadding,
-     borderRadius: metrics.baseRadius,
-     marginTop: metrics.baseMargin / 3,
-     backgroundColor: colors.whiteTransparent
-   },
-
-   icon:{
-      padding: 10,
-      borderRadius: 100,
-      justifyContent: 'center',
-      alignItems: 'center',
-   },
+  icon:{
+    padding: 10,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default styles;

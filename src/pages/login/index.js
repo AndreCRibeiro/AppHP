@@ -96,7 +96,7 @@ class Login extends Component {
       <View style={styles.container}>
 
         <Image 
-          source={require('../../assents/imgs/local_crime.jpg')} 
+          source={require('../../assents/imgs/local_crime2.jpg')} 
           style={styles.image} 
         />
         
@@ -108,7 +108,7 @@ class Login extends Component {
               style={styles.input}
               autoCapitalize="none"
               autoCorrect={true}
-              placeholder="Matrícula"
+              placeholder="Email"
               underlineColorAndroid="rgba(0,0,0,0)"
               onChangeText={inputSave => this.setState({ inputSave })}
               value={this.state.inputSave}
@@ -118,7 +118,7 @@ class Login extends Component {
               style={styles.input}
               autoCapitalize="none"
               autoCorrect={true}
-              placeholder="Turma"
+              placeholder="Senha"
               underlineColorAndroid="rgba(0,0,0,0)"
               secureTextEntry={true}
               onChangeText={password => this.setState({ password })}

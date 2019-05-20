@@ -15,6 +15,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Header, ModalCheck, PickerItem } from '../../globalComponents';
 import styles from './styles';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as NewActions } from '../../store/ducks/new';
@@ -151,8 +153,10 @@ class New extends Component {
     
       </View>
         
-        
-        <ScrollView contentContainerStyle={styles.scrollview}>
+        <KeyboardAwareScrollView 
+          contentContainerStyle={styles.scrollview}
+          scrollEnabled={true}
+        >
           {
             viewError && (
               <View style={styles.message}>
@@ -193,7 +197,7 @@ class New extends Component {
               />
             )
           }
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </View>
 
     );
