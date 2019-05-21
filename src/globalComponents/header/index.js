@@ -86,7 +86,7 @@ class HeaderRedux extends Component {
             }            
             {
               showNotas && (
-                <TouchableOpacity onPress={() => this.showGrades()} style={styles.grades}>
+                <TouchableOpacity onPress={this.navigateToScreen('Hist')} style={styles.grades}>
                   <Icon name="md-book" size={ largura_tela < 430 ? 30 : 40 } style={styles.iconExit} />
                   <Text style={styles.nameIcon}>Notas</Text>
                 </TouchableOpacity>

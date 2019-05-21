@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StatusBar, Image, AsyncStorage, BackHandl
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
 import { Header } from '../../globalComponents';
+import { Scanner } from '../../components';
 import { responsividade } from '../../styles';
 import { connect } from 'react-redux';
 
@@ -24,6 +25,7 @@ class Main extends Component {
   state = {
     nome: '',
     drawerStatus: null,
+    scanner: false,
   }
 
   componentDidMount() {
@@ -63,9 +65,13 @@ class Main extends Component {
     this.props.navigation.dispatch(resetAction);
   }
 
+  openScanner = () => {
+    this.setState({ scanner: true });
+  }
+
   render() {
     const { navigation , login } = this.props;
-    const { nome } = this.state
+    const { nome, scanner } = this.state
     const name = navigation.getParam('nome', 'Nome não cadastrado');
     const { largura_tela } = responsividade;
     return (
@@ -74,10 +80,27 @@ class Main extends Component {
         <View style={styles.buttons_view}>
           <TouchableOpacity onPress={this.navigateToScreen('NewMenu')}>
             <View style={styles.novoTesteButton}>
+              <Text style={styles.button_text}>New</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.buttons_view2}>
+          <TouchableOpacity onPress={() => this.openScanner()}>
+            <View style={styles.novoTesteButton}>
               <Text style={styles.button_text}>+</Text>
             </View>
-            </TouchableOpacity>
+          </TouchableOpacity>
         </View>
+
+        {
+          scanner && (
+            <View>
+              <Scanner 
+                />
+            </View>
+          )
+        }
         
         <Header 
           showExit

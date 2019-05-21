@@ -1,5 +1,6 @@
 import { Platform, StyleSheet } from 'react-native';
 import { colors, metrics, responsividade } from '../../styles';
+import { padding } from '../../styles/responsividade';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     backgroundColor: colors.white,
-    paddingRight: responsividade.largura_tela < 430 ? 80 : 100
+    paddingRight: responsividade.largura_tela < 430 ? 260 : 280,
   },
 
   info: {
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginLeft: 1,
     height: 6,
-    width: 55
+    width: 58
   },
 
   novoTesteButton: {
@@ -96,6 +97,13 @@ const styles = StyleSheet.create({
    top: 390,
    left: 315
  },
+
+ buttons_view2: {
+  position: "absolute", 
+  zIndex: 2,
+  top: 330,
+  left: 315
+},
 
 
 });
