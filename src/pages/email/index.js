@@ -30,7 +30,7 @@ import Axios from 'axios';
 import Api from '../../services/api';
 
 
-const labels = ["Email", "PIN", "Senha"];
+const labels = ["Email","Senha"];
 const customStyles = {
   stepIndicatorSize: 45,
   currentStepIndicatorSize: 45,
@@ -50,7 +50,7 @@ const customStyles = {
   stepIndicatorLabelCurrentColor: '#4CC6D3',
   stepIndicatorLabelFinishedColor: '#ffffff',
   stepIndicatorLabelUnFinishedColor: '#aaaaaa',
-  labelColor: '#ffffff',
+  labelColor: '#4CC6D3',
   labelSize: 13,
   currentStepLabelColor: '#4CC6D3',
 }
@@ -63,7 +63,8 @@ class Login extends Component {
 
   state = {
     progress: new Animated.Value(0),
-    inputSave: null,
+    inputSave1: null,
+    inputSave2: null,
     viewModal: false,
     messageRequest: '',
     load : false,
@@ -89,7 +90,7 @@ class Login extends Component {
     this.props.navigation.dispatch(resetAction);
   }
 
-  navigateToHash = () => {
+  /*navigateToHash = () => {
     const resetAction = StackActions.reset({
       index: 0,
       actions: [
@@ -98,22 +99,37 @@ class Login extends Component {
       ]
     });
     this.props.navigation.dispatch(resetAction);
+  }*/
+
+  navigateToPassword = () => {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [
+        // Logged
+        NavigationActions.navigate({ routeName: 'Password' }),
+      ]
+    });
+    this.props.navigation.dispatch(resetAction);
   }
 
   confereID = async () => {
-    const { inputSave } = this.state;
+    const { inputSave1, inputSave2 } = this.state;
     this.setState({ viewModal: false , cont: false ,load: true});
-    try {
-      const response = await Api.user.postCadastroId({ matricula: inputSave })
+    /*try {
+      const response = await Api.user.postCadastroId({ matricula: inputSave2 })
       if (response.status === 200) {
-        AsyncStorage.setItem('@IdRegistro', inputSave);
-        this.navigateToHash();
+        AsyncStorage.setItem('@IdRegistro', inputSave2);
+        //this.navigateToHash();
+        this.navigateToPassword();
       } else {
         this.setState({ viewModal: true, messageRequest: response.data.mensagem, load: false , cont: true});
       }
     } catch {
       this.setState({ viewModal: true, messageRequest: response.data.mensagem });
-    }
+    }*/
+    AsyncStorage.setItem('@UserName', inputSave1);
+    AsyncStorage.setItem('@UserEmail', inputSave2);
+    this.navigateToPassword();
   }
 
   onPressAnimated = async () => {
@@ -143,9 +159,17 @@ class Login extends Component {
             <TextInput
               style={styles.input}
               autoCapitalize="none"
+              placeholder="Digite seu nome"
+              underlineColorAndroid="rgba(0,0,0,0)"
+              onChangeText={inputSave1 => this.setState({ inputSave1 })}
+              value={this.state.inputSave}
+            />
+            <TextInput
+              style={styles.input}
+              autoCapitalize="none"
               placeholder="Digite seu email"
               underlineColorAndroid="rgba(0,0,0,0)"
-              onChangeText={inputSave => this.setState({ inputSave })}
+              onChangeText={inputSave2 => this.setState({ inputSave2 })}
               value={this.state.inputSave}
             />
             <TouchableOpacity style={styles.testebutton} onPress={() => { this.confereID(); }}>
@@ -172,7 +196,7 @@ class Login extends Component {
               customStyles={customStyles}
               currentPosition={this.state.currentPosition}
               labels={labels}
-              stepCount={3}
+              stepCount={2}
             />
           </View>
         {

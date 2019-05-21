@@ -17,16 +17,30 @@ const styles = StyleSheet.create({
 
   iconMenu: {
     color: colors.white,
-    alignSelf: 'flex-start',
-    margin: 5,
+    bottom: responsividade.largura_tela < 430 ? 9 : 11
   },
+
+  grades: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    top: responsividade.largura_tela < 430 ? 3 : 5
+  },
+
+  nameIcon: {
+    color: colors.white,
+    fontSize: responsividade.largura_tela < 430 ? 18 : 20,
+    left: responsividade.largura_tela < 430 ? 8 : 10,
+    bottom: responsividade.largura_tela < 430 ? 3 : 5
+  },
+
   iconExit: {
-    color: colors.regular,
-    alignSelf: 'flex-start',
+    color: colors.white,
   },
 
   viewIcon: {
-    //marginLeft: 4,
+    justifyContent: 'center',
+    alignItems: 'center',    //marginLeft: 4,
   },
 
   viewTitle: {

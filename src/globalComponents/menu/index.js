@@ -47,28 +47,10 @@ class MenuClass extends Component {
                     </View>
                 </TouchableOpacity>
                 <View style={styles.buttonsView}>
-                    <TouchableOpacity onPress={this.navigateToScreen('NewMenu')}>
-                        <View style={styles.buttonBox}>
-                            <Icon name="pencil" size={largura_tela < 430 ? 19 : 29} color="#fff" style={styles.icon} />
-                            <Text style={styles.textButton}>Nova Perícia</Text>
-                        </View>
-                    </TouchableOpacity>
                     <TouchableOpacity onPress={this.navigateToScreen('Hist')}>
                         <View style={styles.buttonBox}>
                             <Icon name="history" size={largura_tela < 430 ? 19 : 29} color="#fff" style={styles.icon} />
-                            <Text style={styles.textButton}>Minhas perícias</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this.navigateToScreen('UpdatePops')}>
-                        <View style={styles.buttonBox}>
-                            <Icon name="download" size={largura_tela < 430 ? 19 : 29} color="#fff" style={styles.icon} />
-                            <Text style={styles.textButton}>Baixar POPs</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <View style={styles.buttonBox}>
-                            <Icon name="key-variant" size={largura_tela < 430 ? 19 : 29} color="#fff" style={styles.icon} />
-                            <Text style={styles.textButton}>Renovar token</Text>
+                            <Text style={styles.textButton}>Meus testes</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={this.navigateToScreen('Login', true)}>

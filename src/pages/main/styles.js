@@ -12,23 +12,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: colors.white,
+    width: responsividade.largura_tela
   },
 
   card: {
     flex: 1,
-    marginTop: 80,
-    marginLeft: 35,
-    marginRight: 35,
-    marginBottom: 65,
     backgroundColor: colors.white,
-    zIndex: 2,
-    elevation: 1,
-    borderRadius: 5,
+    paddingRight: responsividade.largura_tela < 430 ? 80 : 100
   },
 
   info: {
-    marginTop: 65,
-    marginLeft: 25,
+    marginTop: responsividade.largura_tela < 430 ? 90 : 110,
   },
 
   name: {
@@ -56,9 +50,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 340,
-    width: responsividade.largura_tela < 430 ? responsividade.LARGURABUTTON * 0.72 :  responsividade.LARGURABUTTON * 0.55,
-    height: responsividade.largura_tela < 430 ? responsividade.ALTURABUTTON * 0.72 : responsividade.largura_tela * 0.11,
-    borderRadius: 200,
+    width: responsividade.largura_tela < 430 ? responsividade.LARGURABUTTON * 0.13 :  responsividade.LARGURABUTTON * 0.55,
+    height: responsividade.largura_tela < 430 ? responsividade.ALTURABUTTON * 0.75: responsividade.largura_tela * 0.11,
+    borderRadius: 100,
     backgroundColor: colors.primary,
   },
 
@@ -68,13 +62,13 @@ const styles = StyleSheet.create({
     marginTop: metrics.baseMargin,
     width: responsividade.largura_tela < 430 ? responsividade.LARGURABUTTON * 0.72 :  responsividade.LARGURABUTTON * 0.55,
     height: responsividade.largura_tela < 430 ? responsividade.ALTURABUTTON * 0.72 : responsividade.largura_tela * 0.11,
-    borderRadius: 200,
+    borderRadius: 300,
     borderWidth: 3,
     borderColor: colors.primary,
   },
 
   button_text: {
-    fontSize: responsividade.fonts.button,
+    fontSize: 23,
     fontWeight: "bold",
     fontStyle: "normal",
     letterSpacing: 0,
@@ -97,12 +91,10 @@ const styles = StyleSheet.create({
  },
 
  buttons_view: {
-   //backgroundColor: 'red',"
-   flexDirection:  responsividade.largura_tela < 430 ? "column" : "row",
-   alignItems: "center",
-   width: responsividade.largura_tela * 0.9,
-   justifyContent: 'space-around',
-   marginBottom: responsividade.margin.secondMargin,
+   position: "absolute", 
+   zIndex: 2,
+   top: 390,
+   left: 315
  },
 
 

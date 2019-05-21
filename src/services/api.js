@@ -2,7 +2,7 @@ import axios from 'axios';
 // import { LoginToken } from '../store/ducks/login';
 // import store from '../store';
 
-var URL = 'http://35.198.17.69/api';
+var URL = 'http://157.230.177.190:3000';
 
 const changeBaseURL = (baseUrl) => {
   URL = baseUrl;
@@ -15,7 +15,7 @@ const api = axios.create({
 const tokenAuth = null;
 
 const setToken = (token, matricula) => {
-  axios.defaults.headers.common['X-Token'] = `${token}`;
+  axios.defaults.headers.common['authentication'] = `${token}`;
   axios.defaults.headers.common['matricula'] = `${matricula}`;
 }
 
@@ -23,7 +23,7 @@ const user = {
   // realiza o login do usuario
   loginUser: data => {
     console.log('user request', URL)
-    return axios.post(`${URL}/pericia/usuario/login`, data, {
+    return axios.post(`${URL}/user/login`, data, {
       headers: {}
     },
     )
@@ -35,6 +35,7 @@ const user = {
     },
     )
   },
+
   //confirma o pin recebido por email para validação do usuario
   postConferePIN: data => {
     return api.post('/pericia/usuario/validaPin', data, {
@@ -43,8 +44,9 @@ const user = {
     )
   },
 
+  //criação do usuário
   createPassword: data => {
-    return api.post('/pericia/usuario/geraSenha', data, {
+    return api.post('/user', data, {
       headers: {}
     },
     )

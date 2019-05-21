@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StatusBar, AsyncStorage, Alert } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { NavigationActions, withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 
@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as FormActions } from '../../store/ducks/form';
 import { Creators as GroupActions } from '../../store/ducks/group';
+import { Creators as LoginActions } from '../../store/ducks/login';
 import { responsividade } from '../../styles';
 
 class HeaderRedux extends Component {
@@ -28,6 +29,20 @@ class HeaderRedux extends Component {
     AsyncStorage.clear();
   }
 
+  navigateToScreen = (route, exit) => () => {
+    if (exit) {
+        this.props.getExitLogin();
+    }
+    const navigateAction = NavigationActions.navigate({
+        routeName: route
+    });
+    this.props.navigation.dispatch(navigateAction);
+  }
+
+  showGrades = () => {
+
+  }
+
   static defaultProps = {
     color: '#344955',
   }
@@ -40,6 +55,8 @@ class HeaderRedux extends Component {
       showArrowRegister,
       showMenu,
       showInfo,
+      showExit,
+      showNotas,
       goBack,
       openMenu,
       title,
@@ -64,6 +81,14 @@ class HeaderRedux extends Component {
               showMenu && (
                 <TouchableOpacity onPress={() => openMenu()}>
                   <Icon name="md-menu" size={ largura_tela < 430 ? 28 : 40 } style={styles.iconMenu} />
+                </TouchableOpacity>
+              )
+            }            
+            {
+              showNotas && (
+                <TouchableOpacity onPress={() => this.showGrades()} style={styles.grades}>
+                  <Icon name="md-book" size={ largura_tela < 430 ? 30 : 40 } style={styles.iconExit} />
+                  <Text style={styles.nameIcon}>Notas</Text>
                 </TouchableOpacity>
               )
             }
@@ -98,7 +123,7 @@ class HeaderRedux extends Component {
                 {title}
               </Text>
             </View>
-          <View>
+          <View style={styles.viewIcon}>
             {
               showInfo ?
                 <TouchableOpacity onPress={() => this.openInfo()}>
@@ -130,6 +155,14 @@ class HeaderRedux extends Component {
                 />
               )
             }
+            {
+              showExit && (
+
+                <TouchableOpacity onPress={this.navigateToScreen('Login', true)} style={styles.grades}>
+                  <Icon name="md-exit" size={ largura_tela < 430 ? 30 : 40 } style={styles.iconMenu} />
+                </TouchableOpacity>
+              )
+            }
           </View>
       </View>
     );
@@ -141,7 +174,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({...FormActions, ...GroupActions}, dispatch);
+  bindActionCreators({...FormActions, ...GroupActions, ...LoginActions}, dispatch);
 
 const Header = connect(mapStateToProps, mapDispatchToProps)(HeaderRedux)
 export default withNavigation(Header);

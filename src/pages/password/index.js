@@ -29,7 +29,7 @@ const imageCheck2 = require('../../assents/lottie/check.json');
 
 import styles from './styles';
 
-const labels = ["ID","PIN","Senha"];
+const labels = ["Email","Senha"];
 const customStyles = {
   stepIndicatorSize: 45,
   currentStepIndicatorSize: 45,
@@ -49,7 +49,7 @@ const customStyles = {
   stepIndicatorLabelCurrentColor: '#4CC6D3',
   stepIndicatorLabelFinishedColor: '#ffffff',
   stepIndicatorLabelUnFinishedColor: '#aaaaaa',
-  labelColor: '#ffffff',
+  labelColor: '#4CC6D3',
   labelSize: 13,
   currentStepLabelColor: '#4CC6D3',
 }
@@ -62,7 +62,7 @@ class Login extends Component {
 
   state = {
     progress: new Animated.Value(0),
-    currentPosition: 2,
+    currentPosition: 1,
     idRegistro: null,
     pinRegistro: null,
     inputSave1: null,
@@ -70,15 +70,20 @@ class Login extends Component {
     id: null,
     viewModals: false,
     messageRequest: '',
+    userName: null,
+    userEmail: null,
   }
 
   async componentWillMount() {
-    const idRegistro = await AsyncStorage.getItem('@IdRegistro');
-    this.setState({ idRegistro: idRegistro });
-    const pinRegistro = await AsyncStorage.getItem('@PinRegistro');
-    this.setState({ pinRegistro: pinRegistro });
-    const id = await AsyncStorage.getItem('@IdProv');
-    this.setState({ id: id });
+    //const idRegistro = await AsyncStorage.getItem('@IdRegistro');
+    //this.setState({ idRegistro: idRegistro });
+    //const pinRegistro = await AsyncStorage.getItem('@PinRegistro');
+    //this.setState({ pinRegistro: pinRegistro });
+    //const id = await AsyncStorage.getItem('@IdProv');
+    //this.setState({ id: id });
+    const nome = await AsyncStorage.getItem('@UserName');
+    const email = await AsyncStorage.getItem('@UserEmail');
+    this.setState({ userName: nome, userEmail: email });
   }
 
   componentDidMount() {
@@ -98,27 +103,34 @@ class Login extends Component {
 
 
    salvarId = async () => {
-    const { id, idRegistro, pinRegistro, inputSave1, inputSave2 } = this.state;
+    //const { id, idRegistro, pinRegistro, inputSave1, inputSave2 } = this.state;
+    const { userEmail, userName, inputSave1, inputSave2 } = this.state
     this.setState({ viewModal: false});
     
     if (inputSave1 == inputSave2) {
       try {
-        const response = await Api.user.createPassword({ matricula: idRegistro, pin: pinRegistro, pass: inputSave2 });
+        const response = await Api.user.createPassword({ 
+          name: userName, 
+          email: userEmail, 
+          type: "student", 
+          password_hash: inputSave2, 
+          token:"1234" 
+        });
         if (response.status === 200) {
           this.setState({ viewModals: true })
         } else {
           Alert.alert(response.data.mensagem);
         }
-      } catch {
+      } catch{
         this.setState({ viewModal: true , messageRequest: 'Erro de conexão' });
       }
     } else {
       this.setState({ viewModal: true , messageRequest: 'Senhas diferentes' });
     }
    
-    if(id){
-    AsyncStorage.setItem('@Id', id);
-    }
+    //if(id){
+    //AsyncStorage.setItem('@Id', id);
+    //}
   }
 
   closeModal = () => {
@@ -184,7 +196,7 @@ class Login extends Component {
             customStyles={customStyles}
             currentPosition={this.state.currentPosition}
             labels={labels}
-            stepCount={3}
+            stepCount={2}
           />
         </View>
         {

@@ -26,11 +26,11 @@ export default function LoginState(state = InitialState, action) {
     case Types.GET_SUCSSES:
       return {
         ...state,
-        userName: action.payload.response.nome,
+        userName: action.payload.response.name,
         token: action.payload.response.token,
         userID: action.payload.userID,
         logged: true,
-        valtoken: action.payload.response.validade_token,
+        valtoken: action.payload.response.token,
       };
     case Types.GET_FAILURE:
       return {
