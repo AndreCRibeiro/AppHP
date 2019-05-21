@@ -148,7 +148,9 @@ class New extends Component {
     const {largura_tela} = responsividade;
     return (
       <View style={styles.container}>
-       <Header />
+       <Header 
+        goBack
+       />
        <View style = {styles.bar}> 
     
       </View>

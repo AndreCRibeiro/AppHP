@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StatusBar, Image, AsyncStorage, BackHandler, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StatusBar, Image, AsyncStorage, BackHandler, ScrollView, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
 import { Header } from '../../globalComponents';
 import { Scanner } from '../../components';
 import { responsividade } from '../../styles';
 import { connect } from 'react-redux';
+import { ModalCheck } from '../../globalComponents';
 
 import { NavigationActions, withNavigation, StackActions } from 'react-navigation';
+import Api from '../../services/api';
 
 class Main extends Component {
 
@@ -26,6 +28,25 @@ class Main extends Component {
     nome: '',
     drawerStatus: null,
     scanner: false,
+    viewModals: false,
+    messageRequest: '',
+  }
+
+  componentWillMount() {
+    this.requestClass();
+  }
+
+  requestClass = async () => {
+    try {
+      const response = await Api.user.checkClass();
+      if(response.status === 200 ) {
+        this.setState({ viewClasses: true });
+      } else {
+        Alert.alert(response.data.mensagem);
+      }
+    } catch (error) {
+      console.tron.log(error)
+    }
   }
 
   componentDidMount() {
@@ -71,7 +92,7 @@ class Main extends Component {
 
   render() {
     const { navigation , login } = this.props;
-    const { nome, scanner } = this.state
+    const { nome, scanner, viewModals, viewClasses, messageRequest } = this.state
     const name = navigation.getParam('nome', 'Nome não cadastrado');
     const { largura_tela } = responsividade;
     return (
@@ -92,26 +113,42 @@ class Main extends Component {
             </View>
           </TouchableOpacity>
         </View>
-
-        {
-          scanner && (
-            <View>
-              <Scanner 
-                />
-            </View>
-          )
-        }
         
         <Header 
           showExit
           showNotas
         />
 
+        {
+          viewModals && (
+            <ModalCheck
+              message={messageRequest}
+              viewModal
+              success
+              sourceImage={imageCheck2}
+            />
+          )
+        }
+
         <ScrollView contentContainerStyle={styles.bodyS}>
+        {
+          scanner && (
+            <View>
+              <Scanner />
+            </View>
+          )
+        }
           <View style={styles.card}>
             <View style={styles.info}>
                 <Text style={styles.name}>{login.userName}</Text>
                 <View style={styles.blueLine} />
+                {
+                  viewClasses && (
+                    <View>
+                      <Text>Testando</Text>
+                    </View>
+                  )
+                }
             </View>
           </View>
         </ScrollView>

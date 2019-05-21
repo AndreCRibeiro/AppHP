@@ -15,7 +15,7 @@ const api = axios.create({
 const tokenAuth = null;
 
 const setToken = (token, matricula) => {
-  axios.defaults.headers.common['authentication'] = `${token}`;
+  axios.defaults.headers.common['authorization'] = `${token}`;
   axios.defaults.headers.common['matricula'] = `${matricula}`;
 }
 
@@ -28,6 +28,14 @@ const user = {
     },
     )
   },
+
+  checkClass: () => {
+    return api.get('/student', {
+      headers: {}
+    },
+    )
+  },
+
   // envia matricula pra receber codigo por email
   postCadastroId: data => {
     return api.post('/pericia/usuario/cadastro', data, {
