@@ -38,14 +38,17 @@ class Main extends Component {
 
   requestClass = async () => {
     try {
-      const response = await Api.user.checkClass();
-      if(response.status === 200 ) {
-        this.setState({ viewClasses: true });
-      } else {
-        Alert.alert(response.data.mensagem);
+        const response = await Api.user.checkClass();
+        console.tron.log('Entrei aqui');
+        if(response.data.data.length === 0 ) {
+          this.setState({ viewNoClasses: true });
+        }
+        else {
+          this.setState({ viewClasses: true });
+        }
       }
-    } catch (error) {
-      console.tron.log(error)
+    catch (error) {
+      console.tron.log({"WTF":error})
     }
   }
 
@@ -92,7 +95,7 @@ class Main extends Component {
 
   render() {
     const { navigation , login } = this.props;
-    const { nome, scanner, viewModals, viewClasses, messageRequest } = this.state
+    const { nome, scanner, viewModals, viewClasses, viewNoClasses, messageRequest } = this.state
     const name = navigation.getParam('nome', 'Nome não cadastrado');
     const { largura_tela } = responsividade;
     return (
@@ -142,13 +145,26 @@ class Main extends Component {
             <View style={styles.info}>
                 <Text style={styles.name}>{login.userName}</Text>
                 <View style={styles.blueLine} />
+
+                {
+                  viewNoClasses && (
+                    <View style={styles.teste}>
+                      <Text style={styles.textoNaoCadastrado} > Nenhuma turma encontrada.</Text> 
+                      <Text style={styles.textoNaoCadastrado} > Para adicionar uma nova turma, </Text>
+                      <Text style={styles.textoNaoCadastrado}> aperte no botão "+".</Text>
+                      
+                    </View>
+                  )
+                }
+
                 {
                   viewClasses && (
-                    <View>
+                    <View style={styles.teste}>
                       <Text>Testando</Text>
                     </View>
                   )
                 }
+
             </View>
           </View>
         </ScrollView>

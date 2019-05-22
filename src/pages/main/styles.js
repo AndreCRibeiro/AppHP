@@ -16,6 +16,18 @@ const styles = StyleSheet.create({
     width: responsividade.largura_tela
   },
 
+  teste: {
+    top: 150,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 20
+  },
+
+  textoNaoCadastrado: {
+    color: colors.grey,
+    fontSize: 16,
+  },
+
   card: {
     flex: 1,
     backgroundColor: colors.white,
@@ -24,6 +36,9 @@ const styles = StyleSheet.create({
 
   info: {
     marginTop: responsividade.largura_tela < 430 ? 90 : 110,
+    width: 300,
+    justifyContent: 'center',
+    marginLeft: 220
   },
 
   name: {
