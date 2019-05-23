@@ -189,16 +189,16 @@ class StepList extends Component {
         //console.tron.log('response', response);
         if (response.status === 206) {
           //console.tron.log('teste', response.data, response.data.mensagem);
-          this.errorMessage(response.data.mensagem);
+          //this.errorMessage(response.data.mensagem);
         } else {
-          AsyncStorage.setItem('@IDlaudo', response.data.number);
-          Alert.alert('ID do laudo', 'O número do seu laudo é ' + response.data.number);
+          //AsyncStorage.setItem('@IDlaudo', response.data.number);
+          //Alert.alert('ID do laudo', 'O número do seu laudo é ' + response.data.number);
           this.onSendGroup({ 
             userId, 
             token, 
             reference,       
             dataGroup,
-            idForm: response.data.number,
+            //idForm: response.data.number,
             formName,
           });
         }       
