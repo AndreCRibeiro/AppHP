@@ -68,9 +68,8 @@ class ScannerAPI extends Component {
   }
 
   enrollClass = async data => {
-    //console.tron.log(data)
     try {
-      const response = await api.
+      const response = await Api.user.enrollStudent({code: data});
       console.tron.log(response)
     } catch (error){
       console.tron.log(error)

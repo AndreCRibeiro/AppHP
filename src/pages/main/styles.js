@@ -151,15 +151,15 @@ const styles = StyleSheet.create({
  buttons_view: {
    position: "absolute", 
    zIndex: 2,
-   top: 390,
-   left: 315
+   top: 290,
+   left: 200
  },
 
  buttons_view2: {
   position: "absolute", 
   zIndex: 2,
-  top: 330,
-  left: 315
+  top: 230,
+  left: 200
 },
 
 
