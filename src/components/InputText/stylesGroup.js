@@ -6,8 +6,8 @@ const stylesGroup = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     width: responsividade.largura_tela,
-    padding: 20,
-    paddingBottom: 40,
+    padding: 10,
+    paddingBottom: 10,
   },
    Name: {
     width: responsividade.LARGURABOX,

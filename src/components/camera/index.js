@@ -36,13 +36,9 @@ class Camera extends React.Component {
     if (data.group === 'true') {
 
       group.dataGroup.map(item => {
-        //console.tron.log(['map array', item])
         item.value.map(components => {
-          //console.tron.log(['map array components', components])
           if (components.index === index) {
-            //onsole.tron.log('deucerteo', index)
             Object.keys(components).map(key => {
-              //console.tron.log('object map', components, key, data.data_name)
               if (key === data.data_name) {
                 if (components[key].value !== null && components[key].value !== undefined) {
                   this.setState({ image: components[key].extra, imagePath: components[key].value.uri });
@@ -118,10 +114,8 @@ class Camera extends React.Component {
         images: null,
         imagePath: image.path
       });
-      //console.tron.log('ESTADO', image);
     }).catch(e => {
       console.log(e);
-      //Alert.alert(e.message ? e.message : e);
     });
   }
 
@@ -199,12 +193,8 @@ class Camera extends React.Component {
         images: null,
         imagePath: image.path
       });
-      //console.tron.log('ESTADO', image);
-
     }).catch(e => {
-      console.log(e);
-      //Alert.alert(e.message ? e.message : e);
-    });
+      console.log(e);    });
   }
 
   pickMultiple() {
@@ -289,9 +279,7 @@ class Camera extends React.Component {
       groupMother,
       startControlArrayGroup,      
     } = this.props;    
-    //console.tron.log(['group save ', data.group, info.data_name])
     if (imagePath || image) {
-      //console.tron.log(['group save2', data.group, info.data_name])
       saveDataGroup({
         index,
         groupMother,
@@ -305,7 +293,6 @@ class Camera extends React.Component {
         type: data.component_type
       })
     }
-    //console.tron.log('antes de ', info.data_name)
     startControlArrayGroup(info.data_name)
   }
 
@@ -346,7 +333,6 @@ class Camera extends React.Component {
 
 
             getSaveStateForm(form);
-            //console.tron.log('entrei form nao grupo', image, imagePath)
           }
         }
       
@@ -368,7 +354,6 @@ class Camera extends React.Component {
           form[`leg_${info.data_name}`] = { key: `leg_${info.data_name}`, value: inputSave, data: null, filled: true };
 
           getSaveStateForm(form);
-          //console.tron.log('sem foto', image, imagePath)
         }
       }
     }
@@ -393,12 +378,26 @@ class Camera extends React.Component {
       this.saveFormInput({ data_name, default_value, component_type });
     }
     if (group.flagGroup) {
-      //console.tron.log('numero de flag gorup camera', group.groupFlag)
       this.saveGroupCamera({ data_name, default_value })
     }
     return (
       
       <View style={groupFlag ? stylesGroup.container : styles.container}>
+
+
+        <View style={styles.component_card}>
+
+            <View style={styles.title}> 
+            <View style={styles.title_view}>
+            <Text style={styles.title_text}>Questão X</Text>
+            <View style={styles.blueline}></View>
+            </View>
+
+            </View>
+
+            <View style={styles.answer}>
+                <Text style={styles.answer_text}>Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</Text>
+        </View>
 
         <ScrollView 
           horizontal
@@ -411,29 +410,7 @@ class Camera extends React.Component {
           {/*this.state.image ? this.renderAsset(this.state.image) : null*/}
           {this.state.images ? this.state.images.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
         </ScrollView>
-        <View style={styles.buttonsView}>
-          <TouchableOpacity onPress={() => this.pickSingleWithCamera(true)}>
-            <View style={styles.avatarContainer}>
-              <View style={styles.avatarContainer2}>
-                <Icon name="add-a-photo" color="black" size={largura_tela < 430 ? 20 : 30} style={styles.icon} />
-                <View style={styles.text_foto}>
-                  <Text style={styles.text1}>Tirar foto</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.pickMultiple(false)} style={styles.button}>
-            <View style={styles.avatarContainer1}>
-              <View style={styles.avatarContainer2}>
-                <Icon name="photo-library" color="white" size={largura_tela < 430 ? 20 : 30} style={styles.icon} />
-                <View style={styles.text_foto}>
-                  <Text style={styles.text}>Abrir galeria</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-        </View>
         <View style={styles.containerText}>
           <TextInput
             style={groupFlag ? stylesGroup.input : styles.input}
@@ -446,6 +423,15 @@ class Camera extends React.Component {
             value={this.state.inputSave}
             onChangeText={inputSave => this.setState({ inputSave })}
           />
+        </View>
+
+        <TouchableOpacity  onPress={() => this.pickSingleWithCamera(true)} style={styles.buttonhp}>
+            <View style={styles.button_texthp}><Text style={styles.font}>ABRIR CÂMERA</Text></View>  
+        </TouchableOpacity>
+
+        <TouchableOpacity  onPress={() => this.pickMultiple(false)} style={styles.buttonhp}>
+            <View style={styles.button_texthp}><Text style={styles.font}>ABRIR GALERIA</Text></View>  
+        </TouchableOpacity>
         </View>
       </View>
     );

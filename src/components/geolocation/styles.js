@@ -4,14 +4,12 @@ import { colors, metrics, responsividade } from '../../styles';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'pink',
-    width: responsividade.largura_tela,
-    padding: 20,
-    paddingBottom: 40,
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        borderBottomWidth: 0,
+        borderBottomColor: 'black',
+        paddingBottom: 10,
 
   },
   cabecalho: {
@@ -106,13 +104,14 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: 'white',
     height: responsividade.ALTURA_INPUT,
-    width: responsividade.LARGURA_INPUT,
-    margin: responsividade.margin.mainMargin,
+    width: responsividade. LARGURABOX*0.85,
+    borderWidth: 1,
+    borderColor: '#848484',
     borderRadius: responsividade.BORDER_RADIUS_INPUT,
-    paddingLeft: responsividade.padding.mainPadding,
-    fontSize: responsividade.fonts.descriptionSize,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
+    paddingLeft: 20,
+    paddingTop: 5,
+    fontSize: 16,
+    marginVertical: 5,
    },
    main:
    {
@@ -136,7 +135,75 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginBottom: 5,
    
-  }
+  },
+
+  buttonhp: {
+    //backgroundColor: 'rgba(41, 42, 41, 0.65)',
+    borderWidth: 2,
+    borderColor: '#4CC6D3',
+    borderRadius: 40,
+    height: responsividade.largura_tela < 430 ? 50 : 60,
+    width: responsividade. LARGURABOX*0.85,
+    marginVertical: metrics.baseMargin,
+    paddingHorizontal: metrics.basePadding,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  },
+
+    button_texthp:{
+  
+      //color: 'black',
+      //color: 'white',
+      color: '#4CC6D3',
+      fontSize: responsividade.fonts.descriptionSize,
+      //fontWeight: 'bold',
+      marginLeft: 5,
+
+    },
+
+    font: {
+      color: '#4CC6D3',
+    },
+
+    component_card: {
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: "white",
+          borderRadius: 5,
+          padding: 10,
+          width: responsividade.LARGURABOX,
+    },
+
+    answer: {
+      //backgroundColor: "pink",
+      width: responsividade. LARGURABOX*0.85,
+      margin: 5,
+      justifyContent: 'flex-start'
+    },
+
+    title: {
+      //backgroundColor: "pink",
+      width: responsividade. LARGURABOX*0.85,
+      margin: 5,
+      justifyContent: 'flex-start'
+
+    },
+
+    title_text: {
+
+      fontSize: responsividade.fonts.descriptionSize,
+      fontWeight: 'bold'      },
+
+    blueline: {
+
+      backgroundColor: "#4CC6D3",
+      marginTop: 5,
+      height: 3,
+      width: responsividade. LARGURABOX*0.15,
+
+    },
+
   
 
 });

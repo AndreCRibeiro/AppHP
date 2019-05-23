@@ -5,13 +5,12 @@ import { colors, metrics, responsividade } from '../../styles';
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      // backgroundColor: 'pink',
-      width: responsividade.largura_tela,
+      justifyContent: 'center',
+      alignItems: 'center',
       padding: 10,
-      paddingBottom: 40,
-      paddingTop: 10,
-      borderBottomWidth: 0.5,
+      borderBottomWidth: 0,
       borderBottomColor: 'black',
+      //paddingBottom: 10,
     },
     label: {
       fontSize: 18,

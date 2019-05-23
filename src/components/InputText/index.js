@@ -120,10 +120,23 @@ class InputText extends Component {
       this.saveGroupInput({ data_name, default_value })
     }
     return (
-      <View style={styles.container}>
-        <Text style={styles.hint}>{hint}</Text>
-        <TextInput
-          style={styles.input}
+      <View style={{ ...styles.container, backgroundColor: (groupFlag === true ? 'white' : null) }}>
+                  <View style={styles.component_card}>
+
+          <View style={styles.title}> 
+          <View style={styles.title_view}>
+          <Text style={styles.title_text}>Questão X</Text>
+          <View style={styles.blueline}></View>
+          </View>
+
+          </View>
+
+          <View style={styles.answer}>
+              <Text style={styles.answer_text}>Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</Text>
+          </View>
+
+          <TextInput
+          style={{ ...styles.input, backgroundColor: (groupFlag === true ? colors.light : 'white') }}
           autoCapitalize="sentences"
           autoCorrect={true}
           placeholder={"Digite aqui..."}
@@ -132,6 +145,10 @@ class InputText extends Component {
           onChangeText={inputSave => this.setState({ inputSave })}
           value={this.state.inputSave}
         />
+
+         
+          </View>
+       
 
       </View>
     );

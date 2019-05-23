@@ -106,7 +106,7 @@ class Login extends Component {
     try {
       const response = await Api.user.postCadastroId({ matricula: inputSave })
       if (response.status === 200) {
-        AsyncStorage.setItem('@IdRegistro', inputSave);
+        //AsyncStorage.setItem('@IdRegistro', "paulo");
         this.navigateToHash();
       } else {
         this.setState({ viewModal: true, messageRequest: response.data.mensagem, load: false , cont: true});

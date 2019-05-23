@@ -175,15 +175,30 @@ class Scanner extends Component {
     }
     return (
       <View style={{ justifyContent: 'center', alignItem: 'center' }}>
-        {
+
+      <View style={styles.component_card}>
+
+      <View style={styles.title}> 
+      <View style={styles.title_view}>
+      <Text style={styles.title_text}>Questão X</Text>
+      <View style={styles.blueline}></View>
+      </View>
+
+      </View>
+
+      <View style={styles.answer}>
+          <Text style={styles.answer_text}>Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</Text>
+      </View>
+
+      {
           showButton && (
-            <TouchableOpacity onPress={() => this.setState({ showScanner: true, showButton: false })} style={styles.button}>
-              <View style={styles.square}><Icon name="qrcode" size={largura_tela < 430 ? 28 : 40} color="black" style={styles.icon} /></View>
-              <View style={styles.parale}><Text style={styles.button_text}>LER {label}</Text></View>
+            <TouchableOpacity onPress={() => this.setState({ showScanner: true, showButton: false })} style={styles.buttonhp}>
+              <View style={styles.button_texthp}><Text  style={styles.font}>LER {label}</Text></View>
             </TouchableOpacity>
           )}
 
-        {
+      
+{
           showScanner && (
             <View style={{ alignItems: 'center', height: 250 }}>
               {
@@ -211,7 +226,8 @@ class Scanner extends Component {
             </View>
 
           )}
-        {
+
+{
           this.state.showCode && (
             <View style={styles.codecontainer}>
               <Text style={styles.code}> Código: {this.state.infoScanner} </Text>
@@ -225,6 +241,9 @@ class Scanner extends Component {
               <Text style={styles.button_text}>LER {label}</Text>
             </TouchableOpacity>
           )}
+
+
+      </View>
 
       </View>
     );

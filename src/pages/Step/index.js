@@ -42,20 +42,20 @@ class StepPage extends Component {
             delay: 250,
         }).start()
     }
-    componentWillMount() {
+      componentWillMount() {
         BackHandler.removeEventListener('hardwareBackPress', this.saveStep);
-    }
-
-    componentWillUnmount() {
+      }
+    
+      componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.saveStep);
-    }
+      }
 
-    saveStep = () => {
+      saveStep = () => {
         this.props.saveStepState();
         this.props.startUpdateProgress();
         this.props.navigation.navigate('StepList');
         return true;
-    }
+      }
 
     render() {
         const { navigation } = this.props;
@@ -81,11 +81,7 @@ class StepPage extends Component {
                             i = i + 1;
                             return (
                                 <Animated.View style={{ ...styles.coluna }}>
-                                    <View style={styles.linha}>
-                                        <Text style={styles.textType}> Questão </Text>
-                                        <Text style={styles.numberType}>{i}</Text>
-                                    </View>
-                                    <View style={styles.bluelines} />
+                                    
                                     <ComponentList data={item} index={i} />
                                 </Animated.View>)
                         })}

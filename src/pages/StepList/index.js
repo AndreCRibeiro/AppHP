@@ -313,7 +313,7 @@ class StepList extends Component {
 
           )
         }
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <FlatList
             data={form.steps}
             renderItem={item => { i = i + 1; return <StepBox steps={item} form={form} index={i} /> }}

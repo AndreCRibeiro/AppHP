@@ -5,13 +5,12 @@ import { bold } from 'ansi-colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: responsividade.largura_tela,
-    padding: 20,
-    paddingBottom: 40,
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        borderBottomWidth: 0,
+        borderBottomColor: 'black',
+        paddingBottom: 10,
   },
 
   Name: {

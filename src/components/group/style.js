@@ -4,16 +4,16 @@ import { colors, metrics, responsividade } from '../../styles';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'pink',
+        // backgroundColor: 'pink',
     width: responsividade.largura_tela,
     //padding: 20,
     alignItems: 'center',
-    paddingBottom: 20,   
+    paddingBottom: 10,   
     borderBottomColor: 'black',             
     borderBottomWidth: 0.5,
   },
   boxGroup: {
-    width: responsividade.largura_tela * 0.95,
+    width: responsividade.LARGURABOX,
     padding: 5,
     backgroundColor: 'white',
     borderRadius: 5,    

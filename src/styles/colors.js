@@ -14,7 +14,7 @@ export default {
   gold: '#e0c784',
   gold3: '#cdad00',
 
-  primary: '#4CC6D3',
+  primary: '#344955',
   tercery: '#232f34',
   primaryTransparent: 'rgba(6, 96, 140, 0.83)',
   secundary: '#f9aa33',
