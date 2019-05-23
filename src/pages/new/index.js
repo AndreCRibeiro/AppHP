@@ -81,13 +81,9 @@ class New extends Component {
   }
 
   async componentWillMount() {
-    const valueForm = await AsyncStorage.getItem('@Form');
-    const formLocal = JSON.parse(valueForm);
-    this.setState({ form: formLocal });
-    const valueQuerry = await AsyncStorage.getItem('@Querry');
-    const formQuerryLocal = JSON.parse(valueQuerry);
-    this.setState({ formQuerry: formQuerryLocal });
-    this.incrementarFuncao();
+    const { navigation } = this.props
+    const id = navigation.getParam('key');
+    const response = await Api.user.checkClassTests(id) ;
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
@@ -177,6 +173,8 @@ class New extends Component {
                 arrayConfig={infopicker}
               />
             </View>
+
+          <TouchableOpacity style={styles.button} onPress={() => this.onPressButton()} ></TouchableOpacity>
           </View>
 
           {

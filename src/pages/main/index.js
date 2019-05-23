@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StatusBar, Image, AsyncStorage, BackHandler, ScrollView, Alert } from 'react-native';
+import 
+  {  
+    View, 
+    Text, 
+    TouchableOpacity, 
+    BackHandler, 
+    ScrollView, 
+  } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
 import { Header } from '../../globalComponents';
-import { Scanner } from '../../components';
+import { ScannerAPI } from '../../components';
 import { responsividade } from '../../styles';
 import { connect } from 'react-redux';
 import { ModalCheck } from '../../globalComponents';
@@ -30,6 +37,7 @@ class Main extends Component {
     scanner: false,
     viewModals: false,
     messageRequest: '',
+    arrayReq: null,
   }
 
   componentWillMount() {
@@ -39,16 +47,16 @@ class Main extends Component {
   requestClass = async () => {
     try {
         const response = await Api.user.checkClass();
-        console.tron.log('Entrei aqui');
         if(response.data.data.length === 0 ) {
           this.setState({ viewNoClasses: true });
         }
         else {
-          this.setState({ viewClasses: true });
+          this.setState({ arrayReq: response.data.data });
         }
       }
     catch (error) {
-      console.tron.log({"WTF":error})
+      //console.tron.log({error})
+      Alert.alert(error)
     }
   }
 
@@ -93,9 +101,29 @@ class Main extends Component {
     this.setState({ scanner: true });
   }
 
+  renderClasses = item => {
+    const { navigation } = this.props;
+    return (
+      <TouchableOpacity
+        style={styles.box}
+        onPress={() => { navigation.navigate('NewMenu', {key: item.disciplineId}) }}
+      >
+      <View style={styles.row}>
+            <Text style={styles.status1}>Disciplina: </Text>
+            <Text style={styles.ref}>{item.discipline}</Text>
+      </View>
+        
+      <View style={styles.row}>
+          <Text style={styles.status1}>Turma: </Text>
+          <Text style={styles.statusEnviado}>{item.class}</Text>
+      </View>
+      </TouchableOpacity>
+    );
+  }
+
   render() {
     const { navigation , login } = this.props;
-    const { nome, scanner, viewModals, viewClasses, viewNoClasses, messageRequest } = this.state
+    const { nome, scanner, viewModals, viewClasses, viewNoClasses, messageRequest, arrayReq } = this.state
     const name = navigation.getParam('nome', 'Nome não cadastrado');
     const { largura_tela } = responsividade;
     return (
@@ -137,7 +165,7 @@ class Main extends Component {
         {
           scanner && (
             <View>
-              <Scanner />
+              <ScannerAPI />
             </View>
           )
         }
@@ -158,11 +186,9 @@ class Main extends Component {
                 }
 
                 {
-                  viewClasses && (
-                    <View style={styles.teste}>
-                      <Text>Testando</Text>
-                    </View>
-                  )
+                  arrayReq
+                  ? arrayReq.map(item => this.renderClasses(item))
+                  : null
                 }
 
             </View>

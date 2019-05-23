@@ -47,6 +47,48 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
   },
 
+  box:{
+    backgroundColor: 'white',
+    borderRadius: 5,
+    margin: 5,
+    width: responsividade.LARGURACARD,
+    height: responsividade.ALTURACARD * 0.7,
+    // justifyContent: "flex-start",
+    // alignItems: "center",
+    padding: 20,
+  },
+
+  row: {
+    flexDirection: "row",
+  },
+
+  status1: {     
+    height: 20,
+    fontSize:  responsividade.fonts.nameSize,
+    fontWeight: '500',
+    lineHeight: 21,
+    // opacity: 0.6,
+    marginTop: responsividade.margin.mainMargin,
+  }, 
+
+  ref: {
+    height: 20,
+    fontSize:  responsividade.fonts.nameSize,
+    fontWeight: '300',
+    lineHeight: 21,
+    marginTop: responsividade.margin.mainMargin
+  },
+
+  statusEnviado:{
+    height: 20,
+    color: 'green',
+    fontSize:  responsividade.fonts.nameSize * 0.8,
+    fontWeight: '400',
+    lineHeight: 21,
+    opacity: 0.6,
+    marginTop: responsividade.margin.mainMargin
+  },
+
   turma: {
     fontSize: 18,
     fontWeight: "bold",

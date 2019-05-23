@@ -113,8 +113,7 @@ class Login extends Component {
           name: userName, 
           email: userEmail, 
           type: "student", 
-          password_hash: inputSave2, 
-          token:"1234" 
+          password_hash: inputSave2
         });
         if (response.status === 200) {
           this.setState({ viewModals: true })

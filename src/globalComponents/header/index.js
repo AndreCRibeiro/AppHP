@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 import { Creators as FormActions } from '../../store/ducks/form';
 import { Creators as GroupActions } from '../../store/ducks/group';
 import { Creators as LoginActions } from '../../store/ducks/login';
-import { responsividade } from '../../styles';
+import { responsividade, colors} from '../../styles';
 
 class HeaderRedux extends Component {
   state = {
@@ -75,7 +75,7 @@ class HeaderRedux extends Component {
     return (
       <View style={{...styles.header }}>
 
-        <StatusBar backgroundColor= {this.props.color} barStyle="light-content" />
+        <StatusBar backgroundColor = {colors.secundary} barStyle="light-content" />
           <View style={styles.viewIcon}>
             {
               showMenu && (

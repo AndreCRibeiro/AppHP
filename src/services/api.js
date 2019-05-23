@@ -36,6 +36,27 @@ const user = {
     )
   },
 
+  testes: () => {
+    return api.get('/test', {
+      headers: {}
+    },
+    )
+  },
+
+  enrollStudent: data => {
+    return api.post('/student', data, {
+      headers: {}
+    },
+    )
+  },
+
+  checkClassTests: data => {
+    return api.get(`/form?discipline=${data}`, {
+      headers: {}
+    },
+    )
+  },
+
   // envia matricula pra receber codigo por email
   postCadastroId: data => {
     return api.post('/pericia/usuario/cadastro', data, {
