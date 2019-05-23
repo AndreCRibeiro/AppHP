@@ -82,7 +82,7 @@ export default class SnackBar extends Component {
                 width: 330,
                 height: 60,
                 left: this.state.x,
-                top: responsividade.largura_tela*0.15,
+                top: responsividade.largura_tela*0.28,
                 borderRadius: 5,
                 alignItems: 'center',
                 backgroundColor: this.props.color,

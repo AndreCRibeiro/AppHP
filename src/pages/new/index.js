@@ -52,28 +52,7 @@ class New extends Component {
     viewModal: false,
     messageRequest: 'Sem conexão',
     viewError: false,
-    infopicker: [
-      {
-        name: 'Veículos',
-        value: 30,
-      },
-      {
-        name: 'Incêndio',
-        value: 32,
-      },
-      {
-        name: 'Genética Forense',
-        value: 33,
-      },
-      {
-        name: 'Arrombamento de Caixa',
-        value: 6,
-      },
-      {
-        name: 'Catálogo de Componentes',
-        value: 1,
-      },
-    ],
+    arrayReq: false,
   }
 
   componentDidMount() {
@@ -83,7 +62,10 @@ class New extends Component {
   async componentWillMount() {
     const { navigation } = this.props
     const id = navigation.getParam('key');
-    const response = await Api.user.checkClassTests(id) ;
+    const response = await Api.user.checkClassTests(id);
+    console.tron.log(response);
+    this.setState({ arrayReq: response.data });
+    console.tron.log(this.state.arrayReq);
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
@@ -132,6 +114,21 @@ class New extends Component {
     this.reqUrl(params)
   }
 
+  renderTests = item => {
+    const { navigation } = this.props;
+    return (
+      <TouchableOpacity
+        style={styles.box}
+        onPress={() => { navigation.navigate('StepList', {key: item.data}) }}
+      >
+      <View style={styles.row}>
+            <Text style={styles.status1}>Teste: </Text>
+            <Text style={styles.ref}>{item.table_name}</Text>
+      </View>
+      </TouchableOpacity>
+    );
+  }
+
   render() {
     const {
       showRef,
@@ -139,6 +136,7 @@ class New extends Component {
       viewError,
       messageRequest,
       infopicker,
+      arrayReq
     } = this.state;
     const { navigation, newState, goBack } = this.props;
     const {largura_tela} = responsividade;
@@ -167,25 +165,14 @@ class New extends Component {
               <Text style={styles.textType}> Testes </Text>
             </View>
             <View style={styles.blueLine} />
-            <View style={styles.Picker}>
-              <PickerItem
-                receiveProps={(params => this.receiveParams(params))}
-                arrayConfig={infopicker}
-              />
-            </View>
-
-          <TouchableOpacity style={styles.button} onPress={() => this.onPressButton()} ></TouchableOpacity>
           </View>
 
           {
-            newState.showButton && (
-              <TouchableOpacity style={styles.button} onPress={() => this.onPressButton()}>
-                <Text style={styles.buttonText}>
-                  CONTINUAR
-              </Text>
-              </TouchableOpacity>
-            )
+            arrayReq
+              ? arrayReq.map(item => this.renderTests(item))
+              : null
           }
+
           {
             newState.erro && (
               <ModalCheck

@@ -41,6 +41,10 @@ class StepList extends Component {
   }
 
   componentWillMount() {
+    const { navigation } = this.props
+    const form = navigation.getParam('key');
+    //console.tron.log({'Teste':form});
+    this.setState({ form: form });
     BackHandler.removeEventListener('hardwareBackPress', this.saveForm);
   }
 
@@ -129,12 +133,12 @@ class StepList extends Component {
 
     const dataForm = new FormData();   
    
-    dataForm.append('form_name', formulario.form.form_name);
+    // dataForm.append('form_name', formulario.form.form_name);
 
     for (var key in formulario.step) { 
       if(formulario.step[key].type === 'camera') {
         formulario.step[key].value.map(item => {
-          dataForm.append(`${key}[]`, item);
+          dataForm.append(`${key}`, item);
         })       
       } else {
         dataForm.append(formulario.step[key].key, formulario.step[key].value)
@@ -167,17 +171,18 @@ class StepList extends Component {
       dataGroup,
       formName,
     } = data;
+    const { form } = this.state;
     console.log('onSendForm', contentGroup);    
     
     axios({
       method: 'post',
-      url: 'http://35.198.17.69/api/pericia/formulario/envio',
+      url: 'http://157.230.177.190:3000/form/receiver',
       data: dataForm,
       headers: {
-        'Content-Type': 'multipart/form-data',
-        'matricula': userId,
-        'referencia': reference,
-        'x-Token': token,
+        'Content-Type': 'application/json',
+        'authorization': token,
+        'test_name': form.form_name,
+        'discipline_id': form.discipline
       }
     })
       .then(response => {
@@ -271,7 +276,7 @@ class StepList extends Component {
       
     });
 
-    this.props.navigation.navigate('Hist');
+    // this.props.navigation.navigate('Hist');
     
   }
 
@@ -281,8 +286,7 @@ class StepList extends Component {
   }
 
   render() {
-    const { formRedux } = this.state;
-    const form = this.props.form;
+    const { formRedux, form } = this.state;
     if (formRedux) {
       this.props.setSaveContentForm(form);
       this.setState({ formRedux: false });
