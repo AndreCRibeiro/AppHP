@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     //backgroundColor: '#784657',
   },
   textType: {
-    marginLeft: responsividade.largura_tela < 430 ? responsividade.margin.mainMargin : responsividade.margin.mainMargin * 0.7,
+    //marginLeft: responsividade.largura_tela < 430 ? responsividade.margin.mainMargin : responsividade.margin.mainMargin * 0.7,
     //marginTop: responsividade.margin.mainMargin * 0.4,
     fontSize: responsividade.fonts.nameSize,
     color: colors.halfblack,
@@ -136,7 +136,29 @@ const styles = StyleSheet.create({
    bar: {
     margin: responsividade.padding.mainPadding,
     
-   }
+   },
+
+   box:{
+    backgroundColor: colors.white,
+    borderRadius: 5,
+    margin: 5,
+    width: responsividade.LARGURABOX*0.9,
+    //height: responsividade.ALTURACARD * 0.7,
+    padding: 20,
+    margin: 10,
+  },
+
+  row: {
+    flexDirection: 'row',
+  },
+
+  card: {
+    //flex: 1,
+    //backgroundColor: 'pink',
+    justifyContent: 'flex-start',
+    width: responsividade.LARGURABOX*0.9,
+    //paddingRight: responsividade.largura_tela < 430 ? 260 : 280,
+  },
 
 });
 

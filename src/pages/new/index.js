@@ -162,7 +162,7 @@ class New extends Component {
           }
           <View style={styles.card}>
             <View style={styles.title}>
-              <Text style={styles.textType}> Testes </Text>
+              <Text style={styles.textType}>Testes</Text>
             </View>
             <View style={styles.blueLine} />
           </View>

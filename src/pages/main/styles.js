@@ -5,14 +5,14 @@ import { padding } from '../../styles/responsividade';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAFBFE',
+    //backgroundColor: '#FAFBFE',
   },
 
   bodyS: {
     flex: 1,
-    justifyContent: 'space-between',
+    //justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: colors.white,
+    //backgroundColor: 'green',
     width: responsividade.largura_tela
   },
 
@@ -29,16 +29,20 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    flex: 1,
-    backgroundColor: colors.white,
-    paddingRight: responsividade.largura_tela < 430 ? 260 : 280,
+    //flex: 1,
+    //backgroundColor: 'pink',
+    justifyContent: 'center',
+    alignItems: 'center',
+    //paddingRight: responsividade.largura_tela < 430 ? 260 : 280,
   },
 
   info: {
     marginTop: responsividade.largura_tela < 430 ? 90 : 110,
-    width: 300,
+    width: responsividade.largura_tela,
     justifyContent: 'center',
-    marginLeft: 220
+    alignItems: 'center',
+    //marginLeft: 220
+    //backgroundColor: 'red'
   },
 
   name: {
@@ -48,14 +52,13 @@ const styles = StyleSheet.create({
   },
 
   box:{
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     borderRadius: 5,
     margin: 5,
-    width: responsividade.LARGURACARD,
+    width: responsividade.LARGURABOX*0.9,
     height: responsividade.ALTURACARD * 0.7,
-    // justifyContent: "flex-start",
-    // alignItems: "center",
     padding: 20,
+    margin: 10,
   },
 
   row: {
@@ -161,6 +164,12 @@ const styles = StyleSheet.create({
   top: 330,
   left: 330
 },
+
+titlee: {
+  justifyContent: 'flex-start',
+  width: responsividade.LARGURABOX*0.9,
+
+}
 
 
 });

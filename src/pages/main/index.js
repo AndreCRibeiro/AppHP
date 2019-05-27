@@ -129,14 +129,6 @@ class Main extends Component {
     return (
       <View style={styles.container}>
 
-        <View style={styles.buttons_view}>
-          <TouchableOpacity onPress={this.navigateToScreen('NewMenu')}>
-            <View style={styles.novoTesteButton}>
-              <Text style={styles.button_text}>New</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-
         <View style={styles.buttons_view2}>
           <TouchableOpacity onPress={() => this.openScanner()}>
             <View style={styles.novoTesteButton}>
@@ -169,10 +161,12 @@ class Main extends Component {
             </View>
           )
         }
-          <View style={styles.card}>
             <View style={styles.info}>
-                <Text style={styles.name}>{login.userName}</Text>
+            <View style={styles.titlee}>
+            <Text style={styles.name}>{login.userName}</Text>
                 <View style={styles.blueLine} />
+            </View>
+                
 
                 {
                   viewNoClasses && (
@@ -192,7 +186,6 @@ class Main extends Component {
                 }
 
             </View>
-          </View>
         </ScrollView>
       </View>
     );

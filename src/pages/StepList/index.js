@@ -69,7 +69,7 @@ class StepList extends Component {
 
   saveForm = () => {
     const { reference, saveForm, setSaveContentForm, form } = this.props;
-    saveForm(reference);
+    //saveForm(reference);
     //this.saved();
     this.props.navigation.goBack();
     return true;
@@ -77,7 +77,7 @@ class StepList extends Component {
 
   saveForm2 = () => {
     const { reference, saveForm, setSaveContentForm, form } = this.props;
-    saveForm(reference);
+    //saveForm(reference);
     this.saved();
   }
 
