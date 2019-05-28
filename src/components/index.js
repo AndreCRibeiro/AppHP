@@ -1,5 +1,5 @@
 import InputText from './InputText';
-import AudioRec from './audio';
+// import AudioRec from './audio';
 import Camera from './camera';
 import MyDatePicker from './date';
 import GeoLocation from './geolocation';
@@ -15,7 +15,7 @@ import Sketch from './sketch';
 
 export {
     InputText,
-    AudioRec,
+    // AudioRec,
     Camera,
     MyDatePicker,
     GeoLocation,
