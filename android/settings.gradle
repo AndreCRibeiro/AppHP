@@ -1,8 +1,6 @@
 rootProject.name = 'AppHP'
 include ':react-native-vector-icons'
 project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
-include ':react-native-sound'
-project(':react-native-sound').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-sound/android')
 include ':react-native-scan-barcode'
 project(':react-native-scan-barcode').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-scan-barcode/android')
 include ':react-native-image-resizer'
@@ -11,14 +9,10 @@ include ':react-native-image-crop-picker'
 project(':react-native-image-crop-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-crop-picker/android')
 include ':react-native-image-base64'
 project(':react-native-image-base64').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-base64/android')
-include ':react-native-fetch-blob'
-project(':react-native-fetch-blob').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fetch-blob/android')
 include ':react-native-camera'
 project(':react-native-camera').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-camera/android')
 include ':react-native-barcode-scanner-google'
 project(':react-native-barcode-scanner-google').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-barcode-scanner-google/android')
-include ':react-native-audio'
-project(':react-native-audio').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-audio/android')
 include ':@terrylinla_react-native-sketch-canvas'
 project(':@terrylinla_react-native-sketch-canvas').projectDir = new File(rootProject.projectDir, '../node_modules/@terrylinla/react-native-sketch-canvas/android')
 

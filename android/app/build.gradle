@@ -135,15 +135,12 @@ android {
 
 dependencies {
     implementation project(':react-native-vector-icons')
-    implementation project(':react-native-sound')
     implementation project(':react-native-scan-barcode')
     implementation project(':react-native-image-resizer')
     implementation project(':react-native-image-crop-picker')
     implementation project(':react-native-image-base64')
-    implementation project(':react-native-fetch-blob')
     implementation project(':react-native-camera')
     implementation project(':react-native-barcode-scanner-google')
-    implementation project(':react-native-audio')
     implementation project(':@terrylinla_react-native-sketch-canvas')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
