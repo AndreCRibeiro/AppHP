@@ -5,48 +5,58 @@ buildscript {
         buildToolsVersion = "28.0.3"
         minSdkVersion = 16
         compileSdkVersion = 28
-        targetSdkVersion = 27
-        supportLibVersion = "28.0.0"
+        targetSdkVersion = 28
+        supportLibVersion = "27.1.1"
+        googlePlayServicesVersion = "10.2.4"
     }
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
-
+        classpath 'com.android.tools.build:gradle:3.2.0'       
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
+subprojects { 
+    afterEvaluate {project -> 
+        if (project.hasProperty("android")) { 
+            android { 
+                compileSdkVersion 28     //do this in android/app/build.gradle too 
+                buildToolsVersion "28.0.3"  //do this in android/app/build.gradle too 
+            } 
+        } 
+    } 
+}
+
 allprojects {
     repositories {
-        mavenLocal()
         google()
-        jcenter()
-
+        mavenLocal()
+        mavenCentral()     
+        jcenter()        
+	    // Add jitpack repository (added by react-native-spinkit)
+		maven { url "https://jitpack.io" }       
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
         }
-                maven { url "https://jitpack.io" }
+        maven { url 'https://maven.google.com' }
+    }
+    configurations.all {
+        resolutionStrategy.force "com.android.support:support-v4:26.1.0"
     }
 }
 
-subprojects {
-  project.configurations.all {
-     resolutionStrategy.eachDependency { details ->
-        if (details.requested.group == 'com.android.support'
-              && !details.requested.name.contains('multidex') ) {
-           details.useVersion "28.0.0"
-        }
-     }
-  }
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:support-v4:27.1.0'
+    }
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.7'
+    gradleVersion = '4.6'
     distributionUrl = distributionUrl.replace("bin", "all")
 }
-

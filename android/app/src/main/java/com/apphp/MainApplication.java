@@ -4,10 +4,14 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.zmxv.RNSound.RNSoundPackage;
+import com.safaeean.barcodescanner.BarcodeScannerPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
+import fr.snapp.imagebase64.RNImgToBase64Package;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import org.reactnative.camera.RNCameraPackage;
-import com.spyworldxp.barcodescanner.BarcodeScannerPackage;
+import com.rnim.rn.audio.ReactNativeAudioPackage;
 import com.terrylinla.rnsketchcanvas.SketchCanvasPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -30,10 +34,14 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new VectorIconsPackage(),
+            new RNSoundPackage(),
             new BarcodeScannerPackage(),
             new ImageResizerPackage(),
             new PickerPackage(),
+            new RNImgToBase64Package(),
+            new RNFetchBlobPackage(),
             new RNCameraPackage(),
+            new ReactNativeAudioPackage(),
             new SketchCanvasPackage()
       );
     }
