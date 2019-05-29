@@ -384,6 +384,10 @@ class Camera extends React.Component {
       
       <View style={groupFlag ? stylesGroup.container : styles.container}>
 
+      <View style={styles.answer}>
+          <Text style={styles.answer_text}>{this.props.label}</Text>
+      </View>
+
         <ScrollView 
           horizontal
           pagingEnabled

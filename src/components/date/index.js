@@ -133,6 +133,10 @@ class MyDatePicker extends Component {
     return (
       <View style={styles.container}>
 
+        <View style={styles.answer}>
+                <Text style={styles.answer_text}>{this.props.label}</Text>
+        </View>
+
       <TouchableOpacity  onPress={() => {}} style={styles.buttonhp}>
       <DatePicker
               mode="date"

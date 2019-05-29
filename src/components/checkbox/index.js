@@ -24,6 +24,10 @@ render() {
     return(
     <View>
 
+            <View style={styles.answer}>
+                <Text style={styles.answer_text}>{this.props.label}</Text>
+            </View>
+
         <View style={styles.checks}>
 
             <CheckBox

@@ -150,11 +150,17 @@ class GeoLocation extends Component {
       <View style={styles.container}>
       <View>
 
+      <View style={styles.answer}>
+          <Text style={styles.answer_text}>{this.props.label}</Text>
+      </View>
+
           {
           error && (
            <View style={styles.answer}><Text style={styles.erro}>Não foi possível capturar a localização</Text></View>
           )
         }
+
+
 
 
           <TouchableOpacity  onPress={this.refresh} style={styles.buttonhp}>

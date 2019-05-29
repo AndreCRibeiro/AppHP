@@ -90,10 +90,6 @@ class StepPage extends Component {
                                         </View>
 
                                         </View>
-
-                                        <View style={styles.answer}>
-                                            <Text style={styles.answer_text}>{item}</Text>
-                                        </View>
                                         <ComponentList data={item} index={i} />
                                         </View>
                                     

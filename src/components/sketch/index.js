@@ -34,6 +34,10 @@ export default class Sketch extends Component {
     const { largura_tela } = responsividade;
     return (
       <View style={{ justifyContent: "center", alignItem: "center" }}>
+
+      <View style={styles.answer}>
+                <Text style={styles.answer_text}>{this.props.label}</Text>
+            </View>
         {showButton && (
 
           <TouchableOpacity

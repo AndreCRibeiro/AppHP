@@ -85,6 +85,10 @@ class OCR extends Component {
         return (
             <View style={styles.container}>
 
+            <View style={styles.answer}>
+                <Text style={styles.answer_text}>{this.props.label}</Text>
+            </View>
+
             <TouchableOpacity  onPress={() => this.pickSingleWithCamera(true)} style={styles.buttonhp}>
                 <View style={styles.button_texthp}><Text style={styles.font}>ABRIR CÂMERA</Text></View>  
             </TouchableOpacity>

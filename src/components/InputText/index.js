@@ -122,6 +122,10 @@ class InputText extends Component {
     return (
       <View style={{ ...styles.container, backgroundColor: (groupFlag === true ? 'white' : null) }}>
 
+      <View style={styles.answer}>
+                <Text style={styles.answer_text}>{this.props.label}</Text>
+            </View>
+
           <TextInput
           style={{ ...styles.input, backgroundColor: (groupFlag === true ? colors.light : 'white') }}
           autoCapitalize="sentences"
