@@ -16,6 +16,7 @@ import {
 } from '../../../../components';
 import styles from './styles';
 
+
 class ComponentList extends Component {
   state = {
     move: new Animated.Value(5),

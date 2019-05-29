@@ -81,8 +81,22 @@ class StepPage extends Component {
                             i = i + 1;
                             return (
                                 <Animated.View style={{ ...styles.coluna }}>
-                                   
-                                    <ComponentList data={item} index={i} />
+                                        <View style={styles.component_card}>
+
+                                        <View style={styles.title}> 
+                                        <View style={styles.title_view}>
+                                        <Text style={styles.title_text}>Questão {i}</Text>
+                                        <View style={styles.blueline}></View>
+                                        </View>
+
+                                        </View>
+
+                                        <View style={styles.answer}>
+                                            <Text style={styles.answer_text}>{item}</Text>
+                                        </View>
+                                        <ComponentList data={item} index={i} />
+                                        </View>
+                                    
                                 </Animated.View>)
                         })}
                 </KeyboardAwareScrollView>

@@ -121,19 +121,6 @@ class InputText extends Component {
     }
     return (
       <View style={{ ...styles.container, backgroundColor: (groupFlag === true ? 'white' : null) }}>
-                  <View style={styles.component_card}>
-
-          <View style={styles.title}> 
-          <View style={styles.title_view}>
-          <Text style={styles.title_text}>Questão X</Text>
-          <View style={styles.blueline}></View>
-          </View>
-
-          </View>
-
-          <View style={styles.answer}>
-              <Text style={styles.answer_text}>Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</Text>
-          </View>
 
           <TextInput
           style={{ ...styles.input, backgroundColor: (groupFlag === true ? colors.light : 'white') }}
@@ -147,7 +134,6 @@ class InputText extends Component {
         />
 
          
-          </View>
        
 
       </View>

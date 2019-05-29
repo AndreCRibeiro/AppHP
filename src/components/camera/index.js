@@ -384,21 +384,6 @@ class Camera extends React.Component {
       
       <View style={groupFlag ? stylesGroup.container : styles.container}>
 
-
-        <View style={styles.component_card}>
-
-            <View style={styles.title}> 
-            <View style={styles.title_view}>
-            <Text style={styles.title_text}>Questão X</Text>
-            <View style={styles.blueline}></View>
-            </View>
-
-            </View>
-
-            <View style={styles.answer}>
-                <Text style={styles.answer_text}>Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</Text>
-        </View>
-
         <ScrollView 
           horizontal
           pagingEnabled
@@ -432,7 +417,6 @@ class Camera extends React.Component {
         <TouchableOpacity  onPress={() => this.pickMultiple(false)} style={styles.buttonhp}>
             <View style={styles.button_texthp}><Text style={styles.font}>ABRIR GALERIA</Text></View>  
         </TouchableOpacity>
-        </View>
       </View>
     );
   }

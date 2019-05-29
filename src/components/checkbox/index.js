@@ -24,20 +24,6 @@ render() {
     return(
     <View>
 
-        <View style={styles.component_card}>
-
-        <View style={styles.title}> 
-        <View style={styles.title_view}>
-        <Text style={styles.title_text}>Questão X</Text>
-        <View style={styles.blueline}></View>
-        </View>
-
-        </View>
-
-        <View style={styles.answer}>
-            <Text style={styles.answer_text}>Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</Text>
-        </View>
-
         <View style={styles.checks}>
 
             <CheckBox
@@ -74,8 +60,6 @@ render() {
 
         </View>
 
-
-        </View>
 
         
 
