@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     //height: 80,
     //position: 'absolute',
     zIndex: 2,
-    paddingTop: Platform.OS === 'ios' ? 45 : 0,
+    paddingTop: Platform.OS === 'ios' ? 45 : 25,
     backgroundColor: colors.secundary,
   },
 

@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   textType: {
     //marginLeft: responsividade.largura_tela < 430 ? responsividade.margin.mainMargin : responsividade.margin.mainMargin * 0.7,
     //marginTop: responsividade.margin.mainMargin * 0.4,
-    fontSize: responsividade.fonts.nameSize,
+    fontSize: responsividade.fonts.nameSize*1.2,
     color: colors.halfblack,
     fontWeight: 'bold',
   },

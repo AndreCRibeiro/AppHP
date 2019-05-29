@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: responsividade.LARGURA_MENU,
-        backgroundColor: colors.primary,
     },
     profile: {
         flexDirection: 'row',

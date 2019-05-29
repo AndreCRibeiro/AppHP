@@ -171,11 +171,10 @@ class Historico extends Component {
     return (
       <View style={styles.container}>
       
-        <Header
-          showMenu
-          showClear
-          openMenu={navigation.toggleDrawer}
-          title="Minhas Perícias"
+      <Header
+          showArrow
+          goBack={this.props.navigation.goBack}
+          title='Meus Testes'
         />
         <Modal
           animationType="slide"

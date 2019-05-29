@@ -142,9 +142,10 @@ class New extends Component {
     const {largura_tela} = responsividade;
     return (
       <View style={styles.container}>
-       <Header 
-        goBack
-       />
+      <Header
+          showArrow
+          goBack={this.props.navigation.goBack}
+        />
        <View style = {styles.bar}> 
     
       </View>

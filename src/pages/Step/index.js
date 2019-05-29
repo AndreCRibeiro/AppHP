@@ -68,7 +68,6 @@ class StepPage extends Component {
                     showArrow
                     showProgress
                     showInfo
-                    info={this.props.navigation.state.params.step.info_step}
                     goBack={this.props.navigation.goBack}
                 />
 

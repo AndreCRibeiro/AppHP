@@ -324,14 +324,14 @@ class StepList extends Component {
           />
           <View style={styles.container}>
 
-            <TouchableOpacity style={styles.enviarbutton} onPress={() => this.enviaForm()}>
-              <Text style={styles.buttonText}>
+            <TouchableOpacity style={styles.buttonhp} onPress={() => this.enviaForm()}>
+              <Text style={styles.button_texthp}>
                 ENVIAR
               </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.salvarbutton} onPress={() => this.saveForm2()}>
-              <Text style={styles.buttonTextsalvar}>
+            <TouchableOpacity style={styles.buttonhp} onPress={() => this.saveForm2()}>
+              <Text style={styles.button_texthp}>
                 SALVAR
               </Text>
             </TouchableOpacity>
