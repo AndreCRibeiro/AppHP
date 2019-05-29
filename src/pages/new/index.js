@@ -119,12 +119,12 @@ class New extends Component {
     return (
       <TouchableOpacity
         style={styles.box}
-        onPress={() => { navigation.navigate('StepList', {key: item.data}) }}
+        onPress={() => { navigation.navigate('StepList', { key: item.data }) }}
       >
-      <View style={styles.row}>
-            <Text style={styles.status1}>Teste: </Text>
-            <Text style={styles.ref}>{item.table_name}</Text>
-      </View>
+        <View style={styles.row}>
+          <Text style={styles.status1}>Teste: </Text>
+          <Text style={styles.ref}>{item.table_name}</Text>
+        </View>
       </TouchableOpacity>
     );
   }
@@ -139,17 +139,17 @@ class New extends Component {
       arrayReq
     } = this.state;
     const { navigation, newState, goBack } = this.props;
-    const {largura_tela} = responsividade;
+    const { largura_tela } = responsividade;
     return (
       <View style={styles.container}>
-       <Header 
-        goBack
-       />
-       <View style = {styles.bar}> 
-    
-      </View>
-        
-        <KeyboardAwareScrollView 
+        <Header
+          showArrowRegister
+        />
+        <View style={styles.bar}>
+
+        </View>
+
+        <KeyboardAwareScrollView
           contentContainerStyle={styles.scrollview}
           scrollEnabled={true}
         >

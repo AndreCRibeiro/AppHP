@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 import { Creators as FormActions } from '../../store/ducks/form';
 import { Creators as GroupActions } from '../../store/ducks/group';
 import { Creators as LoginActions } from '../../store/ducks/login';
-import { responsividade, colors} from '../../styles';
+import { responsividade, colors } from '../../styles';
 
 class HeaderRedux extends Component {
   state = {
@@ -31,10 +31,10 @@ class HeaderRedux extends Component {
 
   navigateToScreen = (route, exit) => () => {
     if (exit) {
-        this.props.getExitLogin();
+      this.props.getExitLogin();
     }
     const navigateAction = NavigationActions.navigate({
-        routeName: route
+      routeName: route
     });
     this.props.navigation.dispatch(navigateAction);
   }
@@ -70,100 +70,101 @@ class HeaderRedux extends Component {
     const { showAlert } = this.state;
     const { largura_tela } = responsividade;
     // console.tron.log(this.props, goBack);
-  
+
 
     return (
-      <View style={{...styles.header }}>
+      <View style={{ ...styles.header }}>
 
-        <StatusBar backgroundColor = {colors.secundary} barStyle="light-content" />
-          <View style={styles.viewIcon}>
-            {
-              showMenu && (
-                <TouchableOpacity onPress={() => openMenu()}>
-                  <Icon name="md-menu" size={ largura_tela < 430 ? 28 : 40 } style={styles.iconMenu} />
-                </TouchableOpacity>
-              )
-            }            
-            {
-              showNotas && (
-                <TouchableOpacity onPress={this.navigateToScreen('Hist')} style={styles.grades}>
-                  <Icon name="md-book" size={ largura_tela < 430 ? 30 : 40 } style={styles.iconExit} />
-                  <Text style={styles.nameIcon}>Notas</Text>
-                </TouchableOpacity>
-              )
-            }
-            {
-              showArrow && (
-                <TouchableOpacity onPress={() => {
-                    if(showProgress){
-                      activeFlag();
-                      startUpdateProgress();
-                      saveStepState();                     
-                    }
-                    goBack();
-                  }}
-                >
-                  <Icon name="md-arrow-back" size={ largura_tela < 430 ? 28 : 40 } style={styles.iconMenu} />
-                </TouchableOpacity>
-              )
-            }
-             {
-              showArrowRegister && (
-                <TouchableOpacity onPress={() => 
-                    navigation.navigate('Login')
-                  }
-                >
-                  <Icon name="md-arrow-back" size={ largura_tela < 430 ? 28 : 40 } style={styles.iconMenu} />
-                </TouchableOpacity>
-              )
-            }
-          </View>
-            <View style={styles.viewTitle}>
-              <Text style={styles.headerTitle}>
-                {title}
-              </Text>
-            </View>
-          <View style={styles.viewIcon}>
-            {
-              showInfo ?
-                <TouchableOpacity onPress={() => this.openInfo()}>
-                  <Icon name="ios-information-circle-outline" size={28} style={styles.iconMenu} />
-                </TouchableOpacity>
+        <StatusBar backgroundColor={colors.secundary} barStyle="light-content" />
+        <View style={styles.viewIcon}>
+          {
+            showMenu && (
+              <TouchableOpacity onPress={() => openMenu()}>
+                <Icon name="md-menu" size={largura_tela < 430 ? 28 : 40} style={styles.iconMenu} />
+              </TouchableOpacity>
+            )
+          }
+          {
+            showNotas && (
+              <TouchableOpacity onPress={this.navigateToScreen('Hist')} style={styles.grades}>
+                <Icon name="md-book" size={largura_tela < 430 ? 30 : 40} style={styles.iconExit} />
+                <Text style={styles.nameIcon}>Notas</Text>
+              </TouchableOpacity>
+            )
+          }
+          {
+            showArrow && (
+              <TouchableOpacity onPress={() => {
+                if (showProgress) {
+                  activeFlag();
+                  startUpdateProgress();
+                  saveStepState();
+                }
+                goBack();
+              }}
+              >
+                <Icon name="md-arrow-back" size={largura_tela < 430 ? 28 : 40} style={styles.iconMenu} />
+              </TouchableOpacity>
+            )
+          }
+          {
+            showArrowRegister && (
+              <TouchableOpacity onPress={() =>
+                navigation.navigate('Login')
+              }
+              >
+                <Icon name="md-arrow-back" size={largura_tela < 430 ? 28 : 40} style={styles.iconMenu} />
+              </TouchableOpacity>
+            )
+          }
+
+        </View>
+        <View style={styles.viewTitle}>
+          <Text style={styles.headerTitle}>
+            {title}
+          </Text>
+        </View>
+        <View style={styles.viewIcon}>
+          {
+            showInfo ?
+              <TouchableOpacity onPress={() => this.openInfo()}>
+                <Icon name="ios-information-circle-outline" size={28} style={styles.iconMenu} />
+              </TouchableOpacity>
               : <View style={styles.concerto} />
-            }
-            {
-              showClear && __DEV__ && (
-                <TouchableOpacity onPress={() => this.clearAsync()}>
-                  <Icon name="md-trash" size={28} style={styles.iconMenu} />
-                </TouchableOpacity>
-              )
-            }
-            {
-              showModalInfo && (
-                <Info
-                  closeModalInfo={this.closeInfo}
-                  textInfo={info}
-                />
-              )
-            }
-            {
-              showAlert && (
-                <Alert
-                  alertVisible
-                  goBack={goBack}
-                  closeModalAlert={this.closeAlert}
-                />
-              )
-            }
-            {
-              showExit && (
+          }
+          {
+            showClear && __DEV__ && (
+              <TouchableOpacity onPress={() => this.clearAsync()}>
+                <Icon name="md-trash" size={28} style={styles.iconMenu} />
+              </TouchableOpacity>
+            )
+          }
+          {
+            showModalInfo && (
+              <Info
+                closeModalInfo={this.closeInfo}
+                textInfo={info}
+              />
+            )
+          }
+          {
+            showAlert && (
+              <Alert
+                alertVisible
+                goBack={goBack}
+                closeModalAlert={this.closeAlert}
+              />
+            )
+          }
+          {
+            showExit && (
 
-                <TouchableOpacity onPress={this.navigateToScreen('Login', true)} style={styles.grades}>
-                  <Icon name="md-exit" size={ largura_tela < 430 ? 30 : 40 } style={styles.iconMenu} />
-                </TouchableOpacity>
-              )
-            }
-          </View>
+              <TouchableOpacity onPress={this.navigateToScreen('Login', true)} style={styles.grades}>
+                <Icon name="md-exit" size={largura_tela < 430 ? 30 : 40} style={styles.iconMenu} />
+              </TouchableOpacity>
+            )
+          }
+        </View>
       </View>
     );
   }
@@ -174,7 +175,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({...FormActions, ...GroupActions, ...LoginActions}, dispatch);
+  bindActionCreators({ ...FormActions, ...GroupActions, ...LoginActions }, dispatch);
 
 const Header = connect(mapStateToProps, mapDispatchToProps)(HeaderRedux)
 export default withNavigation(Header);
