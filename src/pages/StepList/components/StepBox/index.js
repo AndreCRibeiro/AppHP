@@ -38,11 +38,11 @@ class StepBoxComponent extends Component {
   }
 
   createFormsSave = async () => {
-    const { 
-      getCreateForm, 
-      steps, 
-      formState, 
-      createDataGroup, 
+    const {
+      getCreateForm,
+      steps,
+      formState,
+      createDataGroup,
     } = this.props;
 
     this.setState({ createdForms: true });
@@ -53,7 +53,7 @@ class StepBoxComponent extends Component {
     };
 
     if (formState.formEdit) {
-      steps.item.components.forEach(component => {    
+      steps.item.components.forEach(component => {
 
         const form = {};
 
@@ -85,41 +85,41 @@ class StepBoxComponent extends Component {
 
         if (component.component_type === 'date') {
           form[component.data_name] = { key: component.data_name, value: '1980-01-21', filled: null };
-        }  else if (component.component_type === 'group') {         
-          component.components_group.map(item => {            
+        } else if (component.component_type === 'group') {
+          component.components_group.map(item => {
             prototype[item.data_name] = {
               key: item.data_name,
               value: null,
               filled: false,
-              extra: null,              
-            }; 
-          })          
+              extra: null,
+            };
+          })
           form[component.data_name] = { key: component.data_name, value: component.default_value, filled: null };
           createDataGroup(component.data_name, prototype);
-        } else if(component.component_type === 'camera'){
-          form[`leg_${component.data_name}`] = { 
-            key: component.data_name, 
-            value: component.default_value, 
-            filled: null, 
+        } else if (component.component_type === 'camera') {
+          form[`leg_${component.data_name}`] = {
+            key: component.data_name,
+            value: component.default_value,
+            filled: null,
             type: 'text',
           };
           getCreateForm(form);
-          form[component.data_name] = { 
-            key: component.data_name, 
-            value: [], 
+          form[component.data_name] = {
+            key: component.data_name,
+            value: [],
             filled: null,
             type: component.component_type,
           };
           getCreateForm(form);
         } else {
-          form[component.data_name] = { 
-            key: component.data_name, 
-            value: component.default_value, 
+          form[component.data_name] = {
+            key: component.data_name,
+            value: component.default_value,
             filled: null,
             type: component.component_type
           };
         }
-        
+
         getCreateForm(form);
         arrayProgress.array.push(component.data_name);
         const lengthArray = arrayProgress.array.length;
@@ -150,8 +150,8 @@ class StepBoxComponent extends Component {
     progress = countProgress / arrayProgress.length;
 
     variable = (responsividade.LARGURACARD * 0.82) * progress;
-    
-    
+
+
     this.setState({ progress, count: countProgress, array: arrayProgress.length, paolo: variable });
   }
 
@@ -179,12 +179,13 @@ class StepBoxComponent extends Component {
           <View style={styles.card_titulo}>
             <Text style={styles.titulo}>{item.step_name}</Text>
           </View>
+          <View style={styles.blueline} />
           <View style={styles.card_descricao}>
             <Text style={styles.descricao}>{item.step_description}</Text>
           </View>
           <View style={styles.row}>
             <View style={styles.bar}>
-            <ProgressBar progress = { paolo }/>
+              <ProgressBar progress={paolo} />
             </View>
             <View style={styles.number_view}>
               <Text style={styles.number}>
@@ -192,7 +193,7 @@ class StepBoxComponent extends Component {
               </Text>
             </View>
           </View>
-          
+
         </TouchableOpacity>
       </Animated.View>
     );
@@ -204,7 +205,7 @@ const mapStateToProps = state => ({
   form: state.formState,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({...FormsActions, ...GroupActions }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ ...FormsActions, ...GroupActions }, dispatch);
 
 const StepBox = connect(mapStateToProps, mapDispatchToProps)(StepBoxComponent);
 

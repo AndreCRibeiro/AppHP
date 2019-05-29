@@ -11,7 +11,7 @@ import {
   BackHandler
 } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Header, ModalCheck, PickerItem } from '../../globalComponents';
 import styles from './styles';
 
@@ -122,7 +122,7 @@ class New extends Component {
         onPress={() => { navigation.navigate('StepList', {key: item.data}) }}
       >
       <View style={styles.row}>
-            <Text style={styles.status1}>Teste: </Text>
+            <Icon name="file-text-o" size={20} color="black" style={styles.icon} />
             <Text style={styles.ref}>{item.table_name}</Text>
       </View>
       </TouchableOpacity>

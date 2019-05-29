@@ -160,6 +160,10 @@ const styles = StyleSheet.create({
     //paddingRight: responsividade.largura_tela < 430 ? 260 : 280,
   },
 
+  ref: {
+    marginHorizontal: 5,
+  }
+
 });
 
 export default styles;

@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     fontSize: responsividade.fonts.titleSize,
     fontWeight: 'bold',
     alignSelf: 'center',
+    marginBottom: 15,
   },
 
   concerto: {

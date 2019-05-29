@@ -127,6 +127,32 @@ const styles = StyleSheet.create({
     margin: 10,
   },
 
+  
+  buttonhp: {
+    //backgroundColor: 'rgba(41, 42, 41, 0.65)',
+    borderWidth: 2,
+    borderColor: '#4CC6D3',
+    borderRadius: 40,
+    height: responsividade.largura_tela < 430 ? 50 : 60,
+    width: responsividade. LARGURABOX,
+    marginVertical: metrics.baseMargin,
+    paddingHorizontal: metrics.basePadding,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  },
+
+    button_texthp:{
+  
+      //color: 'black',
+      //color: 'white',
+      color: '#4CC6D3',
+      fontSize: responsividade.fonts.descriptionSize,
+      //fontWeight: 'bold',
+      marginLeft: 5,
+
+    },
+
 });
 
 export default styles;

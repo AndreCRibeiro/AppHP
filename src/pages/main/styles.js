@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
 
   name: {
-    fontSize: 36,
+    fontSize: responsividade.fonts.nameSize*1.6,
     fontWeight: "bold",
     fontStyle: "normal",
   },
