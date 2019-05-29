@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#EDF0F2',        
+        backgroundColor: '#EDF0F2',  
+        paddingBottom: 10,      
     },
     salvarbutton: {
       alignItems: 'center',

@@ -81,12 +81,7 @@ class StepPage extends Component {
                             i = i + 1;
                             return (
                                 <Animated.View style={{ ...styles.coluna }}>
-                                    <View style={styles.linha}>
-                                        <View style={styles.ball}>
-                                            <Text style={styles.numberType}>{i}</Text>
-                                        </View>
-                                        <Text style={styles.textType}> {item.label}: </Text>
-                                    </View>
+                                   
                                     <ComponentList data={item} index={i} />
                                 </Animated.View>)
                         })}
@@ -103,14 +98,3 @@ StepPage.navigationOptions = ({ navigation }) => ({
 const mapDispatchToProps = dispatch => bindActionCreators(FormActions, dispatch);
 
 export default connect(null, mapDispatchToProps)(StepPage);
-
-/*
- <Header
-        title={this.props.navigation.state.params.step.step_name}
-        showArrow
-        showProgress
-        showInfo
-        info={this.props.navigation.state.params.step.info_step}
-        goBack={this.props.navigation.goBack}
-      />
-*/

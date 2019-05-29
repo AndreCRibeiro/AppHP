@@ -35,24 +35,28 @@ export default class Sketch extends Component {
     return (
       <View style={{ justifyContent: "center", alignItem: "center" }}>
         {showButton && (
+
+          <View style={styles.component_card}>
+
+          <View style={styles.title}> 
+          <View style={styles.title_view}>
+          <Text style={styles.title_text}>Questão X</Text>
+          <View style={styles.blueline}></View>
+          </View>
+
+          </View>
+
+          <View style={styles.answer}>
+              <Text style={styles.answer_text}>Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</Text>
+          </View>
+
           <TouchableOpacity
-            onPress={() =>
-              this.setState({ showScanner: true, showButton: false })
-            }
-            style={styles.button}
-          >
-            <View style={styles.square}>
-              <Icon
-                name="create"
-                size={largura_tela < 430 ? 28 : 40}
-                color="black"
-                style={styles.icon}
-              />
-            </View>
-            <View style={styles.parale}>
-              <Text style={styles.button_text}>FAZER CROQUI</Text>
-            </View>
+                      onPress={() =>
+                        this.setState({ showScanner: true, showButton: false })
+                      } style={styles.buttonhp}>
+              <View style={styles.button_texthp}><Text style={styles.font}>ABRIR CROQUI</Text></View>  
           </TouchableOpacity>
+          </View>
         )}
         {showScanner && (
           <View style={{ width: 330, height: 250, rigth: 50 }}>

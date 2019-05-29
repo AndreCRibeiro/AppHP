@@ -24,35 +24,60 @@ render() {
     return(
     <View>
 
-        <CheckBox
-            title={"Assumir o local"}
-            checked={this.state.checked1}
-            onPress={() => this.setState({checked1: !this.state.checked1})} 
-        />
+        <View style={styles.component_card}>
 
-        <CheckBox
-            title={"Segurança do local"}
-            checked={this.state.checked2}
-            onPress={() => this.setState({checked2: !this.state.checked2})} 
-        />
+        <View style={styles.title}> 
+        <View style={styles.title_view}>
+        <Text style={styles.title_text}>Questão X</Text>
+        <View style={styles.blueline}></View>
+        </View>
 
-        <CheckBox
-            title={"Desligar energia elétrica"}
-            checked={this.state.checked3}
-            onPress={() => this.setState({checked3: !this.state.checked3})} 
-        />
+        </View>
 
-        <CheckBox
-            title={"Verificar impressões digitais"}
-            checked={this.state.checked4}
-            onPress={() => this.setState({checked4: !this.state.checked4})} 
-        />
+        <View style={styles.answer}>
+            <Text style={styles.answer_text}>Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</Text>
+        </View>
 
-        <CheckBox
-            title={"Verificar perímetro da área de perícia"}
-            checked={this.state.checked5}
-            onPress={() => this.setState({checked5: !this.state.checked5})} 
-        />
+        <View style={styles.checks}>
+
+            <CheckBox
+                title={"Assumir o local"}
+                checked={this.state.checked1}
+                onPress={() => this.setState({checked1: !this.state.checked1})} 
+            />
+
+            <CheckBox
+                title={"Segurança do local"}
+                checked={this.state.checked2}
+                onPress={() => this.setState({checked2: !this.state.checked2})} 
+            />
+
+            <CheckBox
+                title={"Desligar energia elétrica"}
+                checked={this.state.checked3}
+                onPress={() => this.setState({checked3: !this.state.checked3})} 
+            />
+
+            <CheckBox
+                title={"Verificar impressões digitais"}
+                checked={this.state.checked4}
+                onPress={() => this.setState({checked4: !this.state.checked4})} 
+            />
+
+            <CheckBox
+                title={"Verificar perímetro da área de perícia"}
+                checked={this.state.checked5}
+                onPress={() => this.setState({checked5: !this.state.checked5})} 
+            />
+
+
+
+        </View>
+
+
+        </View>
+
+        
 
     </View>
     );

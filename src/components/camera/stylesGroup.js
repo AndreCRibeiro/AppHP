@@ -12,7 +12,7 @@ const stylesGroup = StyleSheet.create({
       // borderColor: 'white',
       // borderRadius: 10,
       padding: 10,
-      paddingBottom: 40,
+      paddingBottom: 10,
     //   width: responsividade.LARGURAFOTO,
      },
 

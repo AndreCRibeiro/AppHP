@@ -149,30 +149,40 @@ class GeoLocation extends Component {
     return (
       <View style={styles.container}>
       <View>
-      {
+      
+          <View style={styles.component_card}>
+
+          <View style={styles.title}> 
+          <View style={styles.title_view}>
+          <Text style={styles.title_text}>Questão X</Text>
+          <View style={styles.blueline}></View>
+          </View>
+
+          </View>
+
+          <View style={styles.answer}>
+              <Text style={styles.answer_text}>Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</Text>
+          </View>
+
+          {
           error && (
-           <View style={styles.errov}><Text style={styles.erro}>Não foi possível capturar a localização</Text></View>
+           <View style={styles.answer}><Text style={styles.erro}>Não foi possível capturar a localização</Text></View>
           )
         }
-          <TouchableOpacity onPress={this.refresh} style={styles.button}>
-           
-                  <View style={styles.button}><View style={styles.square}>
-                { load
-                  ? <ActivityIndicator size="small" color="#FFF" />
-                  : <Icon name="ios-pin" size={largura_tela< 430 ? 28 : 40} color="black" style={styles.icon}/>
 
-                }
-                   
-                    </View>
 
-                    <View style={styles.parale}><Text style={styles.button_text}>VERIFICAR LOCALIZAÇÃO</Text></View></View>
-           
+          <TouchableOpacity  onPress={this.refresh} style={styles.buttonhp}>
+              <View style={styles.button_texthp}> 
+              { load
+                  ? <ActivityIndicator size="small" color='#4CC6D3' />
+                  : <Text style={styles.font}>VERIFICAR LOCALIZAÇÃO</Text>
+
+                }</View>  
           </TouchableOpacity>
-    
 
-        {
+          {
           view && (
-            <View style={styles.info}>
+            <View >
                 <View style={styles.input}>
                   <Text style={styles.info_text}>Latitude: {this.state.latitude}</Text>
                 </View>
@@ -188,6 +198,10 @@ class GeoLocation extends Component {
               </View>
             )
           }
+          </View>
+              
+
+        
         </View>
       </View>
     );

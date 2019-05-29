@@ -12,7 +12,6 @@ export default class ProgressBar extends Component {
         <View style = {styles.container}>
             <View style = {styles.bar}>
                 <View style = {{...styles.progress , width: progress}}>
-
                 </View>
             </View>
 

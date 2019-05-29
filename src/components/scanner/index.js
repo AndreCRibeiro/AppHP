@@ -37,12 +37,94 @@ class Scanner extends Component {
   componentWillMount() {
   }
 
+  componentDidMount() {
+    const { form, data, group, index } = this.props;
+
+    if (data.group === 'true') {
+      group.dataGroup.map(item => {
+        item.value.map(components => {
+          if (components.index === index) {
+            Object.keys(components).map(key => {
+              if (key === data.data_name) {
+                if (components[key].value !== null && components[key].filled === true) {
+                  this.setState({ infoScanner: components[key].value, showCode: true })
+                }
+              }
+            })
+          }
+        })
+      });
+    } else {
+      for (var key in form.step) {
+        if (key === data.data_name) {
+          if (form.step[key].filled === true) {
+            this.setState({ infoScanner: form.step[key].value });
+          }
+        }
+      }
+    }
+  }
+
   onPress = () => {
     const { vetor } = this.state;
   }
 
   saveGroupScanner = info => {
     const { infoScanner } = this.state;
+    const {
+      form,
+      getSaveStateForm,
+      startControlArray,
+      data,
+      index,
+      saveDataGroup,
+      group,
+      groupMother,
+      startControlArrayGroup,
+    } = this.props;
+    if (infoScanner) {
+      saveDataGroup({
+        index,
+        groupMother,
+        name: info.data_name,
+        data: infoScanner,
+        extra: null,
+        type: data.component_type
+      })
+    }
+    startControlArrayGroup(info.data_name)
+  }
+
+  saveFormScanner = dataScanner => {
+    const { infoScanner } = this.state;
+    const { form, getSaveStateForm, startControlArray, index, group, saveDataGroup, data } = this.props;
+
+    if (infoScanner) {
+      if (data.group === 'sdfsd') {
+        group.dataGroup.map(item => {
+          if (item.index === index) {
+            saveDataGroup({ index, name: dataScanner.data_name, data: { key: dataScanner.data_name, value: infoScanner, filled: true }, type: dataScanner.component_type, extra: null })
+          }
+        });
+      } else {
+        for (var key in form.step) {
+          if (key === dataScanner.data_name) {
+            const form = {};
+            form[dataScanner.data_name] = { key: dataScanner.data_name, value: infoScanner, filled: true };
+            getSaveStateForm(form);
+          }
+        }
+      }
+    } else {
+      for (var key in form.step) {
+        if (key === dataScanner.data_name) {
+          const form = {};
+          form[dataScanner.data_name] = { key: dataScanner.data_name, value: '', filled: false };
+          getSaveStateForm(form);
+        }
+      }
+    }
+    startControlArray();
   }
 
   onBarCodeRead(scanResult) {
@@ -79,13 +161,47 @@ class Scanner extends Component {
   }
 
   render() {
+    const { data_name, label, hint, default_value, newState } = this.props.data;
     const { showScanner, showButton, showButton2, infoScanner } = this.state;
     const { saveStep, step } = this.props.form;
     const { largura_tela } = responsividade;
     const { group } = this.props;
+
+    if (saveStep) {
+      this.saveFormScanner({ data_name, default_value });
+    }
+    if (group.flagGroup) {
+      this.saveGroupScanner({ data_name, default_value })
+    }
     return (
       <View style={{ justifyContent: 'center', alignItem: 'center' }}>
-          <View style={{ alignItems: 'center', height: 250 }}>
+
+      <View style={styles.component_card}>
+
+      <View style={styles.title}> 
+      <View style={styles.title_view}>
+      <Text style={styles.title_text}>Questão X</Text>
+      <View style={styles.blueline}></View>
+      </View>
+
+      </View>
+
+      <View style={styles.answer}>
+          <Text style={styles.answer_text}>Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</Text>
+      </View>
+
+      {
+          showButton && (
+            <TouchableOpacity onPress={() => this.setState({ showScanner: true, showButton: false })} style={styles.buttonhp}>
+              <View style={styles.button_texthp}><Text  style={styles.font}>LER {label}</Text></View>
+            </TouchableOpacity>
+          )}
+
+      
+{
+          showScanner && (
+            <View style={{ alignItems: 'center', height: 250 }}>
+              {
               <RNCamera
                 ref={ref => {
                   this.camera = ref;
@@ -106,14 +222,29 @@ class Scanner extends Component {
                 style={{ width: 330, height: 250 }}
                 type={this.state.camera.type}
             />
-          </View>
-        {
+            }
+            </View>
+
+          )}
+
+{
           this.state.showCode && (
             <View style={styles.codecontainer}>
               <Text style={styles.code}> Código: {this.state.infoScanner} </Text>
             </View>
           )
         }
+
+        {
+          showButton2 && (
+            <TouchableOpacity onPress={() => this.setState({ showScanner: true, showCode: false })} style={styles.button}>
+              <Text style={styles.button_text}>LER {label}</Text>
+            </TouchableOpacity>
+          )}
+
+
+      </View>
+
       </View>
     );
   }

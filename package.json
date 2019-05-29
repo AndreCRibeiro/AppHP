@@ -23,6 +23,7 @@
     "react-native-image-resizer": "^1.0.1",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-scan-barcode": "^3.1.5",
+    "react-native-simple-radio-button": "^2.7.3",
     "react-native-step-indicator": "^0.0.9",
     "react-native-vector-icons": "^6.0.2",
     "react-navigation": "2.0",

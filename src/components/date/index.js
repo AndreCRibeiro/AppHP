@@ -133,10 +133,22 @@ class MyDatePicker extends Component {
     return (
       <View style={styles.container}>
 
-        <View style={styles.button}>
-          <View style={styles.square}><Icon name="date-range" size={largura_tela < 430 ? 28 : 40} color="black" style={styles.icon} /></View>
-          <View style={styles.parale}>
-            <DatePicker
+      <View style={styles.component_card}>
+
+      <View style={styles.title}> 
+      <View style={styles.title_view}>
+      <Text style={styles.title_text}>Questão X</Text>
+      <View style={styles.blueline}></View>
+      </View>
+
+      </View>
+
+      <View style={styles.answer}>
+          <Text style={styles.answer_text}>Lorem ipsum sit dolor amet Lorem ipsum sit dolor amet</Text>
+      </View>
+
+      <TouchableOpacity  onPress={() => {}} style={styles.buttonhp}>
+      <DatePicker
               mode="date"
               placeholder={this.state.formattedDate}
               format="YYYY-MM-DD"
@@ -160,9 +172,10 @@ class MyDatePicker extends Component {
                 },
               }}
               onDateChange={(date) => { this.setState({ date, showDate: true, call: true }); }}
-            />
-          </View>
-        </View>
+            /> 
+      </TouchableOpacity>
+      </View>
+
         {
           this.state.date && (
             this.getNewDate()
