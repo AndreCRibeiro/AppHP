@@ -49,12 +49,13 @@ class Login extends Component {
     viewModal: false,
     messageRequest: '',
     call: false,
-    error: false,
+    erro: false,
   }
 
   async componentWillMount() {
     const id = await AsyncStorage.getItem('@Id');
     this.setState({ btt: id });
+    console.tron.log(["Estado:" , this.state.erro ," Prop do redux: " , this.props.login.error ])
   }
 
   componentWillReceiveProps(nextProps) {
@@ -84,15 +85,11 @@ class Login extends Component {
   }
 
   confereCadastro = () => {
-    const { error } = this.state;
-    this.setState({ error: false });
     const data = { inputSave: this.state.inputSave, password: this.state.password };
-    //console.tron.log(this.props.login)
-    //console.tron.log(this.state.error)
     this.props.getLoginRequest(data);
-    if (this.props.login.error === true)
-    {
-     this.setState({ error: true })
+    //console.tron.log(["Estado:" , this.state.erro ," Prop do redux: " , this.props.login ])
+    if (this.props.login.error == true){
+     this.setState({ erro: !this.state.erro })
     }
     
   }
@@ -102,14 +99,13 @@ class Login extends Component {
 
   render() {
     const { login } = this.props;
-    const { btt, viewModal, messageRequest, call , error } = this.state;
+    const { btt, viewModal, messageRequest, call , erro } = this.state;
     return (
 
 
       <View style={styles.container}>
-
       {
-              error && (
+              erro && (
                 <SnackBar inside content="Não foi possível logar" color="#4173CE" />
               )
       }
