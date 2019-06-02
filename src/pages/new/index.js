@@ -66,16 +66,15 @@ class New extends Component {
     console.tron.log(response);
     this.setState({ arrayReq: response.data });
     console.tron.log(this.state.arrayReq);
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    //BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
-  componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-  }
-
+  
   handleBackButton() {
-    return true;
+    return true
   }
+
+ 
 
   onPressButton = () => {
     const { navigation, getReference, resetEditForm } = this.props;
@@ -143,8 +142,7 @@ class New extends Component {
     return (
       <View style={styles.container}>
       <Header
-          showArrow
-          goBack={this.props.navigation.goBack}
+          back
         />
        <View style = {styles.bar}> 
     

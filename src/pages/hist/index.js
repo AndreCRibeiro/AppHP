@@ -48,11 +48,7 @@ class Historico extends Component {
 
   async componentWillMount() {
     this.requestFroms();
-    BackHandler.removeEventListener("hardwareBackPress", this.handleBackButton);
-  }
-
-  componentWillUnmount() {
-    BackHandler.removeEventListener("hardwareBackPress", this.handleBackButton);
+    //BackHandler.removeEventListener("hardwareBackPress", this.handleBackButton);
   }
 
   loading() {
@@ -172,8 +168,7 @@ class Historico extends Component {
       <View style={styles.container}>
       
       <Header
-          showArrow
-          goBack={this.props.navigation.goBack}
+          back
           title='Meus Testes'
         />
         <Modal

@@ -17,6 +17,8 @@ class HeaderRedux extends Component {
     alertVisible: false,
   }
 
+ 
+
   openAlert = () => {
     this.setState({ showAlert: true, alertVisible: true })
   }
@@ -66,6 +68,7 @@ class HeaderRedux extends Component {
       form,
       activeFlag,
       navigation,
+      back
     } = this.props;
     const { showAlert } = this.state;
     const { largura_tela } = responsividade;
@@ -92,26 +95,35 @@ class HeaderRedux extends Component {
                 </TouchableOpacity>
               )
             }
-            {
-              showArrow && (
-                <TouchableOpacity onPress={() => {
-                    if(showProgress){
-                      activeFlag();
-                      startUpdateProgress();
-                      saveStepState();                     
-                    }
-                    goBack();
-                  }}
-                >
-                  <Icon name="md-arrow-back" size={ largura_tela < 430 ? 28 : 40 } style={styles.iconMenu} />
-                </TouchableOpacity>
-              )
-            }
+       {
+            showArrow && (
+              <TouchableOpacity onPress={() => {
+                if (showProgress) {
+                  activeFlag();
+                  startUpdateProgress();
+                  saveStepState();
+                }
+                goBack();
+              }}
+              >
+                <Icon name="md-arrow-back" size={largura_tela < 430 ? 28 : 40} style={styles.iconMenu} />
+              </TouchableOpacity>
+            )
+          }
              {
               showArrowRegister && (
                 <TouchableOpacity onPress={() => 
                     navigation.navigate('Login')
                   }
+                >
+                  <Icon name="md-arrow-back" size={ largura_tela < 430 ? 28 : 40 } style={styles.iconMenu} />
+                </TouchableOpacity>
+              )
+            }
+
+          {
+              back && (
+                <TouchableOpacity onPress={() => {navigation.navigate('Main')}} 
                 >
                   <Icon name="md-arrow-back" size={ largura_tela < 430 ? 28 : 40 } style={styles.iconMenu} />
                 </TouchableOpacity>
