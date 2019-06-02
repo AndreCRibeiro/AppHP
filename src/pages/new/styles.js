@@ -14,6 +14,10 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
 
+  icon: {
+    marginHorizontal: 7,
+  },
+
   viewIcon: {
     marginLeft: 4,
   },

@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     height: responsividade.ALTURACARD * 0.7,
     padding: 20,
     margin: 10,
+    marginVertical: 20,
   },
 
   row: {
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
   },
 
   status1: {     
-    height: 20,
+    //height: 20,
     fontSize:  responsividade.fonts.nameSize,
     fontWeight: '500',
     lineHeight: 21,
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
   }, 
 
   ref: {
-    height: 20,
+    //height: 20,
     fontSize:  responsividade.fonts.nameSize,
     fontWeight: '300',
     lineHeight: 21,
@@ -83,10 +84,10 @@ const styles = StyleSheet.create({
   },
 
   statusEnviado:{
-    height: 20,
+    //height: 20,
     color: 'green',
     fontSize:  responsividade.fonts.nameSize * 0.8,
-    fontWeight: '400',
+    fontWeight: 'bold',
     lineHeight: 21,
     opacity: 0.6,
     marginTop: responsividade.margin.mainMargin

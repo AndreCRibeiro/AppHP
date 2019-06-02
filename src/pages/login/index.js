@@ -49,6 +49,7 @@ class Login extends Component {
     viewModal: false,
     messageRequest: '',
     call: false,
+    error: false,
   }
 
   async componentWillMount() {
@@ -81,9 +82,19 @@ class Login extends Component {
   navigateToChangeService = () => {
     this.props.navigation.navigate('ChangeService')
   }
+
   confereCadastro = () => {
+    const { error } = this.state;
+    this.setState({ error: false });
     const data = { inputSave: this.state.inputSave, password: this.state.password };
+    //console.tron.log(this.props.login)
+    //console.tron.log(this.state.error)
     this.props.getLoginRequest(data);
+    if (this.props.login.error === true)
+    {
+     this.setState({ error: true })
+    }
+    
   }
   onPressAnimated = async () => {
     this.animation.play(30, 1000);
@@ -91,19 +102,36 @@ class Login extends Component {
 
   render() {
     const { login } = this.props;
-    const { btt, viewModal, messageRequest, call } = this.state;
+    const { btt, viewModal, messageRequest, call , error } = this.state;
     return (
+
+
       <View style={styles.container}>
 
-        <Image 
-          source={require('../../assents/imgs/local_crime2.jpg')} 
-          style={styles.image} 
-        />
+      {
+              error && (
+                <SnackBar inside content="Não foi possível logar" color="#4173CE" />
+              )
+      }
+
+      
+
+         
+          <Image 
+            source={require('../../assents/imgs/local_crime2.jpg')} 
+            style={styles.image} 
+          />
         
         <KeyboardAwareScrollView
             contentContainerStyle={styles.viewInputs}
             scrollEnabled={true}
         >
+
+          <View style={styles.logoview}>
+            <Text style={styles.logo}>SPHL</Text>
+            <Text style={styles.ed}>Educacional</Text>
+          </View>
+           
             <TextInput
               style={styles.input}
               autoCapitalize="none"

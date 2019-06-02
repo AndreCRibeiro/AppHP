@@ -156,7 +156,7 @@ class Main extends Component {
         <ScrollView contentContainerStyle={styles.bodyS}>
         {
           scanner && (
-            <View>
+            <View style={styles.scanner}>
               <ScannerAPI />
             </View>
           )

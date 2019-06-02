@@ -9,16 +9,37 @@ const styles = StyleSheet.create({
 
   image: {
     width: responsividade.largura_tela,
-    height: responsividade.altura_tela * 0.5,
+    height: responsividade.altura_tela * 0.4,
     opacity: 0.5
   },
 
   viewInputs: {
     backgroundColor: colors.white,
     width: responsividade.largura_tela,
-    height: responsividade.altura_tela * 0.5,
+    height: responsividade.altura_tela * 0.6,
+    elevation: 1,
+    //justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  logoview: {
+
+    width: responsividade.largura_tela,
+    //backgroundColor: 'pink',
     justifyContent: 'center',
     alignItems: 'center',
+    margin: 10,
+
+  },
+
+  logo: {
+
+    fontSize: 25,
+
+  },
+
+  ed: {
+    fontSize: 12,
   },
 
   entrarButton: {
