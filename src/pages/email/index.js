@@ -191,14 +191,17 @@ class Login extends Component {
            
           </View>
         </View>
+        <HideWithKeyboard>
           <View style={styles.indicadorContainer}>
-            <StepIndicator
-              customStyles={customStyles}
-              currentPosition={this.state.currentPosition}
-              labels={labels}
-              stepCount={2}
-            />
-          </View>
+              <StepIndicator
+                customStyles={customStyles}
+                currentPosition={this.state.currentPosition}
+                labels={labels}
+                stepCount={2}
+              />
+            </View>
+        </HideWithKeyboard>
+          
         {
           viewModal && (
             <SnackBar register content={this.state.messageRequest} color="#4173CE" />

@@ -190,6 +190,7 @@ class Login extends Component {
              </TouchableOpacity>
            </View>
         </View>
+        <HideWithKeyboard>
         <View style={styles.indicadorContainer}>
           <StepIndicator
             customStyles={customStyles}
@@ -198,6 +199,7 @@ class Login extends Component {
             stepCount={2}
           />
         </View>
+        </HideWithKeyboard>
         {
           viewModals && (
             <ModalCheck

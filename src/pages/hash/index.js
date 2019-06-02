@@ -158,6 +158,7 @@ class Login extends Component {
             </TouchableOpacity>
           </View>
         </View>
+        <HideWithKeyboard>
           <View style={styles.indicadorContainer}>
             <StepIndicator
               customStyles={customStyles}
@@ -166,6 +167,7 @@ class Login extends Component {
               stepCount={3}
             />
           </View>
+          </HideWithKeyboard>
         {
           viewModal && (
             <SnackBar register content={this.state.messageRequest} color="#4173CE" />
