@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
   viewInputs: {
     backgroundColor: colors.white,
     width: responsividade.largura_tela,
-    height: responsividade.altura_tela * 0.6,
+    height: responsividade.altura_tela,
     elevation: 1,
-    //justifyContent: 'center',
+    justifyContent: 'center',
     alignItems: 'center',
   },
 

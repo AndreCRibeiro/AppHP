@@ -111,12 +111,6 @@ class Login extends Component {
       }
 
       
-
-         
-          <Image 
-            source={require('../../assents/imgs/local_crime2.jpg')} 
-            style={styles.image} 
-          />
         
         <KeyboardAwareScrollView
             contentContainerStyle={styles.viewInputs}

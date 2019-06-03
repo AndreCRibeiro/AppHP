@@ -17,8 +17,6 @@ var radio_props = [
 
 class Radio extends Component {
 
-
-
 render() {
     return(
     <View>
