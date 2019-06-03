@@ -8,6 +8,7 @@ import OCR from './ocr';
 import Group from './group';
 import Scanner from './scanner';
 import ScannerAPI from './scannerAPI';
+import Radio from './radio';
 
 
 import Veiculos from './veiculo';
@@ -25,6 +26,7 @@ export {
     OCR,
     Group,
     Scanner,
-    ScannerAPI
+    ScannerAPI,
+    Radio
 };
 

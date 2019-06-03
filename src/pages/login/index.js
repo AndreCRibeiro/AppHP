@@ -106,7 +106,7 @@ class Login extends Component {
       <View style={styles.container}>
       {
               erro && (
-                <SnackBar inside content="Não foi possível logar" color="#4173CE" />
+                <SnackBar inside content="Não foi possível logar" color='#3C3C46' fontcolor="white"  />
               )
       }
 

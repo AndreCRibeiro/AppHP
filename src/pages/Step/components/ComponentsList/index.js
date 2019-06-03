@@ -13,6 +13,7 @@ import {
   Vestigios,
   OCR,
   Group,
+  Radio
 } from '../../../../components';
 import styles from './styles';
 
@@ -140,6 +141,14 @@ class ComponentList extends Component {
             this.props.data.component_type === 'checkbox' && (
               <View style={styles.component}>
                 <Check data={this.props.data} />
+              </View>
+            )
+          }
+
+{
+            this.props.data.component_type === 'radio' && (
+              <View style={styles.component}>
+                <Radio data={this.props.data} />
               </View>
             )
           }
