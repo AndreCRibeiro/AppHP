@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Alert, Text, TouchableOpacity } from 'react-native';
+import { View, Alert, Text, TouchableOpacity, Dimensions } from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as FormActions } from '../../store/ducks/form';
 import { Creators as GroupActions } from '../../store/ducks/group';
+
+import * as Animatable from 'react-native-animatable';
 
 import { responsividade } from '../../styles';
 
@@ -18,6 +20,8 @@ class Scanner extends Component {
     super(props);
     this.camera = null;
     this.barcodeCodes = [];
+    let { width } = Dimensions.get('window');
+    this.maskLength = (width*50)/100; 
   }
 
   state = {
@@ -58,7 +62,7 @@ class Scanner extends Component {
       for (var key in form.step) {
         if (key === data.data_name) {
           if (form.step[key].filled === true) {
-            this.setState({ infoScanner: form.step[key].value });
+            this.setState({ infoScanner: form.step[key].value, showCode: true , showButton2: true , showButton: false });
           }
         }
       }
@@ -177,18 +181,18 @@ class Scanner extends Component {
       <View style={{ justifyContent: 'center', alignItem: 'center' }}>
 
       <View style={styles.answer}>
-                <Text style={styles.answer_text}>{this.props.label}</Text>
-            </View>
+                <Text style={styles.hint}>{hint}</Text>
+      </View>
 
       {
           showButton && (
             <TouchableOpacity onPress={() => this.setState({ showScanner: true, showButton: false })} style={styles.buttonhp}>
-              <View style={styles.button_texthp}><Text  style={styles.font}>LER {label}</Text></View>
+              <View style={styles.button_texthp}><Text  style={styles.font}>LER QR CODE/ CÓDIGO DE BARRAS</Text></View>
             </TouchableOpacity>
           )}
 
       
-{
+        {     
           showScanner && (
             <View style={{ alignItems: 'center', height: 250 }}>
               {
@@ -199,7 +203,7 @@ class Scanner extends Component {
                 barcodeFinderVisible={this.state.camera.barcodeFinderVisible}
                 barcodeFinderWidth={280}
                 barcodeFinderHeight={220}
-                barcodeFinderBorderColor="white"
+                barcodeFinderBorderColor="green"
                 barcodeFinderBorderWidth={2}
                 defaultTouchToFocus
                 flashMode={this.state.camera.flashMode}
@@ -211,13 +215,28 @@ class Scanner extends Component {
                 permissionDialogMessage={'We need your permission to use your camera phone'}
                 style={{ width: 330, height: 250 }}
                 type={this.state.camera.type}
-            />
+            >
+              <View style={styles.overlay} />
+                <View style={[styles.contentRow, { height: this.maskLength }]} >
+                  <View styel={styles.overlay}/>
+                  <View style={[styles.content, {width: this.maskLength, height: this.maskLength }]} >
+                    <Animatable.View
+                      style={[styles.scanline, {top: this.maskLength/4}]}
+                      animation="slideInUp"
+                      iterationCount="infinite"
+                      direction="alternate"
+                    />
+                  </View>
+                  <View style={styles.overlay} />
+                </View>
+              <View style={styles.overlay} />
+            </RNCamera>
             }
             </View>
 
           )}
 
-{
+        {
           this.state.showCode && (
             <View style={styles.codecontainer}>
               <Text style={styles.code}> Código: {this.state.infoScanner} </Text>
@@ -228,7 +247,7 @@ class Scanner extends Component {
         {
           showButton2 && (
             <TouchableOpacity onPress={() => this.setState({ showScanner: true, showCode: false })} style={styles.button}>
-              <Text style={styles.button_text}>LER {label}</Text>
+              <Text style={styles.button_text}>LER OUTRO QR CODE/ CÓDIGO DE BARRAS</Text>
             </TouchableOpacity>
           )}
 

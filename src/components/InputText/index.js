@@ -123,8 +123,8 @@ class InputText extends Component {
       <View style={{ ...styles.container, backgroundColor: (groupFlag === true ? 'white' : null) }}>
 
       <View style={styles.answer}>
-                <Text style={styles.answer_text}>{this.props.label}</Text>
-            </View>
+        <Text style={styles.hint}>{hint}</Text>
+      </View>
 
           <TextInput
           style={{ ...styles.input, backgroundColor: (groupFlag === true ? colors.light : 'white') }}

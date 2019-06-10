@@ -7,12 +7,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: Platform.OS === 'ios' ? 100 : responsividade.ALTURA_HEADER,
+    height: Platform.OS === 'ios' ? 120 : responsividade.ALTURA_HEADER,
     //height: 80,
     //position: 'absolute',
     zIndex: 2,
     paddingTop: Platform.OS === 'ios' ? 45 : 25,
     backgroundColor: colors.secundary,
+    bottom: Platform.OS === 'ios' ? 25 : 0,
   },
 
   iconMenu: {

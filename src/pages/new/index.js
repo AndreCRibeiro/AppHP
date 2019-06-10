@@ -63,9 +63,7 @@ class New extends Component {
     const { navigation } = this.props
     const id = navigation.getParam('key');
     const response = await Api.user.checkClassTests(id);
-    console.tron.log(response);
     this.setState({ arrayReq: response.data });
-    console.tron.log(this.state.arrayReq);
     //BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
@@ -76,18 +74,12 @@ class New extends Component {
 
  
 
-  onPressButton = () => {
-    const { navigation, getReference, resetEditForm } = this.props;
-    const { inputSave } = this.state;
-    if (inputSave) {
-      getReference(this.state.inputSave);
-      resetEditForm();
-      navigation.navigate('StepList', { inputSave: this.state.inputSave });
-    } else {
-      getReference('Laudo sem Nome');
-      resetEditForm();
-      navigation.navigate('StepList');
-    }
+  onPressButton = item => {
+    const { navigation, getReference, resetEditForm , form, getNewSucsses } = this.props;
+    getReference(item.table_name);
+    getNewSucsses(item.data);
+    resetEditForm();
+    navigation.navigate('StepList');
   }
 
   reqUrl = (value) => {
@@ -114,11 +106,11 @@ class New extends Component {
   }
 
   renderTests = item => {
-    const { navigation } = this.props;
+    const { navigation, getReference} = this.props;
     return (
       <TouchableOpacity
         style={styles.box}
-        onPress={() => { navigation.navigate('StepList', {key: item.data}) }}
+        onPress={() => this.onPressButton(item)}
       >
       <View style={styles.row}>
             <Icon name="file-text-o" size={20} color="black" style={styles.icon} />

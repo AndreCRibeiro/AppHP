@@ -55,7 +55,6 @@ class Login extends Component {
   async componentWillMount() {
     const id = await AsyncStorage.getItem('@Id');
     this.setState({ btt: id });
-    console.tron.log(["Estado:" , this.state.erro ," Prop do redux: " , this.props.login.error ])
   }
 
   componentWillReceiveProps(nextProps) {
@@ -87,7 +86,6 @@ class Login extends Component {
   confereCadastro = () => {
     const data = { inputSave: this.state.inputSave, password: this.state.password };
     this.props.getLoginRequest(data);
-    //console.tron.log(["Estado:" , this.state.erro ," Prop do redux: " , this.props.login ])
     if (this.props.login.error == true){
      this.setState({ erro: !this.state.erro })
     }

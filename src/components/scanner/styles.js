@@ -28,6 +28,32 @@ const styles = StyleSheet.create({
      paddingLeft: 20,
      fontSize: 16,
   },
+
+  preview: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  overlay: {
+    flex: 1,
+  },
+
+  contentRow: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  content: {
+    borderWidth: 3,
+    borderColor: colors.primary,
+  },
+
+  scanline: {
+    backgroundColor: colors.primary,
+    height: 1,
+  },
+
   square: {
     backgroundColor: "#FAAB1A",
     height: responsividade.ALTURA_BUTTON,
@@ -74,10 +100,10 @@ const styles = StyleSheet.create({
 
   },
   hint: {
-    fontSize: 14,
+    fontSize: responsividade.fonts.descriptionSize * 0.9,
     fontWeight: 'bold',
     color: 'black',
-    opacity: 0.3,
+    opacity: 0.7,
     paddingVertical: 10,
   },
   codecontainer: {

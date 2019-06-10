@@ -6,11 +6,13 @@ const styles = StyleSheet.create({
         flex: 1,   
         paddingBottom: 60,
     },
+
     main: {
         padding: 10,   
         justifyContent: 'center',
         alignItems: 'center',  
     },
+
     card: {
         marginHorizontal: 20,
         marginVertical: 10, 
@@ -22,15 +24,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: colors.white,
     },
+
     title: {
         fontSize: responsividade.fonts.nameSize,
         color: colors.darker,
     },
+
     name: {
         fontSize: responsividade.fonts.descriptionSize,
         fontWeight: 'bold',
         color: colors.black
     },
+
     containerModal: {
         flex: 1,
         alignItems: 'center',
@@ -43,9 +48,11 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',        
         backgroundColor: "#67382643",
     },
+
     iconClose: {
         color: colors.white,
     },
+
     box:{
         backgroundColor: 'white',
         borderRadius: 5,
@@ -56,14 +63,15 @@ const styles = StyleSheet.create({
         // alignItems: "center",
         padding: 20,
     
-      },
+    },
+
     text: {
         color: colors.black,
         fontSize: 16,
         textAlign: 'justify',
     },
-    status:{
 
+    status:{
         height: 20,
         color: '#002F7F',
         fontSize:  responsividade.fonts.nameSize * 0.8,
@@ -71,10 +79,9 @@ const styles = StyleSheet.create({
         lineHeight: 21,
         opacity: 0.6,
         marginTop: responsividade.margin.mainMargin
-    
-      },
-      statusEnviado:{
+    },
 
+    statusEnviado:{
         height: 20,
         color: 'green',
         fontSize:  responsividade.fonts.nameSize * 0.8,
@@ -82,37 +89,34 @@ const styles = StyleSheet.create({
         lineHeight: 21,
         opacity: 0.6,
         marginTop: responsividade.margin.mainMargin
-    
-      },
-      status1: {     
+    },
+
+    status1: {     
         height: 20,
         fontSize:  responsividade.fonts.nameSize,
         fontWeight: '500',
         lineHeight: 21,
         // opacity: 0.6,
         marginTop: responsividade.margin.mainMargin,
-    
-      }, 
+    }, 
       
-      ref: {
+    ref: {
         height: 20,
         fontSize:  responsividade.fonts.nameSize,
         fontWeight: '300',
         lineHeight: 21,
         marginTop: responsividade.margin.mainMargin
-      },
+    },
 
-      row: {
+    row: {
         flexDirection: "row",
-      },
+    },
 
-      loading: {
-
+    loading: {
         paddingBottom: 100,
-      },
+    },
 
-      erro : {
-
+    erro : {
         padding: 10,
         width: responsividade.LARGURABOX,
         height: responsividade.ALTURABOX*0.8,
@@ -121,16 +125,12 @@ const styles = StyleSheet.create({
         marginTop: 10,
         justifyContent: 'center',
         alignItems: 'center',
+    },
 
-
-
-      },
-
-      errot: {
+    errot: {
         //fontWeight: 'bold',
         color: "#B83E3E",
-      },
-
+    },
 });
 
 export default styles;

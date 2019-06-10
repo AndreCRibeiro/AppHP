@@ -2,7 +2,7 @@ import axios from 'axios';
 // import { LoginToken } from '../store/ducks/login';
 // import store from '../store';
 
-var URL = 'http://157.230.177.190:3000';
+var URL = 'http://157.230.177.190';
 
 const changeBaseURL = (baseUrl) => {
   URL = baseUrl;

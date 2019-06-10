@@ -51,6 +51,14 @@ const styles = StyleSheet.create({
           width: responsividade.LARGURABOX,
     },
 
+    hint: {
+      fontSize: responsividade.fonts.descriptionSize * 0.9,
+      fontWeight: 'bold',
+      color: 'black',
+      opacity: 0.7,
+      paddingVertical: 10,
+    },
+
     answer: {
       //backgroundColor: "pink",
       width: responsividade. LARGURABOX*0.85,

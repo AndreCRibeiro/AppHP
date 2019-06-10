@@ -155,15 +155,15 @@ const styles = StyleSheet.create({
  buttons_view: {
    position: "absolute", 
    zIndex: 2,
-   top: 390,
+   top: responsividade.largura_tela < 430 ? 390 : 330,
    left: 330
  },
 
  buttons_view2: {
   position: "absolute", 
   zIndex: 2,
-  top: 330,
-  left: 330
+  top: responsividade.largura_tela < 430 ? 390 : 330,
+  left: responsividade.largura_tela < 430 ? 330: 230,
 },
 
 titlee: {

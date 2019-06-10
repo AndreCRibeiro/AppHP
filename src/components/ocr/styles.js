@@ -93,13 +93,15 @@ const styles = StyleSheet.create({
         marginLeft: 5,
     
       },
-    hint: {
-        fontSize: 14,
+
+      hint: {
+        fontSize: responsividade.fonts.descriptionSize * 0.9,
         fontWeight: 'bold',
         color: 'black',
-        opacity: 0.3,
+        opacity: 0.7,
         paddingVertical: 10,
-    },
+      },
+      
     codecontainer: {
         width: (responsividade.LARGURABOX),
         height: (responsividade.ALTURABOX),

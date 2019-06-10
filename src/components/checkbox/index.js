@@ -3,73 +3,113 @@ import { View, Text, TextInput, TouchableOpacity, AsyncStorage, Image, ScrollVie
 import styles from './styles';
 import { CheckBox } from 'react-native-elements';
 
+// redux
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as FormActions } from '../../store/ducks/form';
+import { Creators as GroupActions } from '../../store/ducks/group';
+
+var arrayChecks = [
+    {
+        title:'Opção A',
+        key: 0,
+    },
+    {
+        title:'Opção B',
+        key: 1,
+    }
+]
+
 class Check extends Component {
 
-    state = {
-        checked1: false,
-        checked2: false,
-        checked3: false,
-        checked4: false,
-        checked5: false,
+    state = { }
+
+    componentWillMount() {
+        const { form, data, group, index } = this.props;
+        data.default_value.map(item => {
+            this.setState({ [item.key]: false })
+        })
+        for (var key in form.step) {
+            if (key === data.data_name) {
+              if (form.step[key].filled === true) {
+                this.setState( form.step[key].value );
+              }
+            }
+        }
     }
 
-    /*checkItem(elements){
-      let itemChecked = this.state.checked;
-      itemChecked = elements.target.checked;
-      this.setState({checked: itemChecked});
-    }*/
+    saveFormCheck = info => {
+        const {
+          form,
+          getSaveStateForm,
+          startControlArray,
+          data,
+          index,
+          saveDataGroup,
+          group,
+          groupMother,
+          startControlArrayGroup,
+        } = this.props;
+        if (this.state) {
+            for (var key in form.step) {
+              if (key === info.data_name) {
+                const form = {};
+                form[info.data_name] = { key: info.data_name, value: this.state, filled: true };
+                getSaveStateForm(form);
+            }
+          }
+        } else {
+          for (var key in form.step) {
+            if (key === info.data_name) {
+              const form = {};
+              form[info.data_name] = { key: info.data_name, value: this.state, filled: false };
+              //console.log(form[info.data_name])
+              getSaveStateForm(form);
+            }
+          }
+        }
+        startControlArray();
+        // await startControlArrayGroup();
+      }
+
 
 render() {
-    const { hint } = this.props.data;
+    const { data_name, label, hint, default_value, newState, groupFlag } = this.props.data;
+    const { saveStep, step } = this.props.form;
+
+    if (saveStep) {
+        this.saveFormCheck({ data_name, default_value });
+    }
     return(
     <View>
-
-            <View style={styles.answer}>
-                <Text style={styles.answer_text}>{this.props.label}</Text>
-            </View>
-
-        <View style={styles.checks}>
-
-            <CheckBox
-                title={"Assumir o local"}
-                checked={this.state.checked1}
-                onPress={() => this.setState({checked1: !this.state.checked1})} 
-            />
-
-            <CheckBox
-                title={"Segurança do local"}
-                checked={this.state.checked2}
-                onPress={() => this.setState({checked2: !this.state.checked2})} 
-            />
-
-            <CheckBox
-                title={"Desligar energia elétrica"}
-                checked={this.state.checked3}
-                onPress={() => this.setState({checked3: !this.state.checked3})} 
-            />
-
-            <CheckBox
-                title={"Verificar impressões digitais"}
-                checked={this.state.checked4}
-                onPress={() => this.setState({checked4: !this.state.checked4})} 
-            />
-
-            <CheckBox
-                title={"Verificar perímetro da área de perícia"}
-                checked={this.state.checked5}
-                onPress={() => this.setState({checked5: !this.state.checked5})} 
-            />
-
-
-
+        <View style={styles.answer}>
+            <Text style={styles.answer_text}>{this.props.label}</Text>
         </View>
 
-
-        
-
+        <View style={styles.checks}>
+        {
+            default_value.map(item => {
+                return (
+                    <CheckBox
+                        title={item.title}
+                        checked={this.state[item.key]}
+                        onPress={() => this.setState({ [item.key]: !this.state[item.key] })} 
+                    />
+                )
+            })
+        }
+        </View>
     </View>
     );
 }
 }
 
-export default Check; 
+const mapStateToProps = state => ({
+    form: state.formState,
+    group: state.groupState,
+  });
+  
+  const mapDispatchToProps = dispatch =>
+    bindActionCreators({ ...FormActions, ...GroupActions }, dispatch);
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Check);

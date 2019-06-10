@@ -204,7 +204,13 @@ const styles = StyleSheet.create({
 
     },
 
-  
+    hint: {
+      fontSize: responsividade.fonts.descriptionSize * 0.9,
+      fontWeight: 'bold',
+      color: 'black',
+      opacity: 0.7,
+      paddingVertical: 10,
+    },
 
 });
 

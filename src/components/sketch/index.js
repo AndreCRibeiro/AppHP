@@ -31,12 +31,13 @@ export default class Sketch extends Component {
 
   render() {
     const { showScanner, showButton } = this.state;
+    const { data_name, label, hint, default_value, newState } = this.props.data;
     const { largura_tela } = responsividade;
     return (
       <View style={{ justifyContent: "center", alignItem: "center" }}>
 
       <View style={styles.answer}>
-                <Text style={styles.answer_text}>{this.props.label}</Text>
+                <Text style={styles.hint}>{hint}</Text>
             </View>
         {showButton && (
 

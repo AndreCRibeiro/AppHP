@@ -100,7 +100,7 @@ class Historico extends Component {
     await getReference(form.ref);
     await setForm(form.form);
     await restoreFormState(form);
-    navigation.navigate("StepList");
+    navigation.navigate("StepList", {key: form} );
   };
 
   renderOffline = item => {

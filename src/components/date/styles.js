@@ -23,6 +23,14 @@ const styles = StyleSheet.create({
   direcao: {
     flexDirection: 'row',
   },
+  hint: {
+    fontSize: responsividade.fonts.descriptionSize * 0.9,
+    fontWeight: 'bold',
+    color: 'black',
+    opacity: 0.7,
+    paddingVertical: 10,
+  },
+  
   datecontainer: {
     width: (responsividade.LARGURABOX*0.46),
     height:  (responsividade.ALTURABOX*0.9),

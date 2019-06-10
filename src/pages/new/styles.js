@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 
   blueLine: {
     backgroundColor: colors.primary,
-    marginTop: 12,
+    marginTop: 3,
     marginLeft: 1,
     height: 6,
     width: 55

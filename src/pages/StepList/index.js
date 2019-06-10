@@ -41,10 +41,6 @@ class StepList extends Component {
   }
 
   componentWillMount() {
-    const { navigation } = this.props
-    const form = navigation.getParam('key');
-    //console.tron.log({'Teste':form});
-    this.setState({ form: form });
     BackHandler.removeEventListener('hardwareBackPress', this.saveForm);
   }
 
@@ -77,7 +73,7 @@ class StepList extends Component {
 
   saveForm2 = () => {
     const { reference, saveForm, setSaveContentForm, form } = this.props;
-    //saveForm(reference);
+    saveForm(reference);
     this.saved();
   }
 
@@ -104,7 +100,6 @@ class StepList extends Component {
     const { dataGroup } = group;
 
     this.setState({ sending: true, original: false });
-    console.log(['group', group])
     const matriculaProv = await AsyncStorage.getItem('@AppInc:matricula');
     const matricula = JSON.stringify(matriculaProv);
 
@@ -119,13 +114,6 @@ class StepList extends Component {
     }
 
     //console.tron.log('arrayRef\n', array);
-
-    array.map(item => {
-      if (item === formulario.ref) {
-        array.splice(count, 1);
-      }
-      count += 1;
-    });
 
     //console.tron.log('reset arrayRef\n', array);
 
@@ -176,7 +164,7 @@ class StepList extends Component {
     
     axios({
       method: 'post',
-      url: 'http://157.230.177.190:3000/form/receiver',
+      url: 'http://157.230.177.190/form/receiver',
       data: dataForm,
       headers: {
         'Content-Type': 'application/json',
@@ -286,16 +274,14 @@ class StepList extends Component {
   }
 
   render() {
-    const { formRedux, form } = this.state;
+    const { formRedux } = this.state;
+    const { navigation, reference, form } = this.props;
+    const { viewError, load, saved, mensageError } = this.state;
     if (formRedux) {
       this.props.setSaveContentForm(form);
       this.setState({ formRedux: false });
     }
-    const { navigation, reference } = this.props;
-    const { viewError, load, saved, mensageError } = this.state;
     let i = 0;
-
-    //console.tron.log('msg error', mensageError)
     return (
       <View style={styles.container}>
         <Header

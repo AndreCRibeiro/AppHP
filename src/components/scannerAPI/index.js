@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Alert, Text, TouchableOpacity } from 'react-native';
+import { View, Alert, Text, TouchableOpacity, Dimensions } from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as FormActions } from '../../store/ducks/form';
 import { Creators as GroupActions } from '../../store/ducks/group';
+
+import * as Animatable from 'react-native-animatable';
 
 import { responsividade } from '../../styles';
 
@@ -19,6 +21,8 @@ class ScannerAPI extends Component {
     super(props);
     this.camera = null;
     this.barcodeCodes = [];
+    let { width } = Dimensions.get('window');
+    this.maskLength = (width*50)/100; 
   }
 
   state = {
@@ -70,9 +74,7 @@ class ScannerAPI extends Component {
   enrollClass = async data => {
     try {
       const response = await Api.user.enrollStudent({code: data});
-      console.tron.log(response)
     } catch (error){
-      console.tron.log(error)
     }
   }
 
@@ -108,7 +110,7 @@ class ScannerAPI extends Component {
                 barcodeFinderVisible={this.state.camera.barcodeFinderVisible}
                 barcodeFinderWidth={280}
                 barcodeFinderHeight={220}
-                barcodeFinderBorderColor="white"
+                barcodeFinderBorderColor="green"
                 barcodeFinderBorderWidth={2}
                 defaultTouchToFocus
                 flashMode={this.state.camera.flashMode}
@@ -120,7 +122,22 @@ class ScannerAPI extends Component {
                 permissionDialogMessage={'We need your permission to use your camera phone'}
                 style={{ width: 330, height: 250 }}
                 type={this.state.camera.type}
-            />
+            >
+              <View style={styles.overlay} />
+                <View style={[styles.contentRow, { height: this.maskLength }]} >
+                  <View styel={styles.overlay}/>
+                  <View style={[styles.content, {width: this.maskLength, height: this.maskLength }]} >
+                    <Animatable.View
+                      style={[styles.scanline, {top: this.maskLength/4}]}
+                      animation="slideInUp"
+                      iterationCount="infinite"
+                      direction="alternate"
+                    />
+                  </View>
+                  <View style={styles.overlay} />
+                </View>
+              <View style={styles.overlay} />
+            </RNCamera>
             )
           }
           </View>

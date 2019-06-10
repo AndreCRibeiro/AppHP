@@ -71,21 +71,20 @@ const styles = StyleSheet.create({
 
   },
 
-  hint:{
-
-    fontSize: 14,
+  hint: {
+    fontSize: responsividade.fonts.descriptionSize * 0.9,
     fontWeight: 'bold',
     color: 'black',
-    opacity: 0.3,
+    opacity: 0.7,
     paddingVertical: 10,
-
   },
+  
   container: {
     flex: 1, 
     justifyContent: 'center', 
     alignItems: 'center', 
     backgroundColor: 'pink',
-    paddingTop: Platform.OS === 'ios' ?  25 : 0,
+    paddingTop: Platform.OS === 'ios' ?  35 : 0,
   },
   strokeColorButton: {
     marginHorizontal: 2.5, marginVertical: 8, width: 30, height: 30, borderRadius: 15,
