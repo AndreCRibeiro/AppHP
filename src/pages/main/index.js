@@ -45,6 +45,7 @@ class Main extends Component {
   }
 
   requestClass = async () => {
+    const { navigation } = this.props;
     try {
         const response = await Api.user.checkClass();
         if(response.data.data.length === 0 ) {
@@ -52,6 +53,7 @@ class Main extends Component {
         }
         else {
           this.setState({ arrayReq: response.data.data });
+          navigation.navigate('Main');
         }
       }
     catch (error) {
@@ -153,7 +155,10 @@ class Main extends Component {
           )
         }
 
+
+
         <ScrollView contentContainerStyle={styles.bodyS}>
+
         {
           scanner && (
             <View style={styles.scanner}>
@@ -161,6 +166,7 @@ class Main extends Component {
             </View>
           )
         }
+
             <View style={styles.info}>
             <View style={styles.titlee}>
             <Text style={styles.name}>{login.userName}</Text>

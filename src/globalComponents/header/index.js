@@ -82,15 +82,15 @@ class HeaderRedux extends Component {
             {
               showMenu && (
                 <TouchableOpacity onPress={() => openMenu()}>
-                  <Icon name="md-menu" size={ largura_tela < 430 ? 28 : 40 } style={styles.iconMenu} />
+                  <Icon name="md-menu" size={ largura_tela < 430 ? 25 : 40 } style={styles.iconMenu} />
                 </TouchableOpacity>
               )
             }            
             {
               showNotas && (
                 <TouchableOpacity onPress={this.navigateToScreen('Hist')} style={styles.grades}>
-                  <Icon name="md-book" size={ largura_tela < 430 ? 30 : 40 } style={styles.iconExit} />
-                  <Text style={styles.nameIcon}>Notas</Text>
+                  <Icon name="md-book" size={ largura_tela < 430 ? 25 : 40 } style={styles.iconExit} />
+                  <Text style={styles.nameIcon}>Histórico</Text>
                 </TouchableOpacity>
               )
             }
@@ -170,7 +170,7 @@ class HeaderRedux extends Component {
               showExit && (
 
                 <TouchableOpacity onPress={this.navigateToScreen('Login', true)} style={styles.grades}>
-                  <Icon name="md-exit" size={ largura_tela < 430 ? 30 : 40 } style={styles.iconMenu} />
+                  <Icon name="md-exit" size={ largura_tela < 430 ? 25 : 40 } style={styles.iconMenu} />
                 </TouchableOpacity>
               )
             }

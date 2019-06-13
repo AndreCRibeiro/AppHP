@@ -35,7 +35,14 @@ export const ALTURASUBMIT = largura_tela * 0.15;
 //Bola icone
 export const LARGURABOLA = largura_tela < 430 ? largura_tela * 0.1 : largura_tela * 0.07;
 
+//Scanner tela incial
+export const scanner = largura_tela < 430 ? 250 : 350;
 
+export const camera_scan_height = largura_tela < 430 ? 250 : 350;
+
+export const camera_scan_width = largura_tela < 430 ? 330 : 330;
+
+export const scanner_margin = largura_tela < 430 ? 20 : 30;
 /*----------------------------------------------------*/
 
 //Button padrao

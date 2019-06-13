@@ -159,7 +159,7 @@ class StepList extends Component {
       dataGroup,
       formName,
     } = data;
-    const { form } = this.state;
+    const { form } = this.props;
     console.log('onSendForm', contentGroup);    
     
     axios({
@@ -202,7 +202,7 @@ class StepList extends Component {
           mensage = `${error.response.status} - Bloqueado pelo Firewall`;
         }
         else if(error.response.status === 500) {
-          mensage = `${error.response.status} - Error interno`;
+          mensage = `${error.response.status} - Erro interno`;
         }
         else if(error.response.status === 0) {
           mensage = `${error.response.status} - Formato incorreto`;
@@ -285,7 +285,7 @@ class StepList extends Component {
     return (
       <View style={styles.container}>
         <Header
-          title={reference}
+          title={form.form_titulo}
           showArrow
           goBack={this.saveForm}
         />

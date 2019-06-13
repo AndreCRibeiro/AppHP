@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Alert, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Alert, Text, TouchableOpacity, Dimensions, Button, RefreshControl } from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { NavigationActions, withNavigation, StackActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as FormActions } from '../../store/ducks/form';
@@ -57,8 +58,8 @@ class ScannerAPI extends Component {
     //Alert.alert(scanResult.data)
     this.enrollClass(scanResult.data);
   }
-    this.setState({ infoScanner: scanResult.data, showScanner: false });
-    //Alert.alert(this.state.infoScanner);
+    this.setState({ infoScanner: scanResult.data, showScanner: false, showCode: true });
+    //Alert.alert('Turma não encontrada');
     }
     return;
   }
@@ -71,9 +72,33 @@ class ScannerAPI extends Component {
     }
   }
 
+  requestClass = async () => {
+    const { navigation } = this.props;
+    navigation.navigate('Main');
+    try {
+        const response = await Api.user.checkClass();
+        if(response.data.data.length === 0 ) {
+          this.setState({ viewNoClasses: true });
+        }
+        else {
+          this.setState({ arrayReq: response.data.data });
+        }
+      }
+    catch (error) {
+      //console.tron.log({error})
+      Alert.alert(error)
+    }
+  }
+
+  _onRefresh = () => {
+    fetchData().then(() => {
+    });
+  }
+
   enrollClass = async data => {
     try {
       const response = await Api.user.enrollStudent({code: data});
+      Alert.alert('Cadastrado com sucesso');
     } catch (error){
     }
   }
@@ -100,7 +125,7 @@ class ScannerAPI extends Component {
     const { group } = this.props;
     return (
       <View style={{ justifyContent: 'center', alignItem: 'center' }}>
-          <View style={{ alignItems: 'center', height: 250 }}>
+          <View style={{ alignItems: 'center', height: responsividade.scanner , marginTop: responsividade.scanner_margin}}>
           {
             showScanner && (
               <RNCamera
@@ -120,7 +145,7 @@ class ScannerAPI extends Component {
                 onZoomChanged={() => {}}
                 permissionDialogTitle={'Permission to use camera'}
                 permissionDialogMessage={'We need your permission to use your camera phone'}
-                style={{ width: 330, height: 250 }}
+                style={{ width: responsividade.camera_scan_width, height: responsividade.camera_scan_height }}
                 type={this.state.camera.type}
             >
               <View style={styles.overlay} />
@@ -138,6 +163,14 @@ class ScannerAPI extends Component {
                 </View>
               <View style={styles.overlay} />
             </RNCamera>
+            )
+          }
+
+          {
+            this.state.showCode && (
+              <View style={styles.codecontainer}>
+                <Button onPress={this.requestClass.bind(this)} title="Refresh Screen" />
+              </View>
             )
           }
           </View>

@@ -60,38 +60,14 @@ class Historico extends Component {
   }
 
   requestFroms = async () => {
-    const { login } = this.props;
     const arrayRef = await AsyncStorage.getItem('arrayRef');
     const id = await AsyncStorage.getItem("@AppInc:matricula");
     const array = JSON.parse(arrayRef);
-    this.setState({ arrayRef: array, idUser: id, errorview: false });
+    this.setState({ arrayRef: array, idUser: id, errorview: false, loading: false });
     const idMatricula = this.state.idUser;
-    try {
-      const response = await Api.user.getHist({ id: login.userID, token: login.token });
-      if (response.status === 206) {
-        this.setState({ loading: false, errorview: true });
-      } else {
-        this.setState({ loading: false, arrayEnviados: response.data });
-      }
-    } catch (error) {
-      this.setState({ loading: false, errorview: true })
-    }
-
-
-    /*api.post('/pericia/formulario/recebidos', {
-      matricula: idMatricula
-    }).then(resp => {
-      const data = JSON.stringify(resp.data);
-      if (resp.status === 206) {
-        this.setState({ loading: false, errorview: true });
-      } else {
-        this.setState({ loading: false, arrayEnviados: resp.data });
-      }
-
-    }).catch(err => {
-      this.setState({ loading: false, errorview: true });
-    });*/
+    this.setState({ loading: false, arrayEnviados: response.data });
   }
+
   restoreForm = async name => {
     const { navigation, restoreFormState, setForm, getReference } = this.props;
     const formAsync = await AsyncStorage.getItem(name);

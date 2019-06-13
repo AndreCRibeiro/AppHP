@@ -10,10 +10,9 @@ const styles = StyleSheet.create({
 
   bodyS: {
     flex: 1,
-    //justifyContent: 'space-between',
     alignItems: 'center',
-    //backgroundColor: 'green',
-    width: responsividade.largura_tela
+    width: responsividade.largura_tela,
+    
   },
 
   teste: {
@@ -111,9 +110,14 @@ const styles = StyleSheet.create({
   novoTesteButton: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 340,
-    width: responsividade.largura_tela < 430 ? responsividade.LARGURABUTTON * 0.13 :  responsividade.LARGURABUTTON * 0.55,
-    height: responsividade.largura_tela < 430 ? responsividade.ALTURABUTTON * 0.75: responsividade.largura_tela * 0.11,
+    //marginTop: 340,
+    //right: 20,
+    position: 'absolute',
+    left: responsividade.largura_tela < 430 ? 0 : responsividade.largura_tela*0.5,
+    right: responsividade.largura_tela < 430 ? 20 : 0,
+    top: responsividade.largura_tela < 430 ? responsividade.largura_tela*0.85 : responsividade.largura_tela*0.7,
+    width: responsividade.largura_tela < 430 ? responsividade.LARGURABUTTON * 0.13 :  responsividade.LARGURABUTTON * 0.13,
+    height: responsividade.largura_tela < 430 ? responsividade.ALTURABUTTON * 0.75: responsividade.largura_tela * 0.1,
     borderRadius: 100,
     backgroundColor: colors.primary,
   },
@@ -130,7 +134,7 @@ const styles = StyleSheet.create({
   },
 
   button_text: {
-    fontSize: 23,
+    fontSize: responsividade.fonts.nameSize,
     fontWeight: "bold",
     fontStyle: "normal",
     letterSpacing: 0,

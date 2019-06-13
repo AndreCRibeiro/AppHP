@@ -1698,6 +1698,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = SPHL;
 				PRODUCT_NAME = AppHP;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1729,6 +1730,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = SPHL;
 				PRODUCT_NAME = AppHP;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

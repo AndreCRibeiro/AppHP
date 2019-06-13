@@ -114,7 +114,7 @@ class New extends Component {
       >
       <View style={styles.row}>
             <Icon name="file-text-o" size={20} color="black" style={styles.icon} />
-            <Text style={styles.ref}>{item.table_name}</Text>
+            <Text style={styles.ref}>{item.data.form_titulo}</Text>
       </View>
       </TouchableOpacity>
     );

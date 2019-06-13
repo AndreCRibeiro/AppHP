@@ -68,14 +68,13 @@ class Login extends Component {
       index: 0,
       actions: [
         // Logged
-        NavigationActions.navigate({ routeName: 'Logged' }),
+        NavigationActions.navigate({ routeName: 'Main' }),
       ]
     });
     this.props.navigation.dispatch(resetAction);
   }
 
   navigateToSignUp = () => {
-    
     this.props.navigation.navigate('SignUp');
   }
 

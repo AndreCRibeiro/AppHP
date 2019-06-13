@@ -40,9 +40,9 @@ const Routes = StackNavigator(
     Password: { screen: Password },
     StepPage: { screen: StepPage },
     ChangeService: { screen: ChangeService },
+    Main: { screen: Main },
     Logged: DrawerNavigator(
       {
-        Main: { screen: Main  },
         NewMenu: { screen: New },
         Hist: { screen: Hist },
         UpdatePops: { screen: UpdatePops },
