@@ -106,17 +106,16 @@ class Login extends Component {
                 <SnackBar inside content="Não foi possível logar" color='#3C3C46' fontcolor="white"  />
               )
       }
-
-      
-        
         <KeyboardAwareScrollView
             contentContainerStyle={styles.viewInputs}
-            scrollEnabled={true}
+            scrollEnabled={false}
         >
 
           <View style={styles.logoview}>
-            <Text style={styles.logo}>SPHL</Text>
-            <Text style={styles.ed}>Educacional</Text>
+            <Image
+              style={styles.logo}
+              source={require('../../assents/imgs/logoAPPHP.jpg')}
+            />
           </View>
            
             <TextInput

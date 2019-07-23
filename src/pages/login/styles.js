@@ -33,9 +33,11 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-
-    fontSize: 25,
-
+    width: 280, 
+    height: 150,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 30
   },
 
   ed: {
