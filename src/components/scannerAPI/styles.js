@@ -107,20 +107,15 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   codecontainer: {
-    width: (responsividade.LARGURABOX),
-    height:  (responsividade.ALTURABOX),
-    borderRadius: 10,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: 10
   },
+
   code: {
     color: '#000000',
     fontWeight: 'bold',
     fontSize: 18,
     //fontWeight: '400',
     lineHeight: 21,
+    marginTop: 100
   }
 
 });

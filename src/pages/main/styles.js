@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     top: 150,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 20
+    marginLeft: 20,
   },
 
   textoNaoCadastrado: {
@@ -166,16 +166,24 @@ const styles = StyleSheet.create({
  buttons_view2: {
   position: "absolute", 
   zIndex: 2,
-  top: responsividade.largura_tela < 430 ? 390 : 330,
-  left: responsividade.largura_tela < 430 ? 330: 230,
+  top: responsividade.largura_tela < 430 ? 300 : 330,
+  left: responsividade.largura_tela < 430 ? 315: 230,
 },
 
 titlee: {
   justifyContent: 'flex-start',
-  width: responsividade.LARGURABOX*0.9,
+  width: responsividade.LARGURABOX*0.9
+},
 
-}
-
+codecontainer: {
+  width: (responsividade.LARGURABOX),
+  height: responsividade.ALTURABOX*0.5 ,
+  borderRadius: 10,
+  backgroundColor: 'white',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginLeft: 10
+},
 
 });
 

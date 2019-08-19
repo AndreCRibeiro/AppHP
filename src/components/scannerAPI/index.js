@@ -52,13 +52,14 @@ class ScannerAPI extends Component {
   }
 
   onBarCodeRead(scanResult) {
+    this.setState({ showScanner: false, showCode: true })
     if (scanResult.data != null) {
 	  if (!this.barcodeCodes.includes(scanResult.data)) {
     this.barcodeCodes.push(scanResult.data);
     //Alert.alert(scanResult.data)
     this.enrollClass(scanResult.data);
   }
-    this.setState({ infoScanner: scanResult.data, showScanner: false, showCode: true });
+    //this.setState({ infoScanner: scanResult.data, showScanner: false, showCode: true });
     //Alert.alert('Turma não encontrada');
     }
     return;
@@ -145,7 +146,7 @@ class ScannerAPI extends Component {
                 onZoomChanged={() => {}}
                 permissionDialogTitle={'Permission to use camera'}
                 permissionDialogMessage={'We need your permission to use your camera phone'}
-                style={{ width: responsividade.camera_scan_width, height: responsividade.camera_scan_height }}
+                style={{ width: responsividade.camera_scan_width, height: responsividade.camera_scan_height, marginBottom: 100 }}
                 type={this.state.camera.type}
             >
               <View style={styles.overlay} />
@@ -165,13 +166,12 @@ class ScannerAPI extends Component {
             </RNCamera>
             )
           }
-
           {
-            this.state.showCode && (
-              <View style={styles.codecontainer}>
-                <Button onPress={this.requestClass.bind(this)} title="Refresh Screen" />
-              </View>
-            )
+          this.state.showCode && (
+            <View style={styles.codecontainer}>
+              <Text style={styles.code}> Arraste para cima para atualizar </Text>
+            </View>
+          )
           }
           </View>
       </View>

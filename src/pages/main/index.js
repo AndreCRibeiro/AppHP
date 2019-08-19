@@ -6,6 +6,7 @@ import
     TouchableOpacity, 
     BackHandler, 
     ScrollView, 
+    RefreshControl
   } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
@@ -48,12 +49,11 @@ class Main extends Component {
     const { navigation } = this.props;
     try {
         const response = await Api.user.checkClass();
-        if(response.data.data.length === 0 ) {
+        if(response.status === 206 ) {
           this.setState({ viewNoClasses: true });
         }
         else {
-          this.setState({ arrayReq: response.data.data });
-          navigation.navigate('Main');
+          this.setState({ arrayReq: response.data.data, viewNoClasses: false });
         }
       }
     catch (error) {
@@ -123,6 +123,12 @@ class Main extends Component {
     );
   }
 
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    this.requestClass();
+    this.setState({refreshing: false});
+  }
+
   render() {
     const { navigation , login } = this.props;
     const { nome, scanner, viewModals, viewClasses, viewNoClasses, messageRequest, arrayReq } = this.state
@@ -157,39 +163,40 @@ class Main extends Component {
 
 
 
-        <ScrollView contentContainerStyle={styles.bodyS}>
+         <ScrollView contentContainerStyle={styles.bodyS} refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh}
+          />}>
 
         {
           scanner && (
-            <View style={styles.scanner}>
+            <View style={styles.codecontainer}>
               <ScannerAPI />
             </View>
           )
         }
 
-            <View style={styles.info}>
+        <View style={styles.info}>
             <View style={styles.titlee}>
             <Text style={styles.name}>{login.userName}</Text>
                 <View style={styles.blueLine} />
-            </View>
-                
+        </View>
+              {
+                viewNoClasses && (
+                  <View style={styles.teste}>
+                    <Text style={styles.textoNaoCadastrado} > Nenhuma turma encontrada.</Text> 
+                    <Text style={styles.textoNaoCadastrado} > Para adicionar uma nova turma, </Text>
+                    <Text style={styles.textoNaoCadastrado}> aperte no botão "+".</Text>  
+                  </View>
+                )
+              }
 
-                {
-                  viewNoClasses && (
-                    <View style={styles.teste}>
-                      <Text style={styles.textoNaoCadastrado} > Nenhuma turma encontrada.</Text> 
-                      <Text style={styles.textoNaoCadastrado} > Para adicionar uma nova turma, </Text>
-                      <Text style={styles.textoNaoCadastrado}> aperte no botão "+".</Text>
-                      
-                    </View>
-                  )
-                }
-
-                {
-                  arrayReq
-                  ? arrayReq.map(item => this.renderClasses(item))
-                  : null
-                }
+              {
+                arrayReq
+                ? arrayReq.map(item => this.renderClasses(item))
+                : null
+              }
 
             </View>
         </ScrollView>
