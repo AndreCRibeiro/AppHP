@@ -154,6 +154,40 @@ const styles = StyleSheet.create({
 
   row: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+
+  ajuste: {
+    flexDirection: 'row'
+  },  
+
+  modalcontainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  modalinfo: {
+    backgroundColor: 'white',
+    width: responsividade.largura_tela * 0.5,
+    height: responsividade.largura_tela * 0.5,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+
+  baixar: {
+    fontWeight: 'bold',
+    fontSize: 25,
+    marginTop:10,
+    paddingVertical: 20
+  },
+
+  buttonBaixar: {
+    fontSize:25,
+    paddingTop: 30,
+    color: 'green',
   },
 
   card: {

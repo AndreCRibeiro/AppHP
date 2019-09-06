@@ -83,8 +83,8 @@ const styles = StyleSheet.create({
     flex: 1, 
     justifyContent: 'center', 
     alignItems: 'center', 
-    backgroundColor: 'pink',
-    paddingTop: Platform.OS === 'ios' ?  35 : 0,
+    backgroundColor: '#39579A',
+    paddingTop: Platform.OS === 'ios' ?  50 : 0,
   },
   strokeColorButton: {
     marginHorizontal: 2.5, marginVertical: 8, width: 30, height: 30, borderRadius: 15,

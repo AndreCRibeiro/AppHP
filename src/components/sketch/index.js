@@ -31,21 +31,27 @@ export default class Sketch extends Component {
 
   render() {
     const { showScanner, showButton } = this.state;
-    const { data_name, label, hint, default_value, newState } = this.props.data;
     const { largura_tela } = responsividade;
     return (
       <View style={{ justifyContent: "center", alignItem: "center" }}>
-
-      <View style={styles.answer}>
-                <Text style={styles.hint}>{hint}</Text>
-            </View>
         {showButton && (
-
           <TouchableOpacity
-                      onPress={() =>
-                        this.setState({ showScanner: true, showButton: false })
-                      } style={styles.buttonhp}>
-              <View style={styles.button_texthp}><Text style={styles.font}>ABRIR CROQUI</Text></View>  
+            onPress={() =>
+              this.setState({ showScanner: true, showButton: false })
+            }
+            style={styles.button}
+          >
+            <View style={styles.square}>
+              <Icon
+                name="create"
+                size={largura_tela < 430 ? 28 : 40}
+                color="black"
+                style={styles.icon}
+              />
+            </View>
+            <View style={styles.parale}>
+              <Text style={styles.button_text}>FAZER CROQUI</Text>
+            </View>
           </TouchableOpacity>
         )}
         {showScanner && (
@@ -54,7 +60,7 @@ export default class Sketch extends Component {
               animationType="slide"
               transparent={false}
               visible={showScanner}
-              onRequestClose={() => { }}
+              onRequestClose={() => {}}
             >
               <View style={styles.container}>
                 <View style={{ flex: 1, flexDirection: "row" }}>

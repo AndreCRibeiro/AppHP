@@ -8,7 +8,9 @@ import {
   AsyncStorage,
   TextInput,
   Animated,
-  BackHandler
+  BackHandler,
+  Modal,
+  Linking
 } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -22,6 +24,7 @@ import { bindActionCreators } from 'redux';
 import { Creators as NewActions } from '../../store/ducks/new';
 import { Creators as FormActios } from '../../store/ducks/form';
 import { responsividade } from '../../styles';
+import api from '../../services/api';
 
 const imageCheck = require('../../assents/lottie/warning.json');
 
@@ -53,6 +56,8 @@ class New extends Component {
     messageRequest: 'Sem conexão',
     viewError: false,
     arrayReq: false,
+    refmodal: false,
+    stateItem: null,
   }
 
   componentDidMount() {
@@ -95,6 +100,15 @@ class New extends Component {
     ).start();
   }
 
+  onPressButtonModal = () => {
+    const { stateItem } = this.state;
+    const { login } = this.props;
+    //console.tron.log(stateItem);
+    //api.form.getDocument(stateItem.table_name, stateItem._name, login.token)
+    Linking.openURL(
+      `http://157.230.177.190/files/${stateItem.table_name}-${stateItem.discipline_id}-${login.token}.docx`);
+  }
+
   closeModal = () => {
     this.setState({ showRef: false });
     this.props.closeModalError();
@@ -113,8 +127,13 @@ class New extends Component {
         onPress={() => this.onPressButton(item)}
       >
       <View style={styles.row}>
-            <Icon name="file-text-o" size={20} color="black" style={styles.icon} />
-            <Text style={styles.ref}>{item.data.form_titulo}</Text>
+        <View style={styles.ajuste}>
+          <Icon name="file-text-o" size={20} color="black" style={styles.icon} />
+          <Text style={styles.ref}>{item.data.form_titulo}</Text>
+        </View>
+          <TouchableOpacity onPress={() => this.setState({ refmodal: true, stateItem: item })} style={{padding: 10}} >
+           <Icon name="ellipsis-v" size={20} color="black" style={styles.icon} />
+          </TouchableOpacity>
       </View>
       </TouchableOpacity>
     );
@@ -127,7 +146,8 @@ class New extends Component {
       viewError,
       messageRequest,
       infopicker,
-      arrayReq
+      arrayReq,
+      refmodal
     } = this.state;
     const { navigation, newState, goBack } = this.props;
     const {largura_tela} = responsividade;
@@ -175,6 +195,30 @@ class New extends Component {
               />
             )
           }
+
+          {
+            refmodal && (
+              <Modal
+                  animationType="slide"
+                  transparent={true}
+                  visible={refmodal}
+                  onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                  }}>
+                  <TouchableOpacity style={styles.modalcontainer} onPress={() => {
+                          this.setState({refmodal: false});
+                        }}>
+                      <View style={styles.modalinfo}>
+                          <Text style={styles.baixar}>Baixar teste ?</Text>
+                        <TouchableOpacity onPress={() => this.onPressButtonModal()} style={{ paddingTop: 10}}>
+                          <Text style={styles.buttonBaixar} >Baixar</Text>
+                        </TouchableOpacity>      
+                      </View>
+                  </TouchableOpacity>
+              </Modal>
+            )
+          }
+
         </KeyboardAwareScrollView>
       </View>
 
@@ -183,7 +227,8 @@ class New extends Component {
 }
 
 const mapStateToProps = state => ({
-  newState: state.newState
+  newState: state.newState,
+  login: state.loginState,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

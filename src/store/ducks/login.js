@@ -31,6 +31,7 @@ export default function LoginState(state = InitialState, action) {
         userID: action.payload.userID,
         logged: true,
         valtoken: action.payload.response.token,
+        id: action.payload.response.id
       };
     case Types.GET_FAILURE:
       return {

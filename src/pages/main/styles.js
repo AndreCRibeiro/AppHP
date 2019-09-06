@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 5,
     width: responsividade.LARGURABOX*0.9,
-    height: responsividade.ALTURACARD * 0.7,
+    height: responsividade.ALTURACARD * 0.8,
     padding: 20,
     margin: 10,
     marginVertical: 20,
@@ -72,6 +72,17 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     // opacity: 0.6,
     marginTop: responsividade.margin.mainMargin,
+    paddingHorizontal: 5
+  }, 
+
+  status2: {     
+    //height: 20,
+    fontSize:  responsividade.fonts.nameSize,
+    fontWeight: '500',
+    lineHeight: 21,
+    // opacity: 0.6,
+    marginTop: responsividade.margin.mainMargin,
+    paddingHorizontal: 10
   }, 
 
   ref: {
@@ -88,7 +99,17 @@ const styles = StyleSheet.create({
     fontSize:  responsividade.fonts.nameSize * 0.8,
     fontWeight: 'bold',
     lineHeight: 21,
-    opacity: 0.6,
+    //opacity: 0.6,
+    marginTop: responsividade.margin.mainMargin
+  },
+
+  notas: {
+    //height: 20,
+    color: colors.secundary,
+    fontSize:  responsividade.fonts.nameSize * 0.8,
+    fontWeight: 'bold',
+    lineHeight: 21,
+    //opacity: 0.6,
     marginTop: responsividade.margin.mainMargin
   },
 
@@ -113,9 +134,9 @@ const styles = StyleSheet.create({
     //marginTop: 340,
     //right: 20,
     position: 'absolute',
-    left: responsividade.largura_tela < 430 ? 0 : responsividade.largura_tela*0.5,
+    left: responsividade.largura_tela < 430 ? 45 : responsividade.largura_tela*0.5,
     right: responsividade.largura_tela < 430 ? 20 : 0,
-    top: responsividade.largura_tela < 430 ? responsividade.largura_tela*0.85 : responsividade.largura_tela*0.7,
+    top: responsividade.largura_tela < 430 ? responsividade.largura_tela*1.20 : responsividade.largura_tela*0.7,
     width: responsividade.largura_tela < 430 ? responsividade.LARGURABUTTON * 0.13 :  responsividade.LARGURABUTTON * 0.13,
     height: responsividade.largura_tela < 430 ? responsividade.ALTURABUTTON * 0.75: responsividade.largura_tela * 0.1,
     borderRadius: 100,
@@ -182,7 +203,8 @@ codecontainer: {
   backgroundColor: 'white',
   alignItems: 'center',
   justifyContent: 'center',
-  marginLeft: 10
+  marginLeft: 10,
+  top: 100
 },
 
 });

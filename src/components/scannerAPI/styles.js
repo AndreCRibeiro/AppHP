@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     elevation: 1,
   },
+
   button_text:{
 
     //color: 'black',
@@ -97,8 +98,14 @@ const styles = StyleSheet.create({
     fontSize: responsividade.fonts.descriptionSize,
     //fontWeight: 'bold',
     marginLeft: 5,
-
   },
+
+  modal: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 100 
+  },
+
   hint: {
     fontSize: 14,
     fontWeight: 'bold',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Alert, Text, TouchableOpacity, Dimensions, Button, RefreshControl } from 'react-native';
+import { View, Alert, Text, TouchableOpacity, Dimensions, Button, RefreshControl, Modal } from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -129,41 +129,41 @@ class ScannerAPI extends Component {
           <View style={{ alignItems: 'center', height: responsividade.scanner , marginTop: responsividade.scanner_margin}}>
           {
             showScanner && (
-              <RNCamera
-                ref={ref => {
-                  this.camera = ref;
-                }}
-                barcodeFinderVisible={this.state.camera.barcodeFinderVisible}
-                barcodeFinderWidth={280}
-                barcodeFinderHeight={220}
-                barcodeFinderBorderColor="green"
-                barcodeFinderBorderWidth={2}
-                defaultTouchToFocus
-                flashMode={this.state.camera.flashMode}
-                mirrorImage={false}
-                onBarCodeRead={this.onBarCodeRead.bind(this)}
-                onFocusChanged={() => {}}
-                onZoomChanged={() => {}}
-                permissionDialogTitle={'Permission to use camera'}
-                permissionDialogMessage={'We need your permission to use your camera phone'}
-                style={{ width: responsividade.camera_scan_width, height: responsividade.camera_scan_height, marginBottom: 100 }}
-                type={this.state.camera.type}
-            >
-              <View style={styles.overlay} />
-                <View style={[styles.contentRow, { height: this.maskLength }]} >
-                  <View styel={styles.overlay}/>
-                  <View style={[styles.content, {width: this.maskLength, height: this.maskLength }]} >
-                    <Animatable.View
-                      style={[styles.scanline, {top: this.maskLength/4}]}
-                      animation="slideInUp"
-                      iterationCount="infinite"
-                      direction="alternate"
-                    />
+                <RNCamera
+                  ref={ref => {
+                    this.camera = ref;
+                  }}
+                  barcodeFinderVisible={this.state.camera.barcodeFinderVisible}
+                  barcodeFinderWidth={280}
+                  barcodeFinderHeight={220}
+                  barcodeFinderBorderColor="green"
+                  barcodeFinderBorderWidth={2}
+                  defaultTouchToFocus
+                  flashMode={this.state.camera.flashMode}
+                  mirrorImage={false}
+                  onBarCodeRead={this.onBarCodeRead.bind(this)}
+                  onFocusChanged={() => {}}
+                  onZoomChanged={() => {}}
+                  permissionDialogTitle={'Permission to use camera'}
+                  permissionDialogMessage={'We need your permission to use your camera phone'}
+                  style={{ width: responsividade.camera_scan_width, height: responsividade.camera_scan_height, marginBottom: 100 }}
+                  type={this.state.camera.type}
+              >
+                <View style={styles.overlay} />
+                  <View style={[styles.contentRow, { height: this.maskLength }]} >
+                    <View styel={styles.overlay}/>
+                    <View style={[styles.content, {width: this.maskLength, height: this.maskLength }]} >
+                      <Animatable.View
+                        style={[styles.scanline, {top: this.maskLength/4}]}
+                        animation="slideInUp"
+                        iterationCount="infinite"
+                        direction="alternate"
+                      />
+                    </View>
+                    <View style={styles.overlay} />
                   </View>
-                  <View style={styles.overlay} />
-                </View>
-              <View style={styles.overlay} />
-            </RNCamera>
+                <View style={styles.overlay} />
+              </RNCamera>
             )
           }
           {

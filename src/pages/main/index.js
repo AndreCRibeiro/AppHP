@@ -6,7 +6,8 @@ import
     TouchableOpacity, 
     BackHandler, 
     ScrollView, 
-    RefreshControl
+    RefreshControl,
+    Modal
   } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
@@ -119,6 +120,16 @@ class Main extends Component {
           <Text style={styles.status1}>Turma: </Text>
           <Text style={styles.statusEnviado}>{item.class}</Text>
       </View>
+
+      <View style={styles.row}>
+          <Text style={styles.status2}>P1: </Text>
+          <Text style={styles.notas}>{item.test1 ? item.test1 : "N/A"}</Text>
+          <Text style={styles.status2}>P2: </Text>
+          <Text style={styles.notas}>{item.test2 ? item.test2 : "N/A"}</Text>
+          <Text style={styles.status2}>P3: </Text>
+          <Text style={styles.notas}>{item.test3 ? item.test3 : "N/A"}</Text>
+      </View>
+
       </TouchableOpacity>
     );
   }
@@ -160,9 +171,6 @@ class Main extends Component {
             />
           )
         }
-
-
-
          <ScrollView contentContainerStyle={styles.bodyS} refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}

@@ -100,6 +100,9 @@ const form = {
   getAllPops: () => {
     return api.get('/pericia/formularios')
   },
+  getDocument: (testName, idDisciplina, idUser) => {
+    return axios.get(`${URL}/files/${testName}-${idDisciplina}-${idUser}.docx`)
+  },
   // requisição para enviar um formulario
   postForm: data => {
     return api.post('/pericia/formulario/envio', data.body,

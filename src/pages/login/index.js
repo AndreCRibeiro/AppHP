@@ -98,17 +98,14 @@ class Login extends Component {
     const { login } = this.props;
     const { btt, viewModal, messageRequest, call , erro } = this.state;
     return (
-
-
       <View style={styles.container}>
-      {
+
+        {
               erro && (
                 <SnackBar inside content="Não foi possível logar" color='#3C3C46' fontcolor="white"  />
               )
-      }
+        }
 
-      
-        
         <KeyboardAwareScrollView
             contentContainerStyle={styles.viewInputs}
             scrollEnabled={true}
