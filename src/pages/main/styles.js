@@ -1,103 +1,102 @@
-import { Platform, StyleSheet } from 'react-native';
-import { colors, metrics, responsividade } from '../../styles';
-import { padding } from '../../styles/responsividade';
+import { Platform, StyleSheet } from "react-native";
+import { colors, metrics, responsividade } from "../../styles";
+import { padding } from "../../styles/responsividade";
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
     //backgroundColor: '#FAFBFE',
   },
 
   bodyS: {
     flex: 1,
-    alignItems: 'center',
-    width: responsividade.largura_tela,
-    
+    alignItems: "center",
+    width: responsividade.largura_tela
   },
 
   teste: {
     top: 150,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 20
   },
 
   textoNaoCadastrado: {
     color: colors.grey,
-    fontSize: 16,
+    fontSize: 16
   },
 
   card: {
     //flex: 1,
     //backgroundColor: 'pink',
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center"
     //paddingRight: responsividade.largura_tela < 430 ? 260 : 280,
   },
 
   info: {
     marginTop: responsividade.largura_tela < 430 ? 90 : 110,
     width: responsividade.largura_tela,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center"
     //marginLeft: 220
     //backgroundColor: 'red'
   },
 
   name: {
-    fontSize: responsividade.fonts.nameSize*1.6,
+    fontSize: responsividade.fonts.nameSize * 1.6,
     fontWeight: "bold",
-    fontStyle: "normal",
+    fontStyle: "normal"
   },
 
-  box:{
+  box: {
     backgroundColor: colors.white,
     borderRadius: 5,
     margin: 5,
-    width: responsividade.LARGURABOX*0.9,
-    height: responsividade.ALTURACARD * 0.8,
+    width: responsividade.LARGURABOX * 0.9,
+    height: responsividade.ALTURACARD * 0.9,
     padding: 20,
     margin: 10,
-    marginVertical: 20,
+    marginVertical: 20
   },
 
   row: {
-    flexDirection: "row",
+    flexDirection: "row"
   },
 
-  status1: {     
+  status1: {
     //height: 20,
-    fontSize:  responsividade.fonts.nameSize,
-    fontWeight: '500',
+    fontSize: responsividade.fonts.nameSize,
+    fontWeight: "500",
     lineHeight: 21,
     // opacity: 0.6,
     marginTop: responsividade.margin.mainMargin,
     paddingHorizontal: 5
-  }, 
+  },
 
-  status2: {     
+  status2: {
     //height: 20,
-    fontSize:  responsividade.fonts.nameSize,
-    fontWeight: '500',
+    fontSize: responsividade.fonts.nameSize,
+    fontWeight: "500",
     lineHeight: 21,
     // opacity: 0.6,
     marginTop: responsividade.margin.mainMargin,
     paddingHorizontal: 10
-  }, 
+  },
 
   ref: {
     //height: 20,
-    fontSize:  responsividade.fonts.nameSize,
-    fontWeight: '300',
+    fontSize: responsividade.fonts.nameSize,
+    fontWeight: "300",
     lineHeight: 21,
     marginTop: responsividade.margin.mainMargin
   },
 
-  statusEnviado:{
+  statusEnviado: {
     //height: 20,
-    color: 'green',
-    fontSize:  responsividade.fonts.nameSize * 0.8,
-    fontWeight: 'bold',
+    color: "green",
+    fontSize: responsividade.fonts.nameSize * 0.8,
+    fontWeight: "bold",
     lineHeight: 21,
     //opacity: 0.6,
     marginTop: responsividade.margin.mainMargin
@@ -106,8 +105,8 @@ const styles = StyleSheet.create({
   notas: {
     //height: 20,
     color: colors.secundary,
-    fontSize:  responsividade.fonts.nameSize * 0.8,
-    fontWeight: 'bold',
+    fontSize: responsividade.fonts.nameSize * 0.8,
+    fontWeight: "bold",
     lineHeight: 21,
     //opacity: 0.6,
     marginTop: responsividade.margin.mainMargin
@@ -117,7 +116,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     fontStyle: "normal",
-    marginTop: 10,
+    marginTop: 10
   },
 
   blueLine: {
@@ -129,29 +128,31 @@ const styles = StyleSheet.create({
   },
 
   novoTesteButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     //marginTop: 340,
     //right: 20,
-    position: 'absolute',
-    left: responsividade.largura_tela < 430 ? 45 : responsividade.largura_tela*0.5,
-    right: responsividade.largura_tela < 430 ? 20 : 0,
-    top: responsividade.largura_tela < 430 ? responsividade.largura_tela*1.20 : responsividade.largura_tela*0.7,
-    width: responsividade.largura_tela < 430 ? responsividade.LARGURABUTTON * 0.13 :  responsividade.LARGURABUTTON * 0.13,
-    height: responsividade.largura_tela < 430 ? responsividade.ALTURABUTTON * 0.75: responsividade.largura_tela * 0.1,
+    width: 50,
+    height: 50,
     borderRadius: 100,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.primary
   },
 
   meusTestesButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: metrics.baseMargin,
-    width: responsividade.largura_tela < 430 ? responsividade.LARGURABUTTON * 0.72 :  responsividade.LARGURABUTTON * 0.55,
-    height: responsividade.largura_tela < 430 ? responsividade.ALTURABUTTON * 0.72 : responsividade.largura_tela * 0.11,
+    width:
+      responsividade.largura_tela < 430
+        ? responsividade.LARGURABUTTON * 0.72
+        : responsividade.LARGURABUTTON * 0.55,
+    height:
+      responsividade.largura_tela < 430
+        ? responsividade.ALTURABUTTON * 0.72
+        : responsividade.largura_tela * 0.11,
     borderRadius: 300,
     borderWidth: 3,
-    borderColor: colors.primary,
+    borderColor: colors.primary
   },
 
   button_text: {
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontStyle: "normal",
     letterSpacing: 0,
-    color: colors.white,
+    color: colors.white
   },
 
   button_text2: {
@@ -167,46 +168,45 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontStyle: "normal",
     letterSpacing: 0,
-    color: colors.primary,
+    color: colors.primary
   },
 
-  icon:{
+  icon: {
     padding: 10,
     borderRadius: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
- },
+    justifyContent: "center",
+    alignItems: "center"
+  },
 
- buttons_view: {
-   position: "absolute", 
-   zIndex: 2,
-   top: responsividade.largura_tela < 430 ? 390 : 330,
-   left: 330
- },
+  buttons_view: {
+    position: "absolute",
+    zIndex: 2,
+    top: responsividade.largura_tela < 430 ? 390 : 330,
+    left: 330
+  },
 
- buttons_view2: {
-  position: "absolute", 
-  zIndex: 2,
-  top: responsividade.largura_tela < 430 ? 300 : 330,
-  left: responsividade.largura_tela < 430 ? 315: 230,
-},
+  buttons_view2: {
+    zIndex: 3,
+    alignItems: "center",
+    top: 20,
+    right: 40
+  },
 
-titlee: {
-  justifyContent: 'flex-start',
-  width: responsividade.LARGURABOX*0.9
-},
+  titlee: {
+    justifyContent: "flex-start",
+    width: responsividade.LARGURABOX * 0.9
+  },
 
-codecontainer: {
-  width: (responsividade.LARGURABOX),
-  height: responsividade.ALTURABOX*0.5 ,
-  borderRadius: 10,
-  backgroundColor: 'white',
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginLeft: 10,
-  top: 100
-},
-
+  codecontainer: {
+    width: responsividade.LARGURABOX,
+    height: responsividade.ALTURABOX * 0.5,
+    borderRadius: 10,
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 10,
+    top: 100
+  }
 });
 
 export default styles;

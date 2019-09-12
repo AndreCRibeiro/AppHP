@@ -1,46 +1,48 @@
-import React, { Component } from 'react';
-import 
-  {  
-    View, 
-    Text, 
-    TouchableOpacity, 
-    BackHandler, 
-    ScrollView, 
-    RefreshControl,
-    Modal
-  } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import styles from './styles';
-import { Header } from '../../globalComponents';
-import { ScannerAPI } from '../../components';
-import { responsividade } from '../../styles';
-import { connect } from 'react-redux';
-import { ModalCheck } from '../../globalComponents';
+import React, { Component } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  BackHandler,
+  ScrollView,
+  RefreshControl,
+  Modal
+} from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import styles from "./styles";
+import { Header } from "../../globalComponents";
+import { ScannerAPI } from "../../components";
+import { responsividade } from "../../styles";
+import { connect } from "react-redux";
+import { ModalCheck } from "../../globalComponents";
 
-import { NavigationActions, withNavigation, StackActions } from 'react-navigation';
-import Api from '../../services/api';
+import {
+  NavigationActions,
+  withNavigation,
+  StackActions
+} from "react-navigation";
+import Api from "../../services/api";
 
 class Main extends Component {
-
-  navigateToScreen = (route) => () => {
+  navigateToScreen = route => () => {
     const navigateAction = NavigationActions.navigate({
       routeName: route
     });
     this.props.navigation.dispatch(navigateAction);
-  }
+  };
 
   static navigationOptions = {
-    header: null,
-  }
+    header: null
+  };
 
   state = {
-    nome: '',
+    nome: "",
     drawerStatus: null,
     scanner: false,
     viewModals: false,
-    messageRequest: '',
-    arrayReq: null,
-  }
+    messageRequest: "",
+    arrayReq: null
+  };
 
   componentWillMount() {
     this.requestClass();
@@ -49,164 +51,167 @@ class Main extends Component {
   requestClass = async () => {
     const { navigation } = this.props;
     try {
-        const response = await Api.user.checkClass();
-        if(response.status === 206 ) {
-          this.setState({ viewNoClasses: true });
-        }
-        else {
-          this.setState({ arrayReq: response.data.data, viewNoClasses: false });
-        }
+      const response = await Api.user.checkClass();
+      if (response.status === 206) {
+        this.setState({ viewNoClasses: true });
+      } else {
+        this.setState({ arrayReq: response.data.data, viewNoClasses: false });
       }
-    catch (error) {
+    } catch (error) {
       //console.tron.log({error})
-      Alert.alert(error)
+      Alert.alert(error);
     }
-  }
+  };
 
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.navigateToLogin);
+    BackHandler.addEventListener("hardwareBackPress", this.navigateToLogin);
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress');
-   
+    BackHandler.removeEventListener("hardwareBackPress");
   }
 
   navigateToScreen = (route, exit) => () => {
     if (exit) {
-        this.props.getExitLogin();
+      this.props.getExitLogin();
     }
     const navigateAction = NavigationActions.navigate({
-        routeName: route
+      routeName: route
     });
     this.props.navigation.dispatch(navigateAction);
-}
+  };
 
   openDrawer = () => {
     const { drawerStatus } = this.state;
 
     if (drawerStatus === true) {
     }
-  }
+  };
 
   navigateToLogin = async () => {
     const resetAction = StackActions.reset({
       index: 0,
       actions: [
         // Logged
-        NavigationActions.navigate({ routeName: 'Login' }),
+        NavigationActions.navigate({ routeName: "Login" })
       ]
     });
     this.props.navigation.dispatch(resetAction);
-  }
+  };
 
   openScanner = () => {
     this.setState({ scanner: true });
-  }
+  };
 
   renderClasses = item => {
     const { navigation } = this.props;
     return (
       <TouchableOpacity
         style={styles.box}
-        onPress={() => { navigation.navigate('NewMenu', {key: item.disciplineId}) }}
+        onPress={() => {
+          navigation.navigate("NewMenu", { key: item.disciplineId });
+        }}
       >
-      <View style={styles.row}>
-            <Text style={styles.status1}>Disciplina: </Text>
-            <Text style={styles.ref}>{item.discipline}</Text>
-      </View>
-        
-      <View style={styles.row}>
+        <View style={styles.row}>
+          <Text style={styles.status1}>Disciplina: </Text>
+          <Text style={styles.ref}>{item.discipline}</Text>
+        </View>
+
+        <View style={styles.row}>
           <Text style={styles.status1}>Turma: </Text>
           <Text style={styles.statusEnviado}>{item.class}</Text>
-      </View>
+        </View>
 
-      <View style={styles.row}>
+        <View style={styles.row}>
           <Text style={styles.status2}>P1: </Text>
-          <Text style={styles.notas}>{item.test1 ? item.test1 : "N/A"}</Text>
+          <Text style={styles.notas}>{item.test1 ? item.test1 : "N/A"}</Text>
           <Text style={styles.status2}>P2: </Text>
-          <Text style={styles.notas}>{item.test2 ? item.test2 : "N/A"}</Text>
+          <Text style={styles.notas}>{item.test2 ? item.test2 : "N/A"}</Text>
           <Text style={styles.status2}>P3: </Text>
-          <Text style={styles.notas}>{item.test3 ? item.test3 : "N/A"}</Text>
-      </View>
-
+          <Text style={styles.notas}>{item.test3 ? item.test3 : "N/A"}</Text>
+        </View>
       </TouchableOpacity>
     );
-  }
+  };
 
   _onRefresh = () => {
-    this.setState({refreshing: true});
+    this.setState({ refreshing: true });
     this.requestClass();
-    this.setState({refreshing: false});
-  }
+    this.setState({ refreshing: false });
+  };
 
   render() {
-    const { navigation , login } = this.props;
-    const { nome, scanner, viewModals, viewClasses, viewNoClasses, messageRequest, arrayReq } = this.state
-    const name = navigation.getParam('nome', 'Nome não cadastrado');
+    const { navigation, login } = this.props;
+    const {
+      nome,
+      scanner,
+      viewModals,
+      viewClasses,
+      viewNoClasses,
+      messageRequest,
+      arrayReq
+    } = this.state;
+    const name = navigation.getParam("nome", "Nome não cadastrado");
     const { largura_tela } = responsividade;
     return (
       <View style={styles.container}>
+        <Header showExit showNotas />
 
-        <View style={styles.buttons_view2}>
-          <TouchableOpacity onPress={() => this.openScanner()}>
-            <View style={styles.novoTesteButton}>
-              <Text style={styles.button_text}>+</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        
-        <Header 
-          showExit
-          showNotas
-        />
-
-        {
-          viewModals && (
-            <ModalCheck
-              message={messageRequest}
-              viewModal
-              success
-              sourceImage={imageCheck2}
+        {viewModals && (
+          <ModalCheck
+            message={messageRequest}
+            viewModal
+            success
+            sourceImage={imageCheck2}
+          />
+        )}
+        <ScrollView
+          contentContainerStyle={styles.bodyS}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
             />
-          )
-        }
-         <ScrollView contentContainerStyle={styles.bodyS} refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this._onRefresh}
-          />}>
-
-        {
-          scanner && (
+          }
+        >
+          {scanner && (
             <View style={styles.codecontainer}>
               <ScannerAPI />
             </View>
-          )
-        }
+          )}
 
-        <View style={styles.info}>
+          <View style={styles.buttons_view2}>
+            <TouchableOpacity onPress={() => this.openScanner()}>
+              <View style={styles.novoTesteButton}>
+                <Text style={styles.button_text}>+</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.info}>
             <View style={styles.titlee}>
-            <Text style={styles.name}>{login.userName}</Text>
-                <View style={styles.blueLine} />
-        </View>
-              {
-                viewNoClasses && (
-                  <View style={styles.teste}>
-                    <Text style={styles.textoNaoCadastrado} > Nenhuma turma encontrada.</Text> 
-                    <Text style={styles.textoNaoCadastrado} > Para adicionar uma nova turma, </Text>
-                    <Text style={styles.textoNaoCadastrado}> aperte no botão "+".</Text>  
-                  </View>
-                )
-              }
-
-              {
-                arrayReq
-                ? arrayReq.map(item => this.renderClasses(item))
-                : null
-              }
-
+              <Text style={styles.name}>{login.userName}</Text>
+              <View style={styles.blueLine} />
             </View>
+            {viewNoClasses && (
+              <View style={styles.teste}>
+                <Text style={styles.textoNaoCadastrado}>
+                  {" "}
+                  Nenhuma turma encontrada.
+                </Text>
+                <Text style={styles.textoNaoCadastrado}>
+                  {" "}
+                  Para adicionar uma nova turma,{" "}
+                </Text>
+                <Text style={styles.textoNaoCadastrado}>
+                  {" "}
+                  aperte no botão "+".
+                </Text>
+              </View>
+            )}
+
+            {arrayReq ? arrayReq.map(item => this.renderClasses(item)) : null}
+          </View>
         </ScrollView>
       </View>
     );
@@ -214,7 +219,10 @@ class Main extends Component {
 }
 
 const mapStateToProps = state => ({
-  login: state.loginState,
+  login: state.loginState
 });
 
-export default connect( mapStateToProps , null )(Main);
+export default connect(
+  mapStateToProps,
+  null
+)(Main);

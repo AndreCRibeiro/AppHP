@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   Text,
   Modal,
-  Picker
+  Picker,
+  Image
 } from "react-native";
 
 import styles from "./styles";
@@ -15,25 +16,117 @@ import { responsividade } from "../../styles";
 
 import RNSketchCanvas from "@terrylinla/react-native-sketch-canvas";
 
+// redux
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as FormActions } from "../../store/ducks/form";
+import { Creators as GroupActions } from "../../store/ducks/group";
+
 onPress = () => {
   const { vetor } = this.state;
 };
 
-export default class Sketch extends Component {
+class Sketch extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showScanner: false,
       showButton: true,
-      fundo: ""
+      fundo: "",
+      uri: null
     };
+  }
+
+  componentWillMount() {
+    const { form, data, group, index } = this.props;
+    for (var key in form.step) {
+      if (key === data.data_name) {
+        if (form.step[key].filled === true) {
+          this.setState({ uri: form.step[key].value });
+        }
+      }
+    }
+  }
+
+  saveFormSketch = info => {
+    const { uri } = this.state;
+    const {
+      form,
+      getSaveStateForm,
+      startControlArray,
+      data,
+      index,
+      saveDataGroup,
+      group,
+      groupMother,
+      startControlArrayGroup
+    } = this.props;
+    if (uri) {
+      for (var key in form.step) {
+        if (key === info.data_name) {
+          const form = {};
+          form[info.data_name] = {
+            key: info.data_name,
+            value: `file://${uri}`,
+            filled: true
+          };
+          getSaveStateForm(form);
+        }
+      }
+    } else {
+      for (var key in form.step) {
+        if (key === info.data_name) {
+          const form = {};
+          form[info.data_name] = {
+            key: info.data_name,
+            value: uri,
+            filled: false
+          };
+          //console.log(form[info.data_name])
+          getSaveStateForm(form);
+        }
+      }
+    }
+    startControlArray();
+    // await startControlArrayGroup();
+  };
+
+  renderImage(image) {
+    return (
+      <Image
+        resizeMode="contain"
+        style={styles.avatar}
+        source={{ uri: "file://" + image }}
+      />
+    );
+  }
+
+  renderAsset(image) {
+    return this.renderImage(image);
   }
 
   render() {
     const { showScanner, showButton } = this.state;
     const { largura_tela } = responsividade;
+
+    const {
+      data_name,
+      label,
+      hint,
+      default_value,
+      newState,
+      groupFlag
+    } = this.props.data;
+    const { saveStep, step } = this.props.form;
+
+    if (saveStep) {
+      this.saveFormSketch({ data_name, default_value });
+    }
+
     return (
       <View style={{ justifyContent: "center", alignItem: "center" }}>
+        {this.state.uri ? this.renderAsset(this.state.uri) : null}
+
         {showButton && (
           <TouchableOpacity
             onPress={() =>
@@ -69,6 +162,9 @@ export default class Sketch extends Component {
                     canvasStyle={{ backgroundColor: "transparent", flex: 1 }}
                     defaultStrokeIndex={0}
                     defaultStrokeWidth={5}
+                    onSketchSaved={async (success, path) => {
+                      await this.setState({ uri: path });
+                    }}
                     changeImg={
                       <View style={styles.functionButton}>
                         <Picker
@@ -160,7 +256,7 @@ export default class Sketch extends Component {
                     }}
                     savePreference={() => {
                       return {
-                        folder: "Croqui",
+                        folder: "Câmera",
                         filename: String(Math.ceil(Math.random() * 100000000)),
                         transparent: false,
                         imageType: "png"
@@ -176,3 +272,16 @@ export default class Sketch extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  form: state.formState,
+  group: state.groupState
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...FormActions, ...GroupActions }, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Sketch);
