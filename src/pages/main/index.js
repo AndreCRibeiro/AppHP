@@ -165,8 +165,21 @@ class Main extends Component {
             sourceImage={imageCheck2}
           />
         )}
+
+        <View style={styles.titlee}>
+          <Text style={styles.name}>{login.userName}</Text>
+          <View style={styles.blueLine} />
+        </View>
+
+        <View style={styles.buttons_view2}>
+          <TouchableOpacity onPress={() => this.openScanner()}>
+            <View style={styles.novoTesteButton}>
+              <Text style={styles.button_text}>+</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
         <ScrollView
-          contentContainerStyle={styles.bodyS}
+          // contentContainerStyle={styles.bodyS}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}
@@ -180,19 +193,7 @@ class Main extends Component {
             </View>
           )}
 
-          <View style={styles.buttons_view2}>
-            <TouchableOpacity onPress={() => this.openScanner()}>
-              <View style={styles.novoTesteButton}>
-                <Text style={styles.button_text}>+</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-
           <View style={styles.info}>
-            <View style={styles.titlee}>
-              <Text style={styles.name}>{login.userName}</Text>
-              <View style={styles.blueLine} />
-            </View>
             {viewNoClasses && (
               <View style={styles.teste}>
                 <Text style={styles.textoNaoCadastrado}>

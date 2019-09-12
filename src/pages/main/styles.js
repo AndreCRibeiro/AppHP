@@ -186,6 +186,7 @@ const styles = StyleSheet.create({
   },
 
   buttons_view2: {
+    paddingVertical: 20,
     zIndex: 3,
     alignItems: "center",
     top: 20,
