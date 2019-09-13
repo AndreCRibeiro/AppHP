@@ -181,7 +181,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 25,
     marginTop:10,
-    paddingVertical: 20
+    paddingVertical: 20,
+    color: 'green'
   },
 
   buttonBaixar: {

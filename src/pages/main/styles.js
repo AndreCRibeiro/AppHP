@@ -52,11 +52,11 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: colors.white,
     borderRadius: 5,
-    margin: 5,
+    //margin: 5,
     width: responsividade.LARGURABOX * 0.9,
     height: responsividade.ALTURACARD * 0.9,
     padding: 20,
-    margin: 10,
+    //margin: 10,
     marginVertical: 20
   },
 
@@ -186,16 +186,19 @@ const styles = StyleSheet.create({
   },
 
   buttons_view2: {
-    paddingVertical: 20,
+    //paddingVertical: 20,
     zIndex: 3,
     alignItems: "center",
-    top: 20,
-    right: 40
+    justifyContent: 'center',
+    top: 10,
+    //right: 20
   },
 
   titlee: {
     justifyContent: "flex-start",
-    width: responsividade.LARGURABOX * 0.9
+    width: responsividade.LARGURABOX * 0.9,
+    marginLeft: 37,
+    marginTop: 35,
   },
 
   codecontainer: {

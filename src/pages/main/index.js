@@ -171,7 +171,6 @@ class Main extends Component {
         )}
         {scanner && (
           <View>
-            {console.tron.log("SCANER", this.state.scanner)}
             <ScannerAPI />
           </View>
         )}
@@ -182,7 +181,7 @@ class Main extends Component {
         </View>
 
         <View style={styles.buttons_view2}>
-          <TouchableOpacity onPress={() => this.openScanner()}>
+          <TouchableOpacity onPress={() => {this.setState({ scanner: false });this.openScanner()}}>
             <View style={styles.novoTesteButton}>
               <Text style={styles.button_text}>+</Text>
             </View>
@@ -190,6 +189,7 @@ class Main extends Component {
         </View>
         <ScrollView
           // contentContainerStyle={styles.bodyS}
+          //centerContent={true}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}

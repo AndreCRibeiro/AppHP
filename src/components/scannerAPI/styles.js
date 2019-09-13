@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
     opacity: 0.3,
     paddingVertical: 10
   },
-  codecontainer: {},
 
   code: {
     color: "#000000",
@@ -119,7 +118,30 @@ const styles = StyleSheet.create({
     //fontWeight: '400',
     lineHeight: 21,
     marginTop: 100
-  }
+  },
+
+  modalcontainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.8)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  modalinfo: {
+    backgroundColor: 'white',
+    width: responsividade.largura_tela * 0.5,
+    height: responsividade.largura_tela * 0.5,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+
+  baixar: {
+    fontWeight: 'bold',
+    fontSize: 25,
+    paddingVertical: 20,
+    color: 'white',
+    marginBottom: 25
+  },
 });
 
 export default styles;

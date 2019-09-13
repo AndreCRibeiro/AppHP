@@ -16,7 +16,8 @@ import {
   Animated,
   Easing,
   AsyncStorage,
-  Alert
+  Alert,
+  ActivityIndicator
 } from 'react-native';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -50,6 +51,9 @@ class Login extends Component {
     messageRequest: '',
     call: false,
     erro: false,
+    notLoading: true,
+    loading: false,
+    teste: false
   }
 
   async componentWillMount() {
@@ -82,21 +86,25 @@ class Login extends Component {
     this.props.navigation.navigate('ChangeService')
   }
 
-  confereCadastro = () => {
+  confereCadastro = async () => {
+    await this.setState({ loading: true })
+    console.tron.log(['Segundo toque', this.state.loading])
     const data = { inputSave: this.state.inputSave, password: this.state.password };
     this.props.getLoginRequest(data);
+    await this.setState({ loading:false })
+    console.tron.log(['Terceiro toque', this.state.loading])
     if (this.props.login.error == true){
      this.setState({ erro: !this.state.erro })
     }
-    
   }
+
   onPressAnimated = async () => {
     this.animation.play(30, 1000);
   }
 
   render() {
     const { login } = this.props;
-    const { btt, viewModal, messageRequest, call , erro } = this.state;
+    const { btt, viewModal, messageRequest, call , erro, notLoading, loading } = this.state;
     return (
       <View style={styles.container}>
 
@@ -137,9 +145,15 @@ class Login extends Component {
               value={this.state.password}
             />
             <TouchableOpacity style={styles.entrarButton} onPress={() => this.confereCadastro()}>
-              <Text style={styles.buttonText}>
-                ENTRAR
-              </Text>
+            {
+                loading ? (
+                  <ActivityIndicator size ="small" color='rgb(225, 200, 133)'/>
+                ) : (
+                  <Text style={styles.buttonText}>
+                    ENTRAR
+                  </Text>
+                )
+              }
             </TouchableOpacity>
             <TouchableOpacity style={styles.cadastrarButton} onPress={() => this.navigateToSignUp()}>
               <Text style={styles.buttonText}>
