@@ -145,6 +145,7 @@ class ScannerAPI extends Component {
     return (
       <View style={{ marginTop: 22 }}>
         <Modal
+          style={{ backgroundColor: "transparent" }}
           animationType="slide"
           transparent={false}
           visible={this.state.modalVisible}
@@ -159,8 +160,8 @@ class ScannerAPI extends Component {
                   this.camera = ref;
                 }}
                 barcodeFinderVisible={this.state.camera.barcodeFinderVisible}
-                barcodeFinderWidth={280}
-                barcodeFinderHeight={220}
+                barcodeFinderWidth={500}
+                barcodeFinderHeight={500}
                 barcodeFinderBorderColor="green"
                 barcodeFinderBorderWidth={2}
                 defaultTouchToFocus
@@ -185,11 +186,17 @@ class ScannerAPI extends Component {
                   <View
                     style={[
                       styles.content,
-                      { width: this.maskLength, height: this.maskLength }
+                      { width: "90%", height: this.maskLength }
                     ]}
                   >
                     <Animatable.View
-                      style={[styles.scanline, { top: this.maskLength / 4 }]}
+                      style={[
+                        styles.scanline,
+                        {
+                          top: this.maskLength / 4,
+                          width: "90%"
+                        }
+                      ]}
                       animation="slideInUp"
                       iterationCount="infinite"
                       direction="alternate"

@@ -49,16 +49,20 @@ class Main extends Component {
   }
 
   requestClass = async () => {
+    this.setState({ scanner: false });
     const { navigation } = this.props;
     try {
       const response = await Api.user.checkClass();
       if (response.status === 206) {
         this.setState({ viewNoClasses: true });
       } else {
-        this.setState({ arrayReq: response.data.data, viewNoClasses: false });
+        this.setState({
+          arrayReq: response.data.data,
+          viewNoClasses: false,
+          scanner: false
+        });
       }
     } catch (error) {
-      //console.tron.log({error})
       Alert.alert(error);
     }
   };
@@ -167,6 +171,7 @@ class Main extends Component {
         )}
         {scanner && (
           <View>
+            {console.tron.log("SCANER", this.state.scanner)}
             <ScannerAPI />
           </View>
         )}
