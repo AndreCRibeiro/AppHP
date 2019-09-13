@@ -165,6 +165,11 @@ class Main extends Component {
             sourceImage={imageCheck2}
           />
         )}
+        {scanner && (
+          <View>
+            <ScannerAPI />
+          </View>
+        )}
 
         <View style={styles.titlee}>
           <Text style={styles.name}>{login.userName}</Text>
@@ -187,12 +192,6 @@ class Main extends Component {
             />
           }
         >
-          {scanner && (
-            <View style={styles.codecontainer}>
-              <ScannerAPI />
-            </View>
-          )}
-
           <View style={styles.info}>
             {viewNoClasses && (
               <View style={styles.teste}>

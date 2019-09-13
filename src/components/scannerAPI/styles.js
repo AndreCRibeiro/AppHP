@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { colors, metrics, responsividade } from '../../styles';
-import { bold } from 'ansi-colors';
+import { StyleSheet } from "react-native";
+import { colors, metrics, responsividade } from "../../styles";
+import { bold } from "ansi-colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -9,122 +9,117 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 40,
     borderBottomWidth: 0.5,
-    borderBottomColor: 'black',
+    borderBottomColor: "black"
   },
-   Name: {
+  Name: {
     width: responsividade.LARGURABOX,
     height: 30,
     backgroundColor: colors.transparent,
-    color: '#000000',
+    color: "#000000",
     fontSize: 18,
-    fontWeight: '400',
-    lineHeight: 21,
-   },
+    fontWeight: "400",
+    lineHeight: 21
+  },
 
   input: {
-     backgroundColor: 'white',
-     height: responsividade.ALTURABOX,
-     borderRadius: 4,
-     paddingLeft: 20,
-     fontSize: 16,
+    backgroundColor: "white",
+    height: responsividade.ALTURABOX,
+    borderRadius: 4,
+    paddingLeft: 20,
+    fontSize: 16
   },
 
   preview: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center"
   },
 
   overlay: {
-    flex: 1,
+    flex: 1
   },
 
   contentRow: {
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center"
   },
 
   content: {
     borderWidth: 3,
-    borderColor: colors.primary,
+    borderColor: colors.transparent
   },
 
   scanline: {
-    backgroundColor: colors.primary,
-    height: 1,
+    backgroundColor: colors.danger,
+    height: 1
   },
 
   square: {
     backgroundColor: "#FAAB1A",
     height: responsividade.ALTURA_BUTTON,
-    width: responsividade.LARGURA_INPUT * 0.3,    
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 60,
-
-
+    width: responsividade.LARGURA_INPUT * 0.3,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 60
   },
 
   parale: {
     backgroundColor: "transparent",
     height: responsividade.ALTURA_BUTTON,
     width: responsividade.LARGURA_INPUT * 0.7,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 60,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 60
   },
   button: {
     //backgroundColor: "#344955",
     //backgroundColor: "#FAAB1A",
-    backgroundColor: 'white',
+    backgroundColor: "white",
     elevation: 1,
     //borderRadius: 50,
     borderRadius: 60,
     height: responsividade.ALTURA_BUTTON,
-    width: responsividade.LARGURA_INPUT,    
+    width: responsividade.LARGURA_INPUT,
     margin: 10,
     paddingHorizontal: metrics.basePadding,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    elevation: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    elevation: 1
   },
 
-  button_text:{
-
+  button_text: {
     //color: 'black',
     //color: 'white',
     color: "#344955",
     fontSize: responsividade.fonts.descriptionSize,
     //fontWeight: 'bold',
-    marginLeft: 5,
+    marginLeft: 5
   },
 
   modal: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 100 
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 100
   },
 
   hint: {
     fontSize: 14,
-    fontWeight: 'bold',
-    color: 'black',
+    fontWeight: "bold",
+    color: "black",
     opacity: 0.3,
-    paddingVertical: 10,
+    paddingVertical: 10
   },
-  codecontainer: {
-  },
+  codecontainer: {},
 
   code: {
-    color: '#000000',
-    fontWeight: 'bold',
+    color: "#000000",
+    fontWeight: "bold",
     fontSize: 18,
     //fontWeight: '400',
     lineHeight: 21,
     marginTop: 100
   }
-
 });
 
 export default styles;
