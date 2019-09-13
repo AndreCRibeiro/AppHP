@@ -2,6 +2,7 @@ import { AsyncStorage } from 'react-native';
 //import store from '../index';
 
 const Types = {
+  SET_FLAG: 'form/SET_FLAG',
   CREATE_FORM: 'form/CREATE_SAVE',
   SAVE_FORM_STATE: 'form/SAVE_FORM_STATE',
   START_SAVE_STEP: 'form/SAVE_STEP_STATE',
@@ -23,10 +24,13 @@ const initialState = {
   form: null,
   formEdit: false,
   ref: '',
+  flag: true,
 };
 
 export default function formState(state = initialState, action) {
   switch (action.type) {
+    case Types.SET_FLAG:
+    return { ...state, flag: false };
     case Types.CREATE_FORM:
       return { ...state, step: { ...state.step, ...action.payload.data } };
     case Types.SAVE_FORM_STATE:
@@ -79,6 +83,10 @@ export default function formState(state = initialState, action) {
 }
 
 export const Creators = {
+  // seta flag do scanner
+  setFlag: ( )=> ({
+    type: Types.SET_FLAG,
+  }),
   // cria todos os campos do formularios na variavel step
   getCreateForm: data => ({
     type: Types.CREATE_FORM,

@@ -107,6 +107,10 @@ class Main extends Component {
     this.setState({ scanner: true });
   };
 
+  closeScanner = () => {
+    this.setState({ scanner: false });
+  };
+
   renderClasses = item => {
     const { navigation } = this.props;
     return (
@@ -181,7 +185,7 @@ class Main extends Component {
         </View>
 
         <View style={styles.buttons_view2}>
-          <TouchableOpacity onPress={() => {this.setState({ scanner: false });this.openScanner()}}>
+          <TouchableOpacity onPress={() => {this.openScanner()}}>
             <View style={styles.novoTesteButton}>
               <Text style={styles.button_text}>+</Text>
             </View>

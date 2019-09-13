@@ -7,7 +7,8 @@ import {
   Text,
   Modal,
   Picker,
-  Image
+  Image,
+  Platform
 } from "react-native";
 
 import styles from "./styles";
@@ -67,7 +68,7 @@ class Sketch extends Component {
           const form = {};
           form[info.data_name] = {
             key: info.data_name,
-            value: `file://${uri}`,
+            value: Platform.OS === 'ios' ? `${uri}` :`file://${uri}`,
             filled: true
           };
           getSaveStateForm(form);

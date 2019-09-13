@@ -78,6 +78,7 @@ class ScannerAPI extends Component {
       setModalVisible: false,
       modalVisible: false
     });
+    this.props.setFlag()
     if (scanResult.data != null) {
       if (!this.barcodeCodes.includes(scanResult.data)) {
         this.barcodeCodes.push(scanResult.data);
