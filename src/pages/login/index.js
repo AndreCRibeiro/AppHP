@@ -88,11 +88,11 @@ class Login extends Component {
 
   confereCadastro = async () => {
     await this.setState({ loading: true })
-    console.tron.log(['Segundo toque', this.state.loading])
+    //console.tron.log(['Segundo toque', this.state.loading])
     const data = { inputSave: this.state.inputSave, password: this.state.password };
     this.props.getLoginRequest(data);
     await this.setState({ loading:false })
-    console.tron.log(['Terceiro toque', this.state.loading])
+    //console.tron.log(['Terceiro toque', this.state.loading])
     if (this.props.login.error == true){
      this.setState({ erro: !this.state.erro })
     }
