@@ -78,7 +78,7 @@ class ScannerAPI extends Component {
       setModalVisible: false,
       modalVisible: false
     });
-    this.props.setFlag()
+    this.props.setFlag();
     if (scanResult.data != null) {
       if (!this.barcodeCodes.includes(scanResult.data)) {
         this.barcodeCodes.push(scanResult.data);
@@ -86,8 +86,8 @@ class ScannerAPI extends Component {
         this.enrollClass(scanResult.data);
       }
       //this.setState({ infoScanner: scanResult.data, showScanner: false, showCode: true });
-      Alert.alert('Turma não encontrada');
-      this.setState({ showScanner: true })
+      Alert.alert("Turma não encontrada");
+      this.setState({ showScanner: true });
     }
     return;
   }
@@ -113,7 +113,7 @@ class ScannerAPI extends Component {
     } catch (error) {
       //console.tron.log({error})
       Alert.alert(error);
-      this.setState({ showScanner: true })
+      this.setState({ showScanner: true });
     }
   };
 
@@ -144,81 +144,71 @@ class ScannerAPI extends Component {
   }
 
   render() {
-    const { showScanner, showButton, showButton2, infoScanner, modalVisible } = this.state;
+    const {
+      showScanner,
+      showButton,
+      showButton2,
+      infoScanner,
+      modalVisible
+    } = this.state;
     const { saveStep, step } = this.props.form;
     const { largura_tela } = responsividade;
     const { group } = this.props;
     return (
-      <View style={{ marginTop: 22 }}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-          }}
-        >
-          <TouchableOpacity style={styles.modalcontainer} onPress={() => {
-            this.setState({modalVisible: false});
-          }}>
-            <Text style={styles.baixar}>Escaneie o código</Text>
-            <View style={styles.modalinfo}>
-              {showScanner && (
-                <RNCamera
-                  ref={ref => {
-                    this.camera = ref;
-                  }}
-                  barcodeFinderVisible={this.state.camera.barcodeFinderVisible}
-                  barcodeFinderWidth={500}
-                  barcodeFinderHeight={500}
-                  barcodeFinderBorderColor="green"
-                  barcodeFinderBorderWidth={2}
-                  defaultTouchToFocus
-                  flashMode={this.state.camera.flashMode}
-                  mirrorImage={false}
-                  onBarCodeRead={this.onBarCodeRead.bind(this)}
-                  onFocusChanged={() => {}}
-                  onZoomChanged={() => {}}
-                  permissionDialogTitle={"Permission to use camera"}
-                  permissionDialogMessage={
-                    "We need your permission to use your camera phone"
-                  }
-                  style={{
-                    width: "100%",
-                    height: "100%"
-                  }}
-                  type={this.state.camera.type}
-                >
-                  <View style={styles.overlay} />
-                  <View style={[styles.contentRow, { height: this.maskLength }]}>
-                    <View styel={styles.overlay} />
-                    <View
-                      style={[
-                        styles.content,
-                        { width: "90%", height: this.maskLength }
-                      ]}
-                    >
-                      <Animatable.View
-                        style={[
-                          styles.scanline,
-                          {
-                            top: this.maskLength / 4,
-                            width: "90%"
-                          }
-                        ]}
-                        animation="slideInUp"
-                        iterationCount="infinite"
-                        direction="alternate"
-                      />
-                    </View>
-                    <View style={styles.overlay} />
-                  </View>
-                  <View style={styles.overlay} />
-                </RNCamera>
-              )}
+      <View>
+        {showScanner && (
+          <RNCamera
+            ref={ref => {
+              this.camera = ref;
+            }}
+            barcodeFinderVisible={this.state.camera.barcodeFinderVisible}
+            barcodeFinderWidth={500}
+            barcodeFinderHeight={500}
+            barcodeFinderBorderColor="green"
+            barcodeFinderBorderWidth={2}
+            defaultTouchToFocus
+            flashMode={this.state.camera.flashMode}
+            mirrorImage={false}
+            onBarCodeRead={this.onBarCodeRead.bind(this)}
+            onFocusChanged={() => {}}
+            onZoomChanged={() => {}}
+            permissionDialogTitle={"Permission to use camera"}
+            permissionDialogMessage={
+              "We need your permission to use your camera phone"
+            }
+            style={{
+              width: "100%",
+              height: "100%"
+            }}
+            type={this.state.camera.type}
+          >
+            <View style={styles.overlay} />
+            <View style={[styles.contentRow, { height: this.maskLength }]}>
+              <View styel={styles.overlay} />
+              <View
+                style={[
+                  styles.content,
+                  { width: "90%", height: this.maskLength }
+                ]}
+              >
+                <Animatable.View
+                  style={[
+                    styles.scanline,
+                    {
+                      top: this.maskLength / 4,
+                      width: "90%"
+                    }
+                  ]}
+                  animation="slideInUp"
+                  iterationCount="infinite"
+                  direction="alternate"
+                />
+              </View>
+              <View style={styles.overlay} />
             </View>
-          </TouchableOpacity>
-        </Modal>
+            <View style={styles.overlay} />
+          </RNCamera>
+        )}
       </View>
     );
   }

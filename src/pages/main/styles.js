@@ -13,6 +13,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: responsividade.largura_tela
   },
+  modalcontainer: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.8)",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  modalinfo: {
+    backgroundColor: "white",
+    width: responsividade.largura_tela * 0.7,
+    height: responsividade.largura_tela * 0.7,
+    borderRadius: 10,
+    alignItems: "center"
+  },
+
+  baixar: {
+    fontWeight: "bold",
+    fontSize: 25,
+    paddingVertical: 20,
+    color: "white",
+    marginBottom: 25
+  },
 
   teste: {
     top: 150,
@@ -189,8 +210,8 @@ const styles = StyleSheet.create({
     //paddingVertical: 20,
     zIndex: 3,
     alignItems: "center",
-    justifyContent: 'center',
-    top: 10,
+    justifyContent: "center",
+    top: 10
     //right: 20
   },
 
@@ -198,7 +219,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     width: responsividade.LARGURABOX * 0.9,
     marginLeft: 37,
-    marginTop: 35,
+    marginTop: 35
   },
 
   codecontainer: {

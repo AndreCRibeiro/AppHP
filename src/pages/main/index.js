@@ -165,19 +165,19 @@ class Main extends Component {
       <View style={styles.container}>
         <Header showExit showNotas />
 
-        {viewModals && (
-          <ModalCheck
-            message={messageRequest}
-            viewModal
-            success
-            sourceImage={imageCheck2}
-          />
-        )}
-        {scanner && (
-          <View>
-            <ScannerAPI />
-          </View>
-        )}
+        <View style={{ marginTop: 22 }}>
+          <Modal animationType="slide" transparent={true} visible={scanner}>
+            <TouchableOpacity
+              style={styles.modalcontainer}
+              onPress={() => {
+                this.setState({ scanner: false });
+              }}
+            >
+              <Text style={styles.baixar}>Escaneie o código</Text>
+              <View style={styles.modalinfo}>{scanner && <ScannerAPI />}</View>
+            </TouchableOpacity>
+          </Modal>
+        </View>
 
         <View style={styles.titlee}>
           <Text style={styles.name}>{login.userName}</Text>
@@ -185,7 +185,11 @@ class Main extends Component {
         </View>
 
         <View style={styles.buttons_view2}>
-          <TouchableOpacity onPress={() => {this.openScanner()}}>
+          <TouchableOpacity
+            onPress={() => {
+              this.openScanner();
+            }}
+          >
             <View style={styles.novoTesteButton}>
               <Text style={styles.button_text}>+</Text>
             </View>
