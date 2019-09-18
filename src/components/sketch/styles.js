@@ -2,37 +2,10 @@ import { StyleSheet, Platform } from "react-native";
 import { colors, metrics, responsividade } from "../../styles";
 
 const styles = StyleSheet.create({
-  Name: {
-    width: responsividade.LARGURABOX,
-    height: 30,
-    backgroundColor: colors.transparent,
-    color: "#000000",
-    fontSize: 18,
-    fontWeight: "400",
-    lineHeight: 21
-  },
-
   avatar: {
-    width: responsividade.LARGURA_BUTTON,
-    height: responsividade.LARGURA_BUTTON,
+    width: responsividade.LARGURABUTTON * 0.8,
+    height: responsividade.LARGURA_BUTTON * 0.9,
     margin: 10
-  },
-
-  input: {
-    backgroundColor: "white",
-    height: responsividade.ALTURABOX,
-    borderRadius: 4,
-    paddingLeft: 20,
-    fontSize: 16
-  },
-
-  square: {
-    backgroundColor: "#FAAB1A",
-    height: responsividade.ALTURA_BUTTON,
-    width: responsividade.LARGURA_INPUT * 0.3,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 60
   },
 
   parale: {
@@ -58,15 +31,16 @@ const styles = StyleSheet.create({
   },
 
   button_texthp: {
-    //color: 'black',
-    //color: 'white',
     color: "#4CC6D3",
     fontSize: responsividade.fonts.descriptionSize,
-    //fontWeight: 'bold',
     marginLeft: 5
   },
-  picker: {
-    width: 10
+
+  answer: {
+    //backgroundColor: "pink",
+    width: responsividade.LARGURABOX * 0.85,
+    margin: 5,
+    justifyContent: "flex-start"
   },
 
   hint: {
