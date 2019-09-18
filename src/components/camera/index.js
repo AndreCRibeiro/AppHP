@@ -404,7 +404,7 @@ class Camera extends React.Component {
           <TextInput
             style={groupFlag ? stylesGroup.input : styles.input}
             autoCapitalize="none"
-            autoCorrect={false}
+            autoCorrect={true}
             multiline
             placeholder={"Descrição..."}
             maxLength={100}

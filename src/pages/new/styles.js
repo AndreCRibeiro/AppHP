@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginTop:10,
     paddingVertical: 20,
-    color: 'green'
+    color: 'black'
   },
 
   buttonBaixar: {
