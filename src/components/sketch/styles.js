@@ -43,39 +43,37 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 60
   },
-  button: {
-    //backgroundColor: "#344955",
-    //backgroundColor: "#FAAB1A",
-    backgroundColor: "white",
-    elevation: 1,
-    //borderRadius: 50,
-    borderRadius: 60,
-    height: responsividade.ALTURA_BUTTON,
-    width: responsividade.LARGURA_INPUT,
-    margin: 10,
+
+  buttonhp: {
+    //backgroundColor: 'rgba(41, 42, 41, 0.65)',
+    borderWidth: 2,
+    borderColor: "#4CC6D3",
+    borderRadius: 40,
+    height: responsividade.largura_tela < 430 ? 50 : 60,
+    width: responsividade.LARGURABOX * 0.85,
+    marginVertical: metrics.baseMargin,
     paddingHorizontal: metrics.basePadding,
     justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    elevation: 1
+    alignItems: "center"
   },
-  picker: {
-    width: 10
-  },
-  button_text: {
+
+  button_texthp: {
     //color: 'black',
     //color: 'white',
-    color: "#344955",
+    color: "#4CC6D3",
     fontSize: responsividade.fonts.descriptionSize,
     //fontWeight: 'bold',
     marginLeft: 5
   },
+  picker: {
+    width: 10
+  },
 
   hint: {
-    fontSize: 14,
+    fontSize: responsividade.fonts.descriptionSize * 0.9,
     fontWeight: "bold",
     color: "black",
-    opacity: 0.3,
+    opacity: 0.7,
     paddingVertical: 10
   },
   container: {

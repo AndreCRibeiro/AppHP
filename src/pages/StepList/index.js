@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   FlatList,
@@ -10,46 +10,45 @@ import {
   ActivityIndicator,
   Animated,
   BackHandler
-} from 'react-native';
-import styles from './styles';
-import StepBox from './components/StepBox';
-import { Load } from '../../components';
-import { Header } from '../../globalComponents';
-import { connect } from 'react-redux';
-import axios from 'axios';
-import Api from '../../services/api';
+} from "react-native";
+import styles from "./styles";
+import StepBox from "./components/StepBox";
+import { Load } from "../../components";
+import { Header } from "../../globalComponents";
+import { connect } from "react-redux";
+import axios from "axios";
+import Api from "../../services/api";
 
-import { bindActionCreators } from 'redux';
-import { Creators as FormAction } from '../../store/ducks/form';
-import { Creators as HistActions } from '../../store/ducks/hist';
-import { SnackBar } from '../../globalComponents';
-
+import { bindActionCreators } from "redux";
+import { Creators as FormAction } from "../../store/ducks/form";
+import { Creators as HistActions } from "../../store/ducks/hist";
+import { SnackBar } from "../../globalComponents";
 
 class StepList extends Component {
   state = {
     modalVisible: false,
     load: false,
-    form: '',
+    form: "",
     teste: 10,
     showAlert: false,
     formRedux: true,
     viewError: false,
-    matriculaAsync: '',
+    matriculaAsync: "",
     saved: false,
     error: false,
-    mensageError: 'Error',
-  }
+    mensageError: "Error"
+  };
 
   componentWillMount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.saveForm);
+    BackHandler.removeEventListener("hardwareBackPress", this.saveForm);
   }
 
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.saveForm);
+    BackHandler.addEventListener("hardwareBackPress", this.saveForm);
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.saveForm);
+    BackHandler.removeEventListener("hardwareBackPress", this.saveForm);
   }
 
   cancel() {
@@ -57,10 +56,11 @@ class StepList extends Component {
   }
 
   saved() {
-    this.setState({ saved: true })
+    this.setState({ saved: true });
     let that = this;
-    setTimeout(function () { that.setState({ saved: false }); }, 4000);
-
+    setTimeout(function() {
+      that.setState({ saved: false });
+    }, 4000);
   }
 
   saveForm = () => {
@@ -69,47 +69,56 @@ class StepList extends Component {
     //this.saved();
     this.props.navigation.goBack();
     return true;
-  }
+  };
 
   saveForm2 = () => {
     const { reference, saveForm, setSaveContentForm, form } = this.props;
     saveForm(reference);
     this.saved();
-  }
+  };
 
   resetAsync = () => {
     AsyncStorage.clear();
-  }
+  };
 
   errorMessage = msg => {
     this.setState({ viewError: true, mensageError: msg });
     let that = this;
-    setTimeout(function () { that.setState({ viewError: false }) }, 4000);
-  }
+    setTimeout(function() {
+      that.setState({ viewError: false });
+    }, 4000);
+  };
 
   error = () => {
     this.setState({ error: true });
     let that = this;
-    setTimeout(function () { that.setState({ error: false }) }, 4000);
-  }
-
+    setTimeout(function() {
+      that.setState({ error: false });
+    }, 4000);
+  };
 
   enviaForm = async () => {
     const { matriculaAsync } = this.state;
-    const { reference, formulario, setUpdateHistory, login, group } = this.props;
+    const {
+      reference,
+      formulario,
+      setUpdateHistory,
+      login,
+      group
+    } = this.props;
     const { dataGroup } = group;
 
     this.setState({ sending: true, original: false });
-    const matriculaProv = await AsyncStorage.getItem('@AppInc:matricula');
+    const matriculaProv = await AsyncStorage.getItem("@AppInc:matricula");
     const matricula = JSON.stringify(matriculaProv);
 
     const arrayRef = await AsyncStorage.getItem("arrayRef");
     const array = JSON.parse(arrayRef);
-    
+
     let contentGroup = false;
     let count = 0;
     console.log(dataGroup.length);
-    if(dataGroup.length > 0) {
+    if (dataGroup.length > 0) {
       contentGroup = true;
     }
 
@@ -117,60 +126,58 @@ class StepList extends Component {
 
     //console.tron.log('reset arrayRef\n', array);
 
-    await AsyncStorage.setItem('arrayRef', JSON.stringify(array));
+    await AsyncStorage.setItem("arrayRef", JSON.stringify(array));
 
-    const dataForm = new FormData();   
-   
+    const dataForm = new FormData();
+
     // dataForm.append('form_name', formulario.form.form_name);
 
-    for (var key in formulario.step) { 
-      if(formulario.step[key].type === 'camera') {
+    for (var key in formulario.step) {
+      if (formulario.step[key].type === "camera") {
         formulario.step[key].value.map(item => {
           dataForm.append(`${key}`, item);
-        })       
+        });
       } else {
-        dataForm.append(formulario.step[key].key, formulario.step[key].value)
-      }      
+        dataForm.append(formulario.step[key].key, formulario.step[key].value);
+      }
     }
 
     setUpdateHistory();
     this.setState({ matriculaAsync: matricula });
 
     this.onSendForm({
-      dataForm, 
-      userId: login.userID, 
-      token: login.token, 
-      reference, 
+      dataForm,
+      userId: login.userID,
+      token: login.token,
+      reference,
       contentGroup,
       dataGroup,
-      formName: formulario.form.form_name,
+      formName: formulario.form.form_name
     });
+  };
 
-   
-  }
-  
-  onSendForm = (data) => {
-    const { 
-      dataForm, 
-      userId, 
-      token, 
-      reference, 
+  onSendForm = data => {
+    const {
+      dataForm,
+      userId,
+      token,
+      reference,
       contentGroup,
       dataGroup,
-      formName,
+      formName
     } = data;
     const { form } = this.props;
-    console.log('onSendForm', contentGroup);    
-    
+    console.log("onSendForm", contentGroup);
+
     axios({
-      method: 'post',
-      url: 'http://157.230.177.190/form/receiver',
+      method: "post",
+      url: "http://157.230.177.190/form/receiver",
       data: dataForm,
       headers: {
-        'Content-Type': 'application/json',
-        'authorization': token,
-        'test_name': form.form_name,
-        'discipline_id': form.discipline
+        "Content-Type": "application/json",
+        authorization: token,
+        test_name: form.form_name,
+        discipline_id: form.discipline
       }
     })
       .then(response => {
@@ -181,97 +188,83 @@ class StepList extends Component {
         } else {
           //AsyncStorage.setItem('@IDlaudo', response.data.number);
           //Alert.alert('ID do laudo', 'O número do seu laudo é ' + response.data.number);
-          this.onSendGroup({ 
-            userId, 
-            token, 
-            reference,       
+          this.onSendGroup({
+            userId,
+            token,
+            reference,
             dataGroup,
             //idForm: response.data.number,
-            formName,
+            formName
           });
-        }       
+        }
       })
       .catch(error => {
         var mensage;
         if (error.response.status === 404) {
           mensage = `${error.response.status} - Não encontrado`;
-          //console.tron.log('error 404', error, mensage); 
+          //console.tron.log('error 404', error, mensage);
           // this.errorMessage(mensage);
-        }
-        else if(error.response.status === 403) {
+        } else if (error.response.status === 403) {
           mensage = `${error.response.status} - Bloqueado pelo Firewall`;
-        }
-        else if(error.response.status === 500) {
+        } else if (error.response.status === 500) {
           mensage = `${error.response.status} - Erro interno`;
-        }
-        else if(error.response.status === 0) {
+        } else if (error.response.status === 0) {
           mensage = `${error.response.status} - Formato incorreto`;
-        }        
-        //console.tron.log('error form', error, mensage); 
+        }
+        //console.tron.log('error form', error, mensage);
         this.errorMessage(mensage);
       });
-  }
+  };
 
-  onSendGroup = (data) => {
-    const { 
-      userId, 
-      token, 
-      reference,       
-      dataGroup,
-      idForm,
-      formName,
-    } = data
-    console.log('onSendGroup');
-    
+  onSendGroup = data => {
+    const { userId, token, reference, dataGroup, idForm, formName } = data;
+    console.log("onSendGroup");
 
     dataGroup.map(group => {
-      console.log(['one group map', group])
+      console.log(["one group map", group]);
       const formGroup = new FormData();
       let count = 1;
       group.value.map(item => {
-        console.log(['item', item])
+        console.log(["item", item]);
         Object.keys(item).map(key => {
-          console.log(['keys', key])
-          if(key !== 'index') {
-            formGroup.append(`${group.key}[${count}][${key}]`, item[key].value)
-          }          
-        })
+          console.log(["keys", key]);
+          if (key !== "index") {
+            formGroup.append(`${group.key}[${count}][${key}]`, item[key].value);
+          }
+        });
         count += 1;
-      }) 
+      });
 
-      console.log({ RESULTADO_GROUP_DATA: formGroup})
+      console.log({ RESULTADO_GROUP_DATA: formGroup });
       axios({
-        method: 'post',
-        url: 'http://35.198.17.69/api/pericia/formularios/envio/grupo',
+        method: "post",
+        url: "http://35.198.17.69/api/pericia/formularios/envio/grupo",
         data: formGroup,
         headers: {
-          'Content-Type': 'multipart/form-data',
-          'matricula': userId,
-          'referencia': '',
-          'x-Token': token,
-          'form-id': idForm,
-          'form-group': group.key,
-          'form-name': formName,
+          "Content-Type": "multipart/form-data",
+          matricula: userId,
+          referencia: "",
+          "x-Token": token,
+          "form-id": idForm,
+          "form-group": group.key,
+          "form-name": formName
         }
       })
-        .then(function (response) {
-          console.log(response)          
+        .then(function(response) {
+          console.log(response);
         })
         .catch(error => {
-          console.log(['error group', error])
+          console.log(["error group", error]);
           this.errorMessage();
         });
-      
     });
 
     // this.props.navigation.navigate('Hist');
-    
-  }
+  };
 
   sendGroup = (dataGroup, userId, token, groupName) => {
-    
-    console.log(['api envia group', dataGroup, userId, token, groupName])
-  }
+    console.log(["api envia group", dataGroup, userId, token, groupName]);
+  };
 
   render() {
     const { formRedux } = this.state;
@@ -284,40 +277,45 @@ class StepList extends Component {
     let i = 0;
     return (
       <View style={styles.container}>
-        <Header
-          title={form.form_titulo}
-          showArrow
-          goBack={this.saveForm}
-        />
-        {
-          viewError && (
-            <SnackBar outside content={mensageError} color='#3C3C46' fontcolor="white" />
-          )
-        }
+        <Header title={form.form_titulo} showArrow goBack={this.saveForm} />
+        {viewError && (
+          <SnackBar
+            outside
+            content={mensageError}
+            color="#3C3C46"
+            fontcolor="white"
+          />
+        )}
 
-        {
-          saved && (
-            <SnackBar outside content="Progresso Salvo!" color='#3C3C46' fontcolor="white" />
-
-          )
-        }
+        {saved && (
+          <SnackBar
+            outside
+            content="Progresso Salvo!"
+            color="#3C3C46"
+            fontcolor="white"
+          />
+        )}
         <ScrollView>
           <FlatList
             data={form.steps}
-            renderItem={item => { i = i + 1; return <StepBox steps={item} form={form} index={i} /> }}
+            renderItem={item => {
+              i = i + 1;
+              return <StepBox steps={item} form={form} index={i} />;
+            }}
           />
           <View style={styles.container}>
-
-            <TouchableOpacity style={styles.buttonhp} onPress={() => this.enviaForm()}>
-              <Text style={styles.button_texthp}>
-                ENVIAR
-              </Text>
+            <TouchableOpacity
+              style={styles.buttonhp}
+              onPress={() => this.enviaForm()}
+            >
+              <Text style={styles.button_texthp}>ENVIAR</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.buttonhp} onPress={() => this.saveForm2()}>
-              <Text style={styles.button_texthp}>
-                SALVAR
-              </Text>
+            <TouchableOpacity
+              style={styles.buttonhp}
+              onPress={() => this.saveForm2()}
+            >
+              <Text style={styles.button_texthp}>SALVAR</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -331,17 +329,23 @@ const mapStateToProps = state => ({
   reference: state.newState.reference,
   formulario: state.formState,
   login: state.loginState,
-  group: state.groupState,
+  group: state.groupState
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({
-    ...FormAction,
-    ...HistActions,
-  }, dispatch);
+  bindActionCreators(
+    {
+      ...FormAction,
+      ...HistActions
+    },
+    dispatch
+  );
 
 StepList.navigationOptions = {
-  title: 'Perícia',
+  title: "Perícia"
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StepList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StepList);

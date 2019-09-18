@@ -78,7 +78,6 @@ class ScannerAPI extends Component {
       setModalVisible: false,
       modalVisible: false
     });
-    this.props.setFlag();
     if (scanResult.data != null) {
       if (!this.barcodeCodes.includes(scanResult.data)) {
         this.barcodeCodes.push(scanResult.data);
@@ -86,7 +85,7 @@ class ScannerAPI extends Component {
         this.enrollClass(scanResult.data);
       }
       //this.setState({ infoScanner: scanResult.data, showScanner: false, showCode: true });
-      Alert.alert("Turma não encontrada");
+      //Alert.alert(scanResult.data);
       this.setState({ showScanner: true });
     }
     return;

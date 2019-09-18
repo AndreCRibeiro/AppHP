@@ -68,7 +68,7 @@ class Sketch extends Component {
           const form = {};
           form[info.data_name] = {
             key: info.data_name,
-            value: Platform.OS === 'ios' ? `${uri}` :`file://${uri}`,
+            value: Platform.OS === "ios" ? `${uri}` : `file://${uri}`,
             filled: true
           };
           getSaveStateForm(form);
@@ -128,23 +128,27 @@ class Sketch extends Component {
       <View style={{ justifyContent: "center", alignItem: "center" }}>
         {this.state.uri ? this.renderAsset(this.state.uri) : null}
 
+        <View style={styles.answer}>
+          <Text style={styles.hint}>{hint}</Text>
+        </View>
+
         {showButton && (
           <TouchableOpacity
             onPress={() =>
               this.setState({ showScanner: true, showButton: false })
             }
-            style={styles.button}
+            style={styles.buttonhp}
           >
-            <View style={styles.square}>
+            {/* <View style={styles.square}>
               <Icon
                 name="create"
                 size={largura_tela < 430 ? 28 : 40}
                 color="black"
                 style={styles.icon}
               />
-            </View>
+            </View> */}
             <View style={styles.parale}>
-              <Text style={styles.button_text}>FAZER CROQUI</Text>
+              <Text style={styles.button_texthp}>FAZER CROQUI</Text>
             </View>
           </TouchableOpacity>
         )}
