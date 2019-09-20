@@ -19,15 +19,15 @@ import {
 } from "react-navigation";
 import styles from "./styles";
 import Icon from "react-native-vector-icons/Ionicons";
-import Api from '../../services/api';
+import Api from "../../services/api";
 import axios from "axios";
-import { SnackBar } from '../../globalComponents';
+import { SnackBar } from "../../globalComponents";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Creators as FormActions } from "../../store/ducks/form";
 import { Creators as NewActions } from "../../store/ducks/new";
-import { Creators as HistActions } from '../../store/ducks/hist';
+import { Creators as HistActions } from "../../store/ducks/hist";
 
 class Historico extends Component {
   state = {
@@ -39,7 +39,7 @@ class Historico extends Component {
     loading: true,
     errorview: false,
     callFuction: true,
-    refreshing: false,
+    refreshing: false
   };
 
   componentDidMount() {
@@ -60,23 +60,31 @@ class Historico extends Component {
   }
 
   requestFroms = async () => {
-    const arrayRef = await AsyncStorage.getItem('arrayRef');
-    const id = await AsyncStorage.getItem("@AppInc:matricula");
+    const arrayRef = await AsyncStorage.getItem("arrayRef");
+    const arrayTime = await AsyncStorage.getItem("arrayTime");
     const array = JSON.parse(arrayRef);
-    this.setState({ arrayRef: array, idUser: id, errorview: false, loading: false });
-    const idMatricula = this.state.idUser;
+    const arraytime = JSON.parse(arrayTime);
+    console.tron.log("OBJEEEEEEEEETO", arraytime);
+
+    this.setState({
+      arrayRef: array,
+      idUser: id,
+      errorview: false,
+      loading: false
+    });
+
     this.setState({ loading: false, arrayEnviados: response.data });
-  }
+  };
 
   restoreForm = async name => {
     const { navigation, restoreFormState, setForm, getReference } = this.props;
     const formAsync = await AsyncStorage.getItem(name);
     const form = JSON.parse(formAsync);
-    
+
     await getReference(form.ref);
     await setForm(form.form);
     await restoreFormState(form);
-    navigation.navigate("StepList", {key: form} );
+    navigation.navigate("StepList", { key: form });
   };
 
   renderOffline = item => {
@@ -86,20 +94,24 @@ class Historico extends Component {
           style={styles.box}
           onPress={() => this.restoreForm(item)}
         >
-         <View style={styles.row}>
+          <View style={styles.row}>
             <Text style={styles.status1}>Referência: </Text>
             <Text style={styles.ref}>{item}</Text>
           </View>
-          
+
           <View style={styles.row}>
             <Text style={styles.status1}>Status: </Text>
             <Text style={styles.status}>Em andamento</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.timestamp}>Salvo em:</Text>
+            <Text style={styles.ref}>{this.props.form.timestamp}</Text>
           </View>
         </TouchableOpacity>
       );
     }
     return null;
-  }
+  };
 
   renderEnviados = item => {
     return (
@@ -107,32 +119,37 @@ class Historico extends Component {
         style={styles.box}
         onPress={() => {
           Linking.openURL(
-            "http://35.198.17.69/pericia/links.php?id_pericia=" +
-            item.matricula
+            "http://35.198.17.69/pericia/links.php?id_pericia=" + item.matricula
           );
         }}
       >
-      <View style={styles.row}>
-            <Text style={styles.status1}>Laudo nº: </Text>
-            <Text style={styles.ref}>{item.matricula}</Text>
-      </View>
-        
-      <View style={styles.row}>
+        <View style={styles.row}>
+          <Text style={styles.status1}>Laudo nº: </Text>
+          <Text style={styles.ref}>{item.matricula}</Text>
+        </View>
+
+        <View style={styles.row}>
           <Text style={styles.status1}>Status: </Text>
           <Text style={styles.statusEnviado}>Enviado </Text>
-      </View>
+        </View>
       </TouchableOpacity>
     );
-  }
+  };
 
   _onRefresh = () => {
-    this.setState({refreshing: true});
+    this.setState({ refreshing: true });
     this.requestFroms();
-    this.setState({refreshing: false});
-  }
+    this.setState({ refreshing: false });
+  };
 
   render() {
-    const { arrayRef, modalVisible, form, arrayEnviados, callFuction } = this.state;
+    const {
+      arrayRef,
+      modalVisible,
+      form,
+      arrayEnviados,
+      callFuction
+    } = this.state;
     const { navigation, hist, resetUpdateHistory } = this.props;
     if (hist.updateHistory && callFuction) {
       this.setState({ callFuction: false });
@@ -142,16 +159,12 @@ class Historico extends Component {
 
     return (
       <View style={styles.container}>
-      
-      <Header
-          back
-          title='Meus Testes'
-        />
+        <Header back title="Meus Testes" />
         <Modal
           animationType="slide"
           transparent={false}
           visible={modalVisible}
-          onRequestClose={() => { }}
+          onRequestClose={() => {}}
         >
           <View style={styles.containerModal}>
             <View style={styles.buttonContainer}>
@@ -169,14 +182,23 @@ class Historico extends Component {
           </View>
         </Modal>
         {this.state.errorview && (
-             <SnackBar outside content="Sem conexão!" color='#3C3C46' fontcolor="white" />
+          <SnackBar
+            outside
+            content="Sem conexão!"
+            color="#3C3C46"
+            fontcolor="white"
+          />
         )}
         <View style={styles.main}>
-          <ScrollView  refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this._onRefresh}
-          />}>
+          <ScrollView
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh}
+              />
+            }
+          >
+            {console.tron.log("ARRAYREF", arrayRef)}
             {arrayRef ? arrayRef.map(item => this.renderOffline(item)) : null}
 
             {this.state.loading && (
@@ -185,11 +207,9 @@ class Historico extends Component {
               </View>
             )}
 
-
-            {
-              arrayEnviados
-                ? arrayEnviados.map(item => this.renderEnviados(item))
-                : null}
+            {arrayEnviados
+              ? arrayEnviados.map(item => this.renderEnviados(item))
+              : null}
           </ScrollView>
         </View>
       </View>
@@ -200,15 +220,18 @@ class Historico extends Component {
 const mapStateToProps = state => ({
   form: state.formState,
   hist: state.histState,
-  login: state.loginState,
+  login: state.loginState
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({
-    ...FormActions,
-    ...NewActions,
-    ...HistActions,
-  }, dispatch);
+  bindActionCreators(
+    {
+      ...FormActions,
+      ...NewActions,
+      ...HistActions
+    },
+    dispatch
+  );
 
 export default connect(
   mapStateToProps,

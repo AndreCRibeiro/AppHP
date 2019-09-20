@@ -37,12 +37,12 @@ class StepList extends Component {
     saved: false,
     error: false,
     mensageError: "Error",
-    data: false,
+    data: false
   };
 
   componentWillMount() {
     BackHandler.removeEventListener("hardwareBackPress", this.saveForm);
-    }
+  }
 
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.saveForm);
@@ -72,7 +72,7 @@ class StepList extends Component {
     return true;
   };
 
-  saveForm2 = () => {
+  saveForm2 = async () => {
     const { data } = this.state;
     const { reference, saveForm, setSaveContentForm, form } = this.props;
     var date = new Date().getDate(); //Current Date
@@ -81,8 +81,15 @@ class StepList extends Component {
     var hours = new Date().getHours(); //Current Hours
     var min = new Date().getMinutes(); //Current Minutes
     var sec = new Date().getSeconds(); //Current Seconds
-    this.setState({ data: date + '/' + month + '/' + year + ' ' + hours + ':' + min + ':' + sec, }, () => {console.tron.log(data);})
-    saveForm(reference);
+    await this.setState({
+      data:
+        date + "/" + month + "/" + year + " " + hours + ":" + min + ":" + sec
+    });
+
+    const timestamp =
+      date + "/" + month + "/" + year + " " + hours + ":" + min + ":" + sec;
+
+    saveForm(reference, timestamp);
     this.saved();
   };
 
@@ -126,14 +133,9 @@ class StepList extends Component {
 
     let contentGroup = false;
     let count = 0;
-    console.log(dataGroup.length);
     if (dataGroup.length > 0) {
       contentGroup = true;
     }
-
-    //console.tron.log('arrayRef\n', array);
-
-    //console.tron.log('reset arrayRef\n', array);
 
     await AsyncStorage.setItem("arrayRef", JSON.stringify(array));
 
@@ -176,7 +178,6 @@ class StepList extends Component {
       formName
     } = data;
     const { form } = this.props;
-    console.log("onSendForm", contentGroup);
 
     axios({
       method: "post",
@@ -227,16 +228,12 @@ class StepList extends Component {
 
   onSendGroup = data => {
     const { userId, token, reference, dataGroup, idForm, formName } = data;
-    console.log("onSendGroup");
 
     dataGroup.map(group => {
-      console.log(["one group map", group]);
       const formGroup = new FormData();
       let count = 1;
       group.value.map(item => {
-        console.log(["item", item]);
         Object.keys(item).map(key => {
-          console.log(["keys", key]);
           if (key !== "index") {
             formGroup.append(`${group.key}[${count}][${key}]`, item[key].value);
           }
@@ -244,7 +241,6 @@ class StepList extends Component {
         count += 1;
       });
 
-      console.log({ RESULTADO_GROUP_DATA: formGroup });
       axios({
         method: "post",
         url: "http://35.198.17.69/api/pericia/formularios/envio/grupo",
@@ -259,11 +255,8 @@ class StepList extends Component {
           "form-name": formName
         }
       })
-        .then(function(response) {
-          console.log(response);
-        })
+        .then(function(response) {})
         .catch(error => {
-          console.log(["error group", error]);
           this.errorMessage();
         });
     });
@@ -271,9 +264,7 @@ class StepList extends Component {
     // this.props.navigation.navigate('Hist');
   };
 
-  sendGroup = (dataGroup, userId, token, groupName) => {
-    console.log(["api envia group", dataGroup, userId, token, groupName]);
-  };
+  sendGroup = (dataGroup, userId, token, groupName) => {};
 
   render() {
     const { formRedux } = this.state;
@@ -305,11 +296,7 @@ class StepList extends Component {
           />
         )}
 
-        {data && (
-          <Text>{this.state.data}</Text>
-        )
-
-        }
+        {data && <Text>{this.state.data}</Text>}
         <ScrollView>
           <FlatList
             data={form.steps}

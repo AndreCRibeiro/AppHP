@@ -1,19 +1,19 @@
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from "react-native";
 //import store from '../index';
 
 const Types = {
-  SET_FLAG: 'form/SET_FLAG',
-  CREATE_FORM: 'form/CREATE_SAVE',
-  SAVE_FORM_STATE: 'form/SAVE_FORM_STATE',
-  START_SAVE_STEP: 'form/SAVE_STEP_STATE',
-  STOP_SAVE_STEP: 'form/STOP_SAVE_STEP',
-  START_CONTROL_ARRAY: 'form/START_CONTROL_ARRAY',
-  SAVE_FORM: 'form/SAVE_FORM',
-  START_UPDATE_PROGRESS: 'form/UPDATE_PROGRESS',
-  FINISH_UPDATE_PROGRESS: 'form/FINISH_UPDATE_PROGRESS',
-  RESTORE_FORM: 'form/RESTORE_FORM',
-  SAVE_CONTENT_FORM: 'form/SAVE_CONTENT_FORM',
-  RESET_EDIT_FORM: 'form/RESET_EDIT_FORM',
+  SAVE_TIMESTAMP: "form/SAVE_TIMESTAMP",
+  CREATE_FORM: "form/CREATE_SAVE",
+  SAVE_FORM_STATE: "form/SAVE_FORM_STATE",
+  START_SAVE_STEP: "form/SAVE_STEP_STATE",
+  STOP_SAVE_STEP: "form/STOP_SAVE_STEP",
+  START_CONTROL_ARRAY: "form/START_CONTROL_ARRAY",
+  SAVE_FORM: "form/SAVE_FORM",
+  START_UPDATE_PROGRESS: "form/UPDATE_PROGRESS",
+  FINISH_UPDATE_PROGRESS: "form/FINISH_UPDATE_PROGRESS",
+  RESTORE_FORM: "form/RESTORE_FORM",
+  SAVE_CONTENT_FORM: "form/SAVE_CONTENT_FORM",
+  RESET_EDIT_FORM: "form/RESET_EDIT_FORM"
 };
 
 const initialState = {
@@ -23,20 +23,20 @@ const initialState = {
   step: {},
   form: null,
   formEdit: false,
-  ref: '',
-  flag: true,
+  ref: "",
+  timestamp: ""
 };
 
 export default function formState(state = initialState, action) {
   switch (action.type) {
-    case Types.SET_FLAG:
-    return { ...state, flag: false };
+    case Types.SAVE_TIMESTAMP:
+      return { ...state, timestamp: action.payload.data };
     case Types.CREATE_FORM:
       return { ...state, step: { ...state.step, ...action.payload.data } };
     case Types.SAVE_FORM_STATE:
       return { ...state, step: { ...state.step, ...action.payload.data } };
     case Types.SAVE_CONTENT_FORM:
-      return { ...state, form: action.payload.form, };
+      return { ...state, form: action.payload.form };
     case Types.START_SAVE_STEP:
       return { ...state, saveStep: true };
     case Types.STOP_SAVE_STEP:
@@ -44,7 +44,6 @@ export default function formState(state = initialState, action) {
     case Types.START_CONTROL_ARRAY: {
       const status = controlArraySte(state);
       if (!state.controlArraySize) {
-
         return { ...state, controlArraySize: status };
       }
       if (!status) {
@@ -53,12 +52,14 @@ export default function formState(state = initialState, action) {
       return { ...state, controlArraySize: status };
     }
     case Types.SAVE_FORM: {
-      saveFormAsync({ 
-        ref: action.payload.ref, 
-        state: { 
-          ...state, 
-          formEdit: true, 
-          ref: action.payload.ref 
+      saveFormAsync({
+        ref: action.payload.ref,
+        timestamp: action.payload.timestamp,
+        state: {
+          ...state,
+          formEdit: true,
+          ref: action.payload.ref,
+          timestamp: action.payload.timestamp
         }
       });
       return state;
@@ -74,6 +75,7 @@ export default function formState(state = initialState, action) {
         form: action.payload.form.form,
         formEdit: action.payload.form.formEdit,
         ref: action.payload.form.ref,
+        timestamp: action.payload.timestamp
       };
     case Types.RESET_EDIT_FORM:
       return { ...state, formEdit: false };
@@ -84,8 +86,9 @@ export default function formState(state = initialState, action) {
 
 export const Creators = {
   // seta flag do scanner
-  setFlag: ( )=> ({
-    type: Types.SET_FLAG,
+  saveTimeStamp: data => ({
+    type: Types.SAVE_TIMESTAMP,
+    payload: { data }
   }),
   // cria todos os campos do formularios na variavel step
   getCreateForm: data => ({
@@ -102,7 +105,7 @@ export const Creators = {
   }),
   // inicia o controle de array para ter uma condição de parada
   startControlArray: () => ({
-    type: Types.START_CONTROL_ARRAY,
+    type: Types.START_CONTROL_ARRAY
   }),
   stopSaveStep: () => ({
     type: Types.STOP_SAVE_STEP
@@ -112,25 +115,24 @@ export const Creators = {
     payload: { data }
   }),
   // salva o formulario  no asyncstorage com o nome de referencia
-  saveForm: ref => ({
+  saveForm: (ref, timestamp) => ({
     type: Types.SAVE_FORM,
-    payload: { ref }
+    payload: { ref, timestamp }
   }),
   startUpdateProgress: () => ({
-    type: Types.START_UPDATE_PROGRESS,
+    type: Types.START_UPDATE_PROGRESS
   }),
   finishUpdateProgress: () => ({
-    type: Types.FINISH_UPDATE_PROGRESS,
+    type: Types.FINISH_UPDATE_PROGRESS
   }),
   restoreFormState: form => ({
     type: Types.RESTORE_FORM,
     payload: { form }
   }),
   resetEditForm: () => ({
-    type: Types.RESET_EDIT_FORM,
+    type: Types.RESET_EDIT_FORM
   })
 };
-
 
 // controla o tamano do array step
 const controlArraySte = state => {
@@ -150,13 +152,16 @@ const controlArraySte = state => {
 };
 
 const saveFormAsync = async data => {
-  const arrayRef = await AsyncStorage.getItem('arrayRef');
+  const arrayRef = await AsyncStorage.getItem("arrayRef");
   let arrayControl = false;
   // verifica se ja existe um array de referencia se nao cria um e ja puxa a primeira referencia pra primeiro campod do array
   if (arrayRef === null) {
     const array = [];
+    const arrayTime = [];
     array.push(data.ref);
-    await AsyncStorage.setItem('arrayRef', JSON.stringify(array));
+    arrayTime.push({ ref: data.ref, time: data.timestamp });
+    await AsyncStorage.setItem("arrayRef", JSON.stringify(array));
+    await AsyncStorage.setItem("arrayTime", JSON.stringify(arrayTime));
     await AsyncStorage.setItem(data.ref, JSON.stringify(data.state));
   } else {
     // caso contrario varre o array pra ver se tem aguma ref caso sim ele so substitui caso nao pussh a ref pro fim do array e os dados
@@ -169,7 +174,7 @@ const saveFormAsync = async data => {
     });
     if (!arrayControl) {
       array.push(data.ref);
-      await AsyncStorage.setItem('arrayRef', JSON.stringify(array));
+      await AsyncStorage.setItem("arrayRef", JSON.stringify(array));
       await AsyncStorage.setItem(data.ref, JSON.stringify(data.state));
     }
   }
