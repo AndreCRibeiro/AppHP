@@ -36,12 +36,13 @@ class StepList extends Component {
     matriculaAsync: "",
     saved: false,
     error: false,
-    mensageError: "Error"
+    mensageError: "Error",
+    data: false,
   };
 
   componentWillMount() {
     BackHandler.removeEventListener("hardwareBackPress", this.saveForm);
-  }
+    }
 
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.saveForm);
@@ -72,7 +73,28 @@ class StepList extends Component {
   };
 
   saveForm2 = () => {
+    const { data } = this.state;
     const { reference, saveForm, setSaveContentForm, form } = this.props;
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    //console.tron.log(['Teste Mes',month]);
+    var year = new Date().getFullYear(); //Current Year
+    //console.tron.log(['Teste Ano',year]);
+    var hours = new Date().getHours(); //Current Hours
+    //console.tron.log(['Teste Horas',hours]);
+    var min = new Date().getMinutes(); //Current Minutes
+    //console.tron.log(['Teste Minutos',min]);
+    var sec = new Date().getSeconds(); //Current Seconds
+    //console.tron.log(['Teste Segundos',sec]);
+    /*that.setState({
+      //Setting the value of the date time
+      data:
+        date + '/' + month + '/' + year + ' ' + hours + ':' + min + ':' + sec,
+    });*/
+    this.setState({ data: date + '/' + month + '/' + year + ' ' + hours + ':' + min + ':' + sec, }, () => {console.tron.log(data);})
+    //this.setState({ data: 'Teste2' })
+    //console.tron.log(['Teste Dia',date]);
+    console.tron.log(data);
     saveForm(reference);
     this.saved();
   };
@@ -269,7 +291,7 @@ class StepList extends Component {
   render() {
     const { formRedux } = this.state;
     const { navigation, reference, form } = this.props;
-    const { viewError, load, saved, mensageError } = this.state;
+    const { viewError, load, saved, mensageError, data } = this.state;
     if (formRedux) {
       this.props.setSaveContentForm(form);
       this.setState({ formRedux: false });
@@ -295,6 +317,12 @@ class StepList extends Component {
             fontcolor="white"
           />
         )}
+
+        {data && (
+          <Text>{this.state.data}</Text>
+        )
+
+        }
         <ScrollView>
           <FlatList
             data={form.steps}

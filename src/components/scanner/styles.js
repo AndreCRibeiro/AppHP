@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   codecontainer: {
-    width: (responsividade.LARGURABOX),
-    height:  (responsividade.ALTURABOX),
+    width: responsividade.LARGURABOX * 0.8,
+    height:  responsividade.ALTURABOX * 0.9,
     borderRadius: 10,
     backgroundColor: 'white',
     alignItems: 'center',

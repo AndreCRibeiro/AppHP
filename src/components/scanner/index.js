@@ -246,10 +246,11 @@ class Scanner extends Component {
 
         {
           showButton2 && (
-            <TouchableOpacity onPress={() => this.setState({ showScanner: true, showCode: false })} style={styles.button}>
-              <Text style={styles.button_text}>LER OUTRO QR CODE/ CÓDIGO DE BARRAS</Text>
+            <TouchableOpacity onPress={() => this.setState({ showScanner: true, showCode: false })} style={styles.buttonhp}>
+              <View style={styles.button_texthp}><Text  style={styles.font}>LER NOVAMENTE QR / CÓDIGO</Text></View>
             </TouchableOpacity>
-          )}
+          )
+        }
 
       </View>
     );
