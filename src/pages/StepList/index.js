@@ -23,6 +23,7 @@ import { bindActionCreators } from "redux";
 import { Creators as FormAction } from "../../store/ducks/form";
 import { Creators as HistActions } from "../../store/ducks/hist";
 import { SnackBar } from "../../globalComponents";
+import CheckModal from "./components/Modal";
 
 class StepList extends Component {
   state = {
@@ -38,11 +39,13 @@ class StepList extends Component {
     error: false,
     mensageError: "Error",
     data: false,
+    viewModal: false,
+    loading: false
   };
 
   componentWillMount() {
     BackHandler.removeEventListener("hardwareBackPress", this.saveForm);
-    }
+  }
 
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.saveForm);
@@ -81,7 +84,15 @@ class StepList extends Component {
     var hours = new Date().getHours(); //Current Hours
     var min = new Date().getMinutes(); //Current Minutes
     var sec = new Date().getSeconds(); //Current Seconds
-    this.setState({ data: date + '/' + month + '/' + year + ' ' + hours + ':' + min + ':' + sec, }, () => {console.tron.log(data);})
+    this.setState(
+      {
+        data:
+          date + "/" + month + "/" + year + " " + hours + ":" + min + ":" + sec
+      },
+      () => {
+        console.tron.log(data);
+      }
+    );
     saveForm(reference);
     this.saved();
   };
@@ -152,7 +163,7 @@ class StepList extends Component {
     }
 
     setUpdateHistory();
-    this.setState({ matriculaAsync: matricula });
+    this.setState({ matriculaAsync: matricula, loading: false });
 
     this.onSendForm({
       dataForm,
@@ -278,8 +289,32 @@ class StepList extends Component {
     console.log(["api envia group", dataGroup, userId, token, groupName]);
   };
 
+  // //---------------------------------------------------
+  // openModal = () => {
+  //   this.setState({ viewModal: true });
+  // };
+
+  // closeModal = () => {
+  //   const { viewModal } = this.state;
+  //   if (viewModal) this.setState({ viewModal: false });
+  //   else this.setState({ viewModal: true });
+  // };
+  // //---------------------------------------------------
+
+  closeModal = () => {
+    const { viewModal } = this.state;
+    if (viewModal) this.setState({ viewModal: false });
+    else this.setState({ viewModal: true });
+  };
+
+  sendForm = () => {
+    this.closeModal();
+    this.setState({ showRemove: false, loading: true });
+    this.enviaForm();
+  };
+
   render() {
-    const { formRedux } = this.state;
+    const { formRedux, viewModal, loading } = this.state;
     const { navigation, reference, form } = this.props;
     const { viewError, load, saved, mensageError, data } = this.state;
     if (formRedux) {
@@ -308,11 +343,7 @@ class StepList extends Component {
           />
         )}
 
-        {data && (
-          <Text>{this.state.data}</Text>
-        )
-
-        }
+        {data && <Text>{this.state.data}</Text>}
         <ScrollView>
           <FlatList
             data={form.steps}
@@ -324,10 +355,22 @@ class StepList extends Component {
           <View style={styles.container}>
             <TouchableOpacity
               style={styles.buttonhp}
-              onPress={() => this.enviaForm()}
+              onPress={() => this.closeModal()}
             >
-              <Text style={styles.button_texthp}>ENVIAR</Text>
+              {loading ? (
+                <ActivityIndicator />
+              ) : (
+                <Text style={styles.button_texthp}>ENVIAR</Text>
+              )}
             </TouchableOpacity>
+
+            {viewModal && (
+              <CheckModal
+                viewModal
+                onClose={this.closeModal}
+                onCloseEdit={this.sendForm}
+              />
+            )}
 
             <TouchableOpacity
               style={styles.buttonhp}
