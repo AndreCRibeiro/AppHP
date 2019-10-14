@@ -84,15 +84,10 @@ class StepList extends Component {
     var hours = new Date().getHours(); //Current Hours
     var min = new Date().getMinutes(); //Current Minutes
     var sec = new Date().getSeconds(); //Current Seconds
-    this.setState(
-      {
-        data:
-          date + "/" + month + "/" + year + " " + hours + ":" + min + ":" + sec
-      },
-      () => {
-        console.tron.log(data);
-      }
-    );
+    this.setState({
+      data:
+        date + "/" + month + "/" + year + " " + hours + ":" + min + ":" + sec
+    });
     saveForm(reference);
     this.saved();
   };
@@ -137,14 +132,9 @@ class StepList extends Component {
 
     let contentGroup = false;
     let count = 0;
-    console.log(dataGroup.length);
     if (dataGroup.length > 0) {
       contentGroup = true;
     }
-
-    //console.tron.log('arrayRef\n', array);
-
-    //console.tron.log('reset arrayRef\n', array);
 
     await AsyncStorage.setItem("arrayRef", JSON.stringify(array));
 
@@ -163,7 +153,7 @@ class StepList extends Component {
     }
 
     setUpdateHistory();
-    this.setState({ matriculaAsync: matricula, loading: false });
+    this.setState({ matriculaAsync: matricula });
 
     this.onSendForm({
       dataForm,
@@ -187,7 +177,7 @@ class StepList extends Component {
       formName
     } = data;
     const { form } = this.props;
-    console.log("onSendForm", contentGroup);
+    const json = { nome: "paulo" };
 
     axios({
       method: "post",
@@ -202,13 +192,9 @@ class StepList extends Component {
     })
       .then(response => {
         var mensage;
-        //console.tron.log('response', response);
         if (response.status === 206) {
-          //console.tron.log('teste', response.data, response.data.mensagem);
-          //this.errorMessage(response.data.mensagem);
         } else {
-          //AsyncStorage.setItem('@IDlaudo', response.data.number);
-          //Alert.alert('ID do laudo', 'O número do seu laudo é ' + response.data.number);
+          this.setState({ loading: false });
           mensage = `Prova enviada para avaliação`;
           this.errorMessage(mensage);
           this.onSendGroup({
@@ -225,16 +211,18 @@ class StepList extends Component {
         var mensage;
         if (error.response.status === 404) {
           mensage = `${error.response.status} - Não encontrado`;
-          //console.tron.log('error 404', error, mensage);
-          // this.errorMessage(mensage);
         } else if (error.response.status === 403) {
           mensage = `${error.response.status} - Bloqueado pelo Firewall`;
+        } else if (error.response.status === 400) {
+          mensage = `${error.response.status} - Formato inválido`;
         } else if (error.response.status === 500) {
           mensage = `${error.response.status} - Erro interno`;
         } else if (error.response.status === 0) {
           mensage = `${error.response.status} - Formato incorreto`;
+        } else if (error.response === "undefined") {
+          mensage = "Sem conexão, verifique sua rede";
         }
-        //console.tron.log('error form', error, mensage);
+
         this.errorMessage(mensage);
       });
   };
@@ -288,18 +276,6 @@ class StepList extends Component {
   sendGroup = (dataGroup, userId, token, groupName) => {
     console.log(["api envia group", dataGroup, userId, token, groupName]);
   };
-
-  // //---------------------------------------------------
-  // openModal = () => {
-  //   this.setState({ viewModal: true });
-  // };
-
-  // closeModal = () => {
-  //   const { viewModal } = this.state;
-  //   if (viewModal) this.setState({ viewModal: false });
-  //   else this.setState({ viewModal: true });
-  // };
-  // //---------------------------------------------------
 
   closeModal = () => {
     const { viewModal } = this.state;
