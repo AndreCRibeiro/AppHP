@@ -106,7 +106,7 @@ class New extends Component {
     //console.tron.log(stateItem);
     //api.form.getDocument(stateItem.table_name, stateItem._name, login.token)
     Linking.openURL(
-      `http://157.230.177.190/files/${stateItem.table_name}-${stateItem.discipline_id}-${login.token}.docx`);
+      `http://157.230.177.190/files/${stateItem.table_name}-${stateItem.discipline_id}-${login.id}.docx`);
   }
 
   closeModal = () => {

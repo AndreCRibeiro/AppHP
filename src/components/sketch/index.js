@@ -34,7 +34,8 @@ class Sketch extends Component {
       showScanner: false,
       showButton: true,
       fundo: "",
-      uri: null
+      uri: null,
+      localPath: null
     };
   }
 
@@ -43,7 +44,7 @@ class Sketch extends Component {
     for (var key in form.step) {
       if (key === data.data_name) {
         if (form.step[key].filled === true) {
-          this.setState({ uri: form.step[key].value });
+          this.setState({ uri: form.step[key].value.uri });
         }
       }
     }
@@ -68,7 +69,7 @@ class Sketch extends Component {
           const form = {};
           form[info.data_name] = {
             key: info.data_name,
-            value: Platform.OS === "ios" ? `${uri}` : `file://${uri}`,
+            value: Platform.OS === "ios" ? {uri: uri, type:'image/png', name:`${info.data_name}.png`} : `file://${uri}`,
             filled: true
           };
           getSaveStateForm(form);
@@ -80,7 +81,7 @@ class Sketch extends Component {
           const form = {};
           form[info.data_name] = {
             key: info.data_name,
-            value: uri,
+            value: 'teste',
             filled: false
           };
           //console.log(form[info.data_name])
@@ -94,11 +95,11 @@ class Sketch extends Component {
 
   renderImage(image) {
     return (
-      <Image
-        resizeMode="contain"
-        style={styles.avatar}
-        source={{ uri: "file://" + image }}
-      />
+        <Image
+          resizeMode="contain"
+          style={styles.avatar}
+          source={{ uri: "file://" + image }}
+        />
     );
   }
 

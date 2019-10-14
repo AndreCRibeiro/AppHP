@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
 
   first:{
     flex: 1,
-
   },
 
   step:{
@@ -19,8 +18,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    // backgroundColor: colors.lighter,
-    backgroundColor: 'rgba(45, 45, 45, 0.8)',
+    backgroundColor: colors.white,
   },
 
   indicadorContainer: {
@@ -70,7 +68,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
    },
 
-   testebutton: {
+  testebutton: {
     borderWidth: 3,
     borderColor: colors.primary,
     borderRadius: 40,
@@ -79,39 +77,38 @@ const styles = StyleSheet.create({
     paddingHorizontal: metrics.basePadding,
     justifyContent: 'center',
     alignItems: 'center',
+  },
 
-   },
-
-   buttonText: {
+  buttonText: {
     color: colors.primary,
     fontWeight: 'bold',
     fontSize: responsividade.largura_tela < 430 ? 16 : 20,
-   },
+  },
 
-   estiloPicker: {
-     //height: 50,
-     //paddingHorizontal: metric.basePadding,
-     flex: 7,
-     },
+  estiloPicker: {
+    //height: 50,
+    //paddingHorizontal: metric.basePadding,
+    flex: 7,
+  },
 
-   forms2: {
-     height: 50,
-     justifyContent: 'center',
-     alignItems: 'center',
-     alignSelf: 'center',
-     flexDirection: 'row',
-     padding: metrics.basePadding,
-     borderRadius: metrics.baseRadius,
-     marginTop: metrics.baseMargin / 3,
-     backgroundColor: colors.whiteTransparent
-   },
+  forms2: {
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    flexDirection: 'row',
+    padding: metrics.basePadding,
+    borderRadius: metrics.baseRadius,
+    marginTop: metrics.baseMargin / 3,
+    backgroundColor: colors.whiteTransparent
+  },
 
-   icon:{
+  icon:{
     padding: 10,
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
- },
+  },
 });
 
 export default styles;

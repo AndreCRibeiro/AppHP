@@ -65,6 +65,12 @@ class Login extends Component {
     if (nextProps.login.logged !== this.props.login.logged) {
       this.navigateToLogged();
     }
+    console.tron.log('nextprops', nextProps.login)
+    console.tron.log('this.props', this.props.login)
+    if (nextProps.login.error && nextProps.login.error !== this.props.login.error) {
+      console.tron.log('entreis')
+      this.setState({ messageRequest: this.props.login.messageError })
+    }
   }
 
   navigateToLogged = () => {
@@ -87,15 +93,13 @@ class Login extends Component {
   }
 
   confereCadastro = async () => {
+    const { login } = this.props;
+    console.tron.log(login)
     await this.setState({ loading: true })
-    //console.tron.log(['Segundo toque', this.state.loading])
     const data = { inputSave: this.state.inputSave, password: this.state.password };
-    this.props.getLoginRequest(data);
-    await this.setState({ loading:false })
-    //console.tron.log(['Terceiro toque', this.state.loading])
-    if (this.props.login.error == true){
-     this.setState({ erro: !this.state.erro })
-    }
+    await this.props.getLoginRequest(data);
+    await this.setState({ loading:false, messageRequest: login.messageError })
+    console.tron.log(['Teste', this.state.messageRequest])
   }
 
   onPressAnimated = async () => {
@@ -109,8 +113,8 @@ class Login extends Component {
       <View style={styles.container}>
 
         {
-              erro && (
-                <SnackBar inside content="Não foi possível logar" color='#3C3C46' fontcolor="white"  />
+              login.error && (
+                <SnackBar inside content={login.messageError || "Verique sua conexão com a internet"} color='#3C3C46' fontcolor="white"  />
               )
         }
 

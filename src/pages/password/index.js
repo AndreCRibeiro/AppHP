@@ -41,16 +41,16 @@ const customStyles = {
   stepStrokeUnFinishedColor: '#aaaaaa',
   separatorFinishedColor: '#4CC6D3',
   separatorUnFinishedColor: '#aaaaaa',
-  stepIndicatorFinishedColor: '#4CC6D3',
+  stepIndicatorFinishedColor: '#FFFFFF',
   stepIndicatorUnFinishedColor: '#ffffff',
-  stepIndicatorCurrentColor: '#ffffff',
+  stepIndicatorCurrentColor: '#4CC6D3',
   stepIndicatorLabelFontSize: 13,
   currentStepIndicatorLabelFontSize: 13,
-  stepIndicatorLabelCurrentColor: '#4CC6D3',
-  stepIndicatorLabelFinishedColor: '#ffffff',
+  stepIndicatorLabelCurrentColor: '#FFFFFF',
+  stepIndicatorLabelFinishedColor: '#4CC6D3',
   stepIndicatorLabelUnFinishedColor: '#aaaaaa',
   labelColor: '#4CC6D3',
-  labelSize: 13,
+  labelSize: 18,
   currentStepLabelColor: '#4CC6D3',
 }
 
@@ -75,12 +75,6 @@ class Login extends Component {
   }
 
   async componentWillMount() {
-    //const idRegistro = await AsyncStorage.getItem('@IdRegistro');
-    //this.setState({ idRegistro: idRegistro });
-    //const pinRegistro = await AsyncStorage.getItem('@PinRegistro');
-    //this.setState({ pinRegistro: pinRegistro });
-    //const id = await AsyncStorage.getItem('@IdProv');
-    //this.setState({ id: id });
     const nome = await AsyncStorage.getItem('@UserName');
     const email = await AsyncStorage.getItem('@UserEmail');
     this.setState({ userName: nome, userEmail: email });

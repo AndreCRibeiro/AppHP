@@ -22,7 +22,13 @@ const InitialState = {
 export default function LoginState(state = InitialState, action) {
   switch (action.type) {
     case Types.GET_REQUEST_LOGIN:
-      return state;
+      return {
+        ...state,
+        error: false,
+        messageError: '',
+        logged: false,
+        token: null
+      };
     case Types.GET_SUCSSES:
       return {
         ...state,
@@ -38,7 +44,7 @@ export default function LoginState(state = InitialState, action) {
         ...state,
         logged: false,
         error: true,
-        messageError: action.payload.messageError,
+        messageError: action.payload.messageError.response.data.error,
       };
     case Types.GET_EXIT_USER:
       return {
@@ -64,10 +70,13 @@ export const Creators = {
     payload: { response, userID },
   }),
 
-  getLoginFailure: messageError => ({
-    type: Types.GET_FAILURE,
-    payload: { messageError },
-  }),
+  getLoginFailure: messageError => {
+    console.log('mensage error', messageError);
+    return {
+      type: Types.GET_FAILURE,
+      payload: { messageError },
+    }
+  },
 
   getExitLogin: () => ({
     type: Types.GET_EXIT_USER

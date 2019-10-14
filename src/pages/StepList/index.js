@@ -190,6 +190,7 @@ class StepList extends Component {
       }
     })
       .then(response => {
+        var mensage;
         //console.tron.log('response', response);
         if (response.status === 206) {
           //console.tron.log('teste', response.data, response.data.mensagem);
@@ -197,6 +198,8 @@ class StepList extends Component {
         } else {
           //AsyncStorage.setItem('@IDlaudo', response.data.number);
           //Alert.alert('ID do laudo', 'O número do seu laudo é ' + response.data.number);
+          mensage = `Prova enviada para avaliação`;
+          this.errorMessage(mensage);
           this.onSendGroup({
             userId,
             token,

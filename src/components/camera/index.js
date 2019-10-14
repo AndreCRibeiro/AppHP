@@ -167,7 +167,6 @@ class Camera extends React.Component {
       width: 200,
       height: 200
     }).then(image => {
-      console.log('received cropped image', image);
       this.setState({
         image: { uri: image.path, width: image.width, height: image.height, mime: image.mime },
         images: null
