@@ -1,125 +1,137 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
-  View, Text, StyleSheet, ScrollView, Alert,
-  Image, TouchableOpacity, NativeModules, Dimensions, TextInput, AsyncStorage
-} from 'react-native';
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Alert,
+  Image,
+  TouchableOpacity,
+  NativeModules,
+  Dimensions,
+  TextInput,
+  AsyncStorage
+} from "react-native";
 
-import styles from './styles';
-import stylesGroup from './stylesGroup';
-import axios from 'axios';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { responsividade } from '../../styles';
+import styles from "./styles";
+import stylesGroup from "./stylesGroup";
+import axios from "axios";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import { responsividade } from "../../styles";
 
 var ImagePicker = NativeModules.ImageCropPicker;
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Creators as FormActions } from '../../store/ducks/form';
-import { Creators as GroupActions } from '../../store/ducks/group';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as FormActions } from "../../store/ducks/form";
+import { Creators as GroupActions } from "../../store/ducks/group";
 
 class Camera extends React.Component {
-
   state = {
     avatarSource: null,
     videoSource: null,
     imagePath: null,
     image: null,
     images: [],
-    inputSave: '',
-    arrayCamera: [],
+    inputSave: "",
+    arrayCamera: []
   };
-
 
   componentWillMount() {
     const { form, data, group, index } = this.props;
 
-    if (data.group === 'true') {
-
+    if (data.group === "true") {
       group.dataGroup.map(item => {
         item.value.map(components => {
           if (components.index === index) {
             Object.keys(components).map(key => {
               if (key === data.data_name) {
-                if (components[key].value !== null && components[key].value !== undefined) {
-                  this.setState({ image: components[key].extra, imagePath: components[key].value.uri });
+                if (
+                  components[key].value !== null &&
+                  components[key].value !== undefined
+                ) {
+                  this.setState({
+                    image: components[key].extra,
+                    imagePath: components[key].value.uri
+                  });
                 }
               }
-            })
+            });
           }
-        })
+        });
       });
-
     } else {
       for (var key in form.step) {
         if (key === data.data_name) {
           if (form.step[key].filled === true) {
-            this.setState({ 
-              images: form.step[key].data, 
+            this.setState({
+              images: form.step[key].data,
               imagePath: form.step[key].value.uri,
-              inputSave: form.step[`leg_${key}`].value,
+              inputSave: form.step[`leg_${key}`].value
             });
           }
         }
       }
     }
-
   }
 
-  pickSingleWithCamera(cropping) {
+  pickSingleWithCamera() {
     const { data } = this.props;
     ImagePicker.openCamera({
-      cropping: cropping,
+      // cropping: cropping,
       includeExif: false,
       includeBase64: true,
+      mediaType: "photo",
       width: 600,
-      height: 600,
-    }).then(image => {
-      this.setState({
-        image: { 
-          uri: image.path, 
-          width: image.width, 
-          height: image.height 
-        },
-        images: [
-           ...this.state.images,
-          { 
-            uri: image.path, 
-            width: image.width, 
-            height: image.height,
-            mine: image.mime,
-          }
-        ],
-        arrayCamera: [
-          ...this.state.arrayCamera,
-          {
+      height: 600
+    })
+      .then(image => {
+        this.setState({
+          image: {
             uri: image.path,
-            type: 'image/jpeg',
-            name: `${data.data_name}.jpg`,
-          }
-        ],
-        imagePath: image.path
-      });     
-
-    }).catch();
+            width: image.width,
+            height: image.height
+          },
+          images: [
+            ...this.state.images,
+            {
+              uri: image.path,
+              width: image.width,
+              height: image.height,
+              mine: image.mime
+            }
+          ],
+          arrayCamera: [
+            ...this.state.arrayCamera,
+            {
+              uri: image.path,
+              type: "image/jpeg",
+              name: `${data.data_name}.jpg`
+            }
+          ],
+          imagePath: image.path
+        });
+      })
+      .catch();
   }
- 
+
   pickSingle(cropit, circular = false) {
     ImagePicker.openPicker({
       cropping: cropping,
       includeExif: false,
-      includeBase64: true,
-    }).then(image => {
-      this.setState({
-        image: { uri: image.path, width: image.width, height: image.height },
-        images: null,
-        imagePath: image.path
+      includeBase64: true
+    })
+      .then(image => {
+        this.setState({
+          image: { uri: image.path, width: image.width, height: image.height },
+          images: null,
+          imagePath: image.path
+        });
+      })
+      .catch(e => {
+        console.log(e);
       });
-    }).catch(e => {
-      console.log(e);
-    });
   }
-
-
 
   pickSingleBase64(cropit) {
     ImagePicker.openPicker({
@@ -127,34 +139,47 @@ class Camera extends React.Component {
       height: 300,
       cropping: cropit,
       includeBase64: true,
-      includeExif: true,
-
-    }).then(image => {
-      console.log('received base64 image');
-      this.setState({
-        image: { uri: `data:${image.mime};base64,` + image.data, width: image.width, height: image.height },
-        images: null
-      });
-    }).catch();
+      includeExif: true
+    })
+      .then(image => {
+        console.log("received base64 image");
+        this.setState({
+          image: {
+            uri: `data:${image.mime};base64,` + image.data,
+            width: image.width,
+            height: image.height
+          },
+          images: null
+        });
+      })
+      .catch();
   }
 
   cleanupImages() {
-    ImagePicker.clean().then(() => {
-      console.log('removed tmp images from tmp directory');
-    }).catch(e => {
-      //alert(e);
-    });
+    ImagePicker.clean()
+      .then(() => {
+        console.log("removed tmp images from tmp directory");
+      })
+      .catch(e => {
+        //alert(e);
+      });
   }
 
   cleanupSingleImage() {
-    let image = this.state.image || (this.state.images && this.state.images.length ? this.state.images[0] : null);
-    console.log('will cleanup image', image);
+    let image =
+      this.state.image ||
+      (this.state.images && this.state.images.length
+        ? this.state.images[0]
+        : null);
+    console.log("will cleanup image", image);
 
-    ImagePicker.cleanSingle(image ? image.uri : null).then(() => {
-      console.log(`removed tmp image ${image.uri} from tmp directory`);
-    }).catch(e => {
-      //alert(e);
-    })
+    ImagePicker.cleanSingle(image ? image.uri : null)
+      .then(() => {
+        console.log(`removed tmp image ${image.uri} from tmp directory`);
+      })
+      .catch(e => {
+        //alert(e);
+      });
   }
 
   cropLast() {
@@ -166,15 +191,22 @@ class Camera extends React.Component {
       path: this.state.image.uri,
       width: 200,
       height: 200
-    }).then(image => {
-      this.setState({
-        image: { uri: image.path, width: image.width, height: image.height, mime: image.mime },
-        images: null
+    })
+      .then(image => {
+        this.setState({
+          image: {
+            uri: image.path,
+            width: image.width,
+            height: image.height,
+            mime: image.mime
+          },
+          images: null
+        });
+      })
+      .catch(e => {
+        console.log(e);
+        // Alert.alert(e.message ? e.message : e);
       });
-    }).catch(e => {
-      console.log(e);
-      // Alert.alert(e.message ? e.message : e);
-    });
   }
 
   pickSingle(cropit, circular = false) {
@@ -184,48 +216,52 @@ class Camera extends React.Component {
       compressImageMaxWidth: 640,
       compressImageMaxHeight: 480,
       compressImageQuality: 0.5,
-      compressVideoPreset: 'MediumQuality',
-      includeExif: true,
-    }).then(image => {
-      this.setState({
-        image: { uri: image.path, width: image.width, height: image.height },
-        images: null,
-        imagePath: image.path
+      compressVideoPreset: "MediumQuality",
+      includeExif: true
+    })
+      .then(image => {
+        this.setState({
+          image: { uri: image.path, width: image.width, height: image.height },
+          images: null,
+          imagePath: image.path
+        });
+      })
+      .catch(e => {
+        console.log(e);
       });
-    }).catch(e => {
-      console.log(e);    });
   }
 
   pickMultiple() {
     const { data } = this.props;
     ImagePicker.openPicker({
       multiple: true,
+      mediaType: "photo",
       waitAnimationEnd: false,
       includeExif: true,
-      forceJpg: true,
+      forceJpg: true
     }).then(images => {
       images.map(image => {
         this.setState({
           images: [
             ...this.state.images,
-            { 
-              uri: image.path, 
-              width: image.width, 
+            {
+              uri: image.path,
+              width: image.width,
               height: image.height,
-              mine: image.mime,
+              mine: image.mime
             }
           ],
           arrayCamera: [
             ...this.state.arrayCamera,
             {
               uri: image.path,
-              type: 'image/jpeg',
-              name: `${data.data_name}.jpg`,
+              type: "image/jpeg",
+              name: `${data.data_name}.jpg`
             }
-          ],
-        })
+          ]
+        });
       });
-    });//.catch(e => alert(e));
+    }); //.catch(e => alert(e));
   }
 
   scaledHeight(oldW, oldH, newW) {
@@ -233,32 +269,36 @@ class Camera extends React.Component {
   }
 
   renderVideo(video) {
-    return (<View style={{ height: 300, width: 300 }}>
-      <Video source={{ uri: video.uri, type: video.mime }}
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0
-        }}
-        rate={1}
-        paused={false}
-        volume={1}
-        muted={false}
-        resizeMode={'cover'}
-        onError={e => console.log(e)}
-        onLoad={load => console.log(load)}
-        repeat={true} />
-    </View>);
+    return (
+      <View style={{ height: 300, width: 300 }}>
+        <Video
+          source={{ uri: video.uri, type: video.mime }}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0
+          }}
+          rate={1}
+          paused={false}
+          volume={1}
+          muted={false}
+          resizeMode={"cover"}
+          onError={e => console.log(e)}
+          onLoad={load => console.log(load)}
+          repeat={true}
+        />
+      </View>
+    );
   }
 
   renderImage(image) {
-    return <Image resizeMode="contain" style={styles.avatar} source={image} />
+    return <Image resizeMode="contain" style={styles.avatar} source={image} />;
   }
 
   renderAsset(image) {
-    if (image.mime && image.mime.toLowerCase().indexOf('video/') !== -1) {
+    if (image.mime && image.mime.toLowerCase().indexOf("video/") !== -1) {
       return this.renderVideo(image);
     }
 
@@ -276,8 +316,8 @@ class Camera extends React.Component {
       saveDataGroup,
       group,
       groupMother,
-      startControlArrayGroup,      
-    } = this.props;    
+      startControlArrayGroup
+    } = this.props;
     if (imagePath || image) {
       saveDataGroup({
         index,
@@ -285,19 +325,25 @@ class Camera extends React.Component {
         name: info.data_name,
         data: {
           uri: image.uri,
-          type: 'image/jpeg',
+          type: "image/jpeg",
           name: `${info.data_name}.jpg`
         },
         extra: image,
         type: data.component_type
-      })
+      });
     }
-    startControlArrayGroup(info.data_name)
-  }
+    startControlArrayGroup(info.data_name);
+  };
 
   saveFormInput = info => {
-
-    const { imageData, imagePath, image, inputSave, images, arrayCamera } = this.state;
+    const {
+      imageData,
+      imagePath,
+      image,
+      inputSave,
+      images,
+      arrayCamera
+    } = this.state;
     const {
       form,
       getSaveStateForm,
@@ -305,69 +351,72 @@ class Camera extends React.Component {
       saveDataGroup, //importa
       data, // importa
       index, //importa
-      group, // importa
+      group // importa
     } = this.props;
     const size = arrayCamera.length;
 
+    if (size > 0) {
+      for (var key in form.step) {
+        if (key === info.data_name) {
+          const form = {};
+          form[info.data_name] = {
+            key: info.data_name,
+            value: arrayCamera,
+            data: images,
+            filled: true,
+            type: info.component_type
+          };
 
-    if (size > 0) {     
-        for (var key in form.step) {
-          if (key === info.data_name) {
-            const form = {};
-            form[info.data_name] = { 
-              key: info.data_name, 
-              value: arrayCamera, 
-              data: images, 
-              filled: true,
-              type: info.component_type,
-            };
+          getSaveStateForm(form);
+          form[`leg_${info.data_name}`] = {
+            key: `leg_${info.data_name}`,
+            value: inputSave,
+            data: null,
+            filled: true,
+            type: "text"
+          };
 
-            getSaveStateForm(form);
-            form[`leg_${info.data_name}`] = { 
-              key: `leg_${info.data_name}`, 
-              value: inputSave, data: null, 
-              filled: true,
-              type: 'text', 
-            };
-
-
-            getSaveStateForm(form);
-          }
+          getSaveStateForm(form);
         }
-      
+      }
     } else {
       for (var key in form.step) {
         if (key === info.data_name && info.data_name.filled === false) {
           const form = {};
-          form[info.data_name] = { 
-            key: info.data_name, 
-            value: { 
-              uri: '', 
-              type: '', 
-              name: '' 
-            }, 
-            data: image, 
-            filled: false 
+          form[info.data_name] = {
+            key: info.data_name,
+            value: {
+              uri: "",
+              type: "",
+              name: ""
+            },
+            data: image,
+            filled: false
           };
           getSaveStateForm(form);
-          form[`leg_${info.data_name}`] = { key: `leg_${info.data_name}`, value: inputSave, data: null, filled: true };
+          form[`leg_${info.data_name}`] = {
+            key: `leg_${info.data_name}`,
+            value: inputSave,
+            data: null,
+            filled: true
+          };
 
           getSaveStateForm(form);
         }
       }
     }
     startControlArray();
-  }
+  };
 
   render() {
-    const { 
-      data_name, 
-      label, 
-      hint, 
-      default_value, 
-      newState, 
-      groupFlag, 
-      component_type 
+    const {
+      data_name,
+      label,
+      hint,
+      default_value,
+      newState,
+      groupFlag,
+      component_type
     } = this.props.data;
     const { saveStep } = this.props.form;
     const { group } = this.props;
@@ -377,26 +426,28 @@ class Camera extends React.Component {
       this.saveFormInput({ data_name, default_value, component_type });
     }
     if (group.flagGroup) {
-      this.saveGroupCamera({ data_name, default_value })
+      this.saveGroupCamera({ data_name, default_value });
     }
     return (
-      
       <View style={groupFlag ? stylesGroup.container : styles.container}>
-
-      <View style={styles.answer}>
+        <View style={styles.answer}>
           <Text style={styles.hint}>{hint}</Text>
-      </View>
+        </View>
 
-        <ScrollView 
+        <ScrollView
           horizontal
           pagingEnabled
-          ref={ref => this.scrollView = ref}
+          ref={ref => (this.scrollView = ref)}
           onContentSizeChange={(contentWidth, contentHeight) => {
             this.scrollView.scrollToEnd({ animated: true, duration: 3000 });
           }}
         >
           {/*this.state.image ? this.renderAsset(this.state.image) : null*/}
-          {this.state.images ? this.state.images.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
+          {this.state.images
+            ? this.state.images.map(i => (
+                <View key={i.uri}>{this.renderAsset(i)}</View>
+              ))
+            : null}
         </ScrollView>
 
         <View style={styles.containerText}>
@@ -413,24 +464,36 @@ class Camera extends React.Component {
           />
         </View>
 
-        <TouchableOpacity  onPress={() => this.pickSingleWithCamera(true)} style={styles.buttonhp}>
-            <View style={styles.button_texthp}><Text style={styles.font}>ABRIR CÂMERA</Text></View>  
+        <TouchableOpacity
+          onPress={() => this.pickSingleWithCamera(true)}
+          style={styles.buttonhp}
+        >
+          <View style={styles.button_texthp}>
+            <Text style={styles.font}>ABRIR CÂMERA</Text>
+          </View>
         </TouchableOpacity>
 
-        <TouchableOpacity  onPress={() => this.pickMultiple(false)} style={styles.buttonhp}>
-            <View style={styles.button_texthp}><Text style={styles.font}>ABRIR GALERIA</Text></View>  
+        <TouchableOpacity
+          onPress={() => this.pickMultiple(false)}
+          style={styles.buttonhp}
+        >
+          <View style={styles.button_texthp}>
+            <Text style={styles.font}>ABRIR GALERIA</Text>
+          </View>
         </TouchableOpacity>
       </View>
     );
   }
-
 }
 const mapStateToProps = state => ({
   form: state.formState,
-  group: state.groupState,
+  group: state.groupState
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ ...FormActions, ...GroupActions }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Camera);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Camera);
