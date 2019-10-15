@@ -175,10 +175,7 @@ class ScannerAPI extends Component {
             permissionDialogMessage={
               "We need your permission to use your camera phone"
             }
-            style={{
-              width: "100%",
-              height: "100%"
-            }}
+            style={{ width: 230, height: 265 }}
             type={this.state.camera.type}
           >
             <View style={styles.overlay} />
