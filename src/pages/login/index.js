@@ -65,10 +65,7 @@ class Login extends Component {
     if (nextProps.login.logged !== this.props.login.logged) {
       this.navigateToLogged();
     }
-    console.tron.log('nextprops', nextProps.login)
-    console.tron.log('this.props', this.props.login)
     if (nextProps.login.error && nextProps.login.error !== this.props.login.error) {
-      console.tron.log('entreis')
       this.setState({ messageRequest: this.props.login.messageError })
     }
   }
@@ -94,12 +91,10 @@ class Login extends Component {
 
   confereCadastro = async () => {
     const { login } = this.props;
-    console.tron.log(login)
     await this.setState({ loading: true })
     const data = { inputSave: this.state.inputSave, password: this.state.password };
     await this.props.getLoginRequest(data);
     await this.setState({ loading:false, messageRequest: login.messageError })
-    console.tron.log(['Teste', this.state.messageRequest])
   }
 
   onPressAnimated = async () => {
