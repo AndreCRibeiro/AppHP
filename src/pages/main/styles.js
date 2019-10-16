@@ -36,15 +36,15 @@ const styles = StyleSheet.create({
   },
 
   teste: {
-    top: 150,
+    //top: 150,
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: 20
+    marginLeft: 20,
   },
 
   textoNaoCadastrado: {
-    color: colors.grey,
-    fontSize: 16
+    color: colors.secundary,
+    fontSize: 20
   },
 
   card: {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: responsividade.fonts.nameSize * 1.6,
     fontWeight: "bold",
-    fontStyle: "normal"
+    fontStyle: "normal",
   },
 
   box: {

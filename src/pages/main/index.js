@@ -15,6 +15,7 @@ import { ScannerAPI } from "../../components";
 import { responsividade } from "../../styles";
 import { connect } from "react-redux";
 import { ModalCheck } from "../../globalComponents";
+import CheckModal from "./components/Modal";
 
 import {
   NavigationActions,
@@ -41,7 +42,9 @@ class Main extends Component {
     scanner: false,
     viewModals: false,
     messageRequest: "",
-    arrayReq: null
+    arrayReq: null,
+    viewModal: false,
+    viewNoClasses: true
   };
 
   componentWillMount() {
@@ -103,14 +106,6 @@ class Main extends Component {
     this.props.navigation.dispatch(resetAction);
   };
 
-  openScanner = () => {
-    this.setState({ scanner: true });
-  };
-
-  closeScanner = () => {
-    this.setState({ scanner: false });
-  };
-
   renderClasses = item => {
     const { navigation } = this.props;
     return (
@@ -148,12 +143,23 @@ class Main extends Component {
     this.setState({ refreshing: false });
   };
 
+  scanner = () => {
+    this.closeModal();
+  };
+
+  closeModal = () => {
+    const { viewModal } = this.state;
+    if (viewModal) this.setState({ viewModal: false });
+    else this.setState({ viewModal: true });
+    this._onRefresh();
+  };
+
   render() {
     const { navigation, login } = this.props;
     const {
       nome,
       scanner,
-      viewModals,
+      viewModal,
       viewClasses,
       viewNoClasses,
       messageRequest,
@@ -161,23 +167,19 @@ class Main extends Component {
     } = this.state;
     const name = navigation.getParam("nome", "Nome não cadastrado");
     const { largura_tela } = responsividade;
+    console.tron.log([viewNoClasses, "teste"])
     return (
       <View style={styles.container}>
         <Header showExit showNotas />
 
-        <View style={{ marginTop: 22 }}>
-          <Modal animationType="slide" transparent={true} visible={scanner}>
-            <TouchableOpacity
-              style={styles.modalcontainer}
-              onPress={() => {
-                this.setState({ scanner: false });
-              }}
-            >
-              <Text style={styles.baixar}>Escaneie o código</Text>
-              <View style={styles.modalinfo}>{scanner && <ScannerAPI />}</View>
-            </TouchableOpacity>
-          </Modal>
-        </View>
+        {viewModal && (
+          <View style={{ marginTop: 22 }}>
+            <CheckModal
+              viewModal
+              onClose={this.closeModal}
+            />
+          </View>
+        )}
 
         <View style={styles.titlee}>
           <Text style={styles.name}>{login.userName}</Text>
@@ -187,7 +189,7 @@ class Main extends Component {
         <View style={styles.buttons_view2}>
           <TouchableOpacity
             onPress={() => {
-              this.openScanner();
+              this.scanner();
             }}
           >
             <View style={styles.novoTesteButton}>
