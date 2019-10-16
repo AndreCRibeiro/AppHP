@@ -13,7 +13,8 @@ import {
   Vestigios,
   OCR,
   Group,
-  Radio
+  Radio,
+  Webviewer
 } from '../../../../components';
 import styles from './styles';
 
@@ -63,6 +64,13 @@ class ComponentList extends Component {
                   index={this.props.data.group ? this.props.index : null}
                   groupMother={this.props.data.group ? this.props.groupName : null}
                 />
+              </View>
+            )
+          }
+          {
+            this.props.data.component_type === 'webview' && (
+              <View style={styles.component}>
+                <Webviewer  />
               </View>
             )
           }

@@ -9,6 +9,7 @@ import Group from './group';
 import Scanner from './scanner';
 import ScannerAPI from './scannerAPI';
 import Radio from './radio';
+import Webviewer from './webviewer';
 
 
 import Veiculos from './veiculo';
@@ -27,6 +28,7 @@ export {
     Group,
     Scanner,
     ScannerAPI,
-    Radio
+    Radio,
+    Webviewer
 };
 

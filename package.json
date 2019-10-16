@@ -23,6 +23,8 @@
     "react-native-image-crop-picker": "^0.21.3",
     "react-native-image-resizer": "^1.0.1",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
+    "react-native-modal": "^11.4.0",
+    "react-native-render-html": "^4.1.2",
     "react-native-scan-barcode": "^3.1.5",
     "react-native-simple-radio-button": "^2.7.3",
     "react-native-step-indicator": "^0.0.9",
