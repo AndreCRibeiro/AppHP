@@ -167,7 +167,6 @@ class Main extends Component {
     } = this.state;
     const name = navigation.getParam("nome", "Nome não cadastrado");
     const { largura_tela } = responsividade;
-    console.tron.log([viewNoClasses, "teste"])
     return (
       <View style={styles.container}>
         <Header showExit showNotas />

@@ -77,9 +77,10 @@ class Camera extends React.Component {
 
   pickSingleWithCamera() {
     const { data } = this.props;
+    console.tron.log('1')
     ImagePicker.openCamera({
       // cropping: cropping,
-      includeExif: false,
+      includeExif: true,
       includeBase64: true,
       mediaType: "photo",
       width: 600,
@@ -256,7 +257,8 @@ class Camera extends React.Component {
             {
               uri: image.path,
               type: "image/jpeg",
-              name: `${data.data_name}.jpg`
+              name: `${data.data_name}.jpg`,
+              exif: image.exif
             }
           ]
         });
