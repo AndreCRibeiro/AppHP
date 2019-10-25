@@ -159,7 +159,13 @@ const styles = StyleSheet.create({
         //backgroundColor: "pink",
         width: responsividade. LARGURABOX*0.85,
         margin: 5,
-        justifyContent: 'flex-start'
+        justifyContent: 'space-between',
+        flexDirection: 'row'
+      },
+
+      input_o: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
       },
 
       title: {

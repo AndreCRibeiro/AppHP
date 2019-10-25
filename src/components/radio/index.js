@@ -77,6 +77,7 @@ render() {
   if (saveStep) {
     this.saveFormRadio({ data_name, default_value });
   }
+
     return(
     <View>
 
@@ -90,12 +91,12 @@ render() {
 
         <RadioForm
           style={styles.radio}
-          radio_props={radio_props}
-          initial={this.state.value === false ? 0 : this.state.value}
+          radio_props={label}
+          initial={this.state.value === false ? null : this.state.value}
           buttonColor={'#4CC6D3'}
           buttonInnerColor={'#4CC6D3'}
           buttonSize={20}
-          onPress={(value) => {this.setState({ value:value })}}
+          onPress={(value) => {this.setState({ value })}}
         />
         </View>
         </View>

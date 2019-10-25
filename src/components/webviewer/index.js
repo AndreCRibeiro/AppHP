@@ -45,7 +45,7 @@ class Webviewer extends Component {
         return (
             <View style={styles.container}>
                     <TouchableOpacity  onPress={() => this.openModal() } style={styles.buttonhp}>
-                        <View style={styles.button_texthp}><Text style={styles.font}>ABRIR TEXTO</Text></View>  
+                        <View style={styles.button_texthp}><Text style={styles.font}>ABRIR TEXTO AUXILIAR</Text></View>  
                     </TouchableOpacity>
                 <ModalBox 
                     backdropOpacity={1} isVisible={textModal} 

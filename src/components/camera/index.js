@@ -16,7 +16,7 @@ import {
 import styles from "./styles";
 import stylesGroup from "./stylesGroup";
 import axios from "axios";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Icon from 'react-native-vector-icons/Ionicons';
 import { responsividade } from "../../styles";
 
 var ImagePicker = NativeModules.ImageCropPicker;
@@ -25,6 +25,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Creators as FormActions } from "../../store/ducks/form";
 import { Creators as GroupActions } from "../../store/ducks/group";
+import CheckModal from "./components/Modal";
 
 class Camera extends React.Component {
   state = {
@@ -34,7 +35,10 @@ class Camera extends React.Component {
     image: null,
     images: [],
     inputSave: "",
-    arrayCamera: []
+    arrayCamera: [],
+    exif: null,
+    viewModal: false,
+    showButton: false
   };
 
   componentWillMount() {
@@ -77,7 +81,6 @@ class Camera extends React.Component {
 
   pickSingleWithCamera() {
     const { data } = this.props;
-    console.tron.log('1')
     ImagePicker.openCamera({
       // cropping: cropping,
       includeExif: true,
@@ -88,10 +91,13 @@ class Camera extends React.Component {
     })
       .then(image => {
         this.setState({
+          exif: image.exif,
+          showButton: true,
           image: {
             uri: image.path,
             width: image.width,
-            height: image.height
+            height: image.height,
+            exif: image.exif
           },
           images: [
             ...this.state.images,
@@ -243,13 +249,16 @@ class Camera extends React.Component {
     }).then(images => {
       images.map(image => {
         this.setState({
+          exif: image.exif,
+          showButton: true,
           images: [
             ...this.state.images,
             {
               uri: image.path,
               width: image.width,
               height: image.height,
-              mine: image.mime
+              mine: image.mime,
+              exif: image.exif
             }
           ],
           arrayCamera: [
@@ -410,6 +419,15 @@ class Camera extends React.Component {
     startControlArray();
   };
 
+  openOptions = () => {
+    const { exif, viewModal, showExif } = this.state;
+    this.setState({ showExif: true })
+  };
+
+  closeOptions = () => {
+    this.setState({ showExif: false })
+  };
+
   render() {
     const {
       data_name,
@@ -420,6 +438,7 @@ class Camera extends React.Component {
       groupFlag,
       component_type
     } = this.props.data;
+    const { viewModal, showExif, exif } = this.state
     const { saveStep } = this.props.form;
     const { group } = this.props;
     const { largura_tela } = responsividade;
@@ -434,9 +453,15 @@ class Camera extends React.Component {
       <View style={groupFlag ? stylesGroup.container : styles.container}>
         <View style={styles.answer}>
           <Text style={styles.hint}>{hint}</Text>
+          {this.state.showButton 
+          ? <TouchableOpacity onPress={() => this.openOptions()}>
+              <Icon name="ios-information-circle-outline" size={ largura_tela < 430 ? 25 : 40 } style={styles.iconMenu} />
+            </TouchableOpacity>
+          : null
+          }
         </View>
 
-        <ScrollView
+        <View
           horizontal
           pagingEnabled
           ref={ref => (this.scrollView = ref)}
@@ -450,9 +475,45 @@ class Camera extends React.Component {
                 <View key={i.uri}>{this.renderAsset(i)}</View>
               ))
             : null}
-        </ScrollView>
+        </View>
 
         <View style={styles.containerText}>
+            {showExif && (
+              <View style={styles.info}>
+              <View style={styles.input_o}>
+                <Text style={styles.info_text}>Fabricante: {exif['{TIFF}'] ? exif['{TIFF}'].Make : "Não informado"}</Text>
+              </View>
+              <View style={styles.input_o}>
+                <Text style={styles.info_text}>Modelo: {exif['{TIFF}'] ? exif['{TIFF}'].Model : "Não informado"}</Text>
+              </View>
+              <View style={styles.input_o}>
+                <Text style={styles.info_text}>Data: {exif['{TIFF}'] ? exif['{TIFF}'].DateTime : "Não informado"} </Text>
+              </View>
+              <View style={styles.input_o}>
+                <Text style={styles.info_text}>Abertura Diafragma: {exif['{TIFF}'] ? exif['{Exif}'].FNumber : "Não informado"} </Text>
+              </View>
+              <View style={styles.input_o}>
+                <Text style={styles.info_text}>Distância Focal: {exif['{TIFF}'] ? exif['{Exif}'].FocalLength : "Não informado"} </Text>
+              </View>
+              <View style={styles.input_o}>
+                <Text style={styles.info_text}>Tempo de exposição: {exif['{TIFF}'] ? exif['{Exif}'].ExposureTime : "Não informado"} </Text>
+              </View>
+              <View style={styles.input_o}>
+                <Text style={styles.info_text}>Flash: {exif['{TIFF}'] ? exif['{Exif}'].Flash : "Não informado"} </Text>
+              </View>
+              <View style={styles.input_o}>
+                <Text style={styles.info_text}>Equivalente ISO: {exif['{TIFF}'] ? exif['{Exif}'].ISOSpeedRatings[0] : "Não informado"} </Text>
+              </View>
+              <View style={styles.input_o}>
+                <Text style={styles.info_text}>Orientação: {exif['{TIFF}'] ? exif.Orientation : "Não informado"} </Text>
+              </View>
+              <View style={styles.input_o}>
+                <TouchableOpacity onPress={() => this.closeOptions()}>
+                  <Icon name="ios-arrow-up" size={ largura_tela < 430 ? 25 : 40 } style={styles.iconMenu} />
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
           <TextInput
             style={groupFlag ? stylesGroup.input : styles.input}
             autoCapitalize="none"

@@ -4,7 +4,7 @@ import sagaPlugin from 'reactotron-redux-saga';
 
 if (__DEV__) {
   const tron = Reactotron
-    .configure({host: '127.0.0.1'}) // controls connection & communication settings
+    .configure({host: '192.168.0.102'}) // controls connection & communication settings
     .useReactNative() // add all built-in react native plugins
     .use(reactotronRedux())
     .use(sagaPlugin())
